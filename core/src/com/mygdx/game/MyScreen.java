@@ -5,7 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -18,6 +20,20 @@ abstract public class MyScreen implements Screen {
     protected Viewport viewport = new ExtendViewport(WORLD_WIDTH, WORLD_HEIGHT);
     protected SpriteBatch spriteBatch = new SpriteBatch();
     protected OrthographicCamera camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
+
+
+    protected static String CHARS = "0123456789öüóqwertzuiopőúasdfghjkléáűíyxcvbnm'+!%/=()ÖÜÓQWERTZUIOPŐÚASDFGHJKLÉÁŰÍYXCVBNM?:_*<>#&@{}[],-.";
+    protected static BitmapFont FONT_HOBO_STD;
+
+    static {
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Alegreya-Regular.otf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 50;
+        parameter.characters = CHARS;
+        FONT_HOBO_STD = generator.generateFont(parameter);
+        FONT_HOBO_STD.setColor(1, 1, 1, 1f);
+        generator.dispose();
+    }
 
     @Override
     public void dispose() {

@@ -1,7 +1,10 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
@@ -10,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class MenuStage extends Stage {
     private BadlActor actor;
     private CrossActor crossActor;
+    private TextButton textButton;
 
     public MenuStage() {
         init();
@@ -29,8 +33,13 @@ public class MenuStage extends Stage {
     {
         actor = new BadlActor();
         crossActor = new CrossActor();
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.font = MyScreen.FONT_HOBO_STD;
+        textButton = new TextButton("Gomb", textButtonStyle);
+
         addActor(actor);
         addActor(crossActor);
+        addActor(textButton);
     }
 
 
