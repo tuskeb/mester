@@ -42,4 +42,10 @@ abstract public class OneSpriteActor extends MyActor {
         super.setPosition(x, y);
         sprite.setPosition(x,y);
     }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        texture.dispose();
+    }
 }

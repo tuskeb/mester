@@ -8,42 +8,26 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
-public class MenuStage extends MyStage {
-    private BadlActor actor;
-    private CrossActor crossActor;
+public class OtherStage extends MyStage {
     private TextButton textButton;
 
-    public MenuStage(Game game) {
+    public OtherStage(Game game) {
         super(game);
     }
 
-    public void init(final Game game)
-    {
-        actor = new BadlActor();
-        crossActor = new CrossActor();
-        textButton = new MyButton("Előre");
+    @Override
+    protected void init(final Game game) {
+        super.init(game);
+        textButton = new MyButton("Vissza");
         textButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreen(new OtherScreen(game));
+                game.setScreen(new MenuScreen(game));
             }
         });
 
-        addActor(actor);
-        addActor(crossActor);
         addActor(textButton);
-    }
-
-
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
 
     }
 }

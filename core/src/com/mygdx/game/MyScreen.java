@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -21,6 +22,9 @@ abstract public class MyScreen implements Screen {
     protected SpriteBatch spriteBatch = new SpriteBatch();
     protected OrthographicCamera camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
 
+    public float r=0,g=0,b=0;
+
+    protected Game game;
 
     protected static String CHARS = "0123456789öüóqwertzuiopőúasdfghjkléáűíyxcvbnm'+!%/=()ÖÜÓQWERTZUIOPŐÚASDFGHJKLÉÁŰÍYXCVBNM?:_*<>#&@{}[],-.";
     protected static BitmapFont FONT_HOBO_STD;
@@ -33,6 +37,10 @@ abstract public class MyScreen implements Screen {
         FONT_HOBO_STD = generator.generateFont(parameter);
         FONT_HOBO_STD.setColor(1, 1, 1, 1f);
         generator.dispose();
+    }
+
+    public MyScreen(Game game) {
+        this.game = game;
     }
 
     @Override
@@ -52,7 +60,7 @@ abstract public class MyScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(r, g, b, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         spriteBatch.setProjectionMatrix(camera.combined);
     }
@@ -71,4 +79,16 @@ abstract public class MyScreen implements Screen {
     public void show() {
 
     }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setBackGroundColor(float r, float g, float b)
+    {
+        this.r=r;
+        this.g = g;
+        this.b = b;
+    }
+
 }
