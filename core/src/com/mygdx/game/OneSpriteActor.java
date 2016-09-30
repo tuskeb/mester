@@ -8,22 +8,17 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  * Created by tuskeb on 2016. 09. 30..
  */
 abstract public class OneSpriteActor extends MyActor {
-    private Texture texture;
-    private Sprite sprite;
+    protected Sprite sprite;
 
-    public OneSpriteActor(String file) {
-        texture = new Texture(file);
-        init();
+    public OneSpriteActor(Sprite sprite) {
+        if (sprite!=null) {
+            this.sprite = sprite;
+            init();
+        }
     }
 
-    public OneSpriteActor(Texture texture) {
-        this.texture = texture;
-        init();
-    }
-
-    private void init()
+    protected void init()
     {
-        sprite = new Sprite(texture);
         setSize(sprite.getWidth(), sprite.getHeight());
     }
 
@@ -33,9 +28,6 @@ abstract public class OneSpriteActor extends MyActor {
         sprite.draw(batch);
     }
 
-    public Texture getTexture() {
-        return texture;
-    }
 
     @Override
     public void setPosition(float x, float y) {
@@ -46,6 +38,11 @@ abstract public class OneSpriteActor extends MyActor {
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
-        texture.dispose();
+    }
+
+    @Override
+    public void setSize(float width, float height) {
+        super.setSize(width, height);
+        sprite.setSize(width, height);
     }
 }

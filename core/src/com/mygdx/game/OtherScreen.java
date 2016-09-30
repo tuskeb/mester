@@ -13,9 +13,8 @@ public class OtherScreen extends MyScreen {
         r = 1;
         g = 0.5f;
         b = 0.3f;
-        otherStage = new OtherStage(game);
+        otherStage = new OtherStage(viewport, spriteBatch, game);
         Gdx.input.setInputProcessor(otherStage);
-
     }
 
     @Override

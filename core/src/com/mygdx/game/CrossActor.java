@@ -3,7 +3,7 @@ package com.mygdx.game;
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
-public class CrossActor extends OneSpriteActor {
+public class CrossActor extends OneSpriteStaticActor {
     public CrossActor() {
         super("badlogic.jpg");
     }

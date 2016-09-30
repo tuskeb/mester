@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
-public class BadlActor extends OneSpriteActor {
+public class BadlActor extends OneSpriteStaticActor {
     public BadlActor() {
         super("badlogic.jpg");
     }
