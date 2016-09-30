@@ -17,7 +17,6 @@ abstract public class MyScreen implements Screen {
     public final float WORLD_WIDTH = 640, WORLD_HEIGHT = 480;
     protected Viewport viewport = new ExtendViewport(WORLD_WIDTH, WORLD_HEIGHT);
     protected SpriteBatch spriteBatch = new SpriteBatch();
-    protected Stage stage = new Stage(viewport, spriteBatch);
     protected OrthographicCamera camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
 
     @Override
@@ -40,15 +39,11 @@ abstract public class MyScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         spriteBatch.setProjectionMatrix(camera.combined);
-        //spriteBatch.begin();
-        stage.act(delta);
-        stage.draw();
-        //spriteBatch.end();
     }
 
     @Override
     public void resize(int width, int height) {
-
+        viewport.update(width, height);
     }
 
     @Override

@@ -1,14 +1,23 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
 public class MenuScreen extends MyScreen {
-    private BadlActor actor;
+    protected MenuStage menuStage = new MenuStage(viewport, spriteBatch);
+
+
     public MenuScreen() {
-        actor = new BadlActor();
-        stage.addActor(actor);
+    }
+
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+        menuStage.act(delta);
+        menuStage.draw();
+
     }
 }

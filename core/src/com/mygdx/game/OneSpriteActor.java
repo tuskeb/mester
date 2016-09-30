@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  * Created by tuskeb on 2016. 09. 30..
  */
 abstract public class OneSpriteActor extends MyActor {
-    Texture texture;
-    Sprite sprite;
+    private Texture texture;
+    private Sprite sprite;
 
     public OneSpriteActor(String file) {
         texture = new Texture(file);
@@ -31,5 +31,15 @@ abstract public class OneSpriteActor extends MyActor {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         sprite.draw(batch);
+    }
+
+    public Texture getTexture() {
+        return texture;
+    }
+
+    @Override
+    public void setPosition(float x, float y) {
+        super.setPosition(x, y);
+        sprite.setPosition(x,y);
     }
 }
