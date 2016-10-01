@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class MenuStage extends MyStage {
     private BadlActor actor;
     private CrossActor crossActor;
-    private TextButton textButton;
+    private TextButton textButton, textButton2;
     private ExplosionActor explosionActor;
 
     public MenuStage(Game game) {
@@ -41,10 +41,21 @@ public class MenuStage extends MyStage {
             }
         });
 
+        textButton2 = new MyButton("Űrlap");
+        textButton2.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreen(new InputScreen(game));
+            }
+        });
+
         addActor(actor);
         addActor(crossActor);
         textButton.setPosition(200,200);
         addActor(textButton);
+        textButton2.setPosition(200,300);
+        addActor(textButton2);
         addActor(new StarActor());
         explosionActor = new ExplosionActor();
         explosionActor.setPosition(0, getHeight() - explosionActor.getHeight());

@@ -26,18 +26,7 @@ abstract public class MyScreen implements Screen {
 
     protected Game game;
 
-    protected static String CHARS = "0123456789öüóqwertzuiopőúasdfghjkléáűíyxcvbnm'+!%/=()ÖÜÓQWERTZUIOPŐÚASDFGHJKLÉÁŰÍYXCVBNM?:_*<>#&@{}[],-.";
-    protected static BitmapFont FONT_HOBO_STD;
 
-    static {
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Alegreya-Regular.otf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 50;
-        parameter.characters = CHARS;
-        FONT_HOBO_STD = generator.generateFont(parameter);
-        FONT_HOBO_STD.setColor(1, 1, 1, 1f);
-        generator.dispose();
-    }
 
     public MyScreen(Game game) {
         this.game = game;
