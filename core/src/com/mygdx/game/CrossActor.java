@@ -5,7 +5,8 @@ package com.mygdx.game;
  */
 public class CrossActor extends OneSpriteStaticActor {
     public CrossActor() {
-        super("badlogic.jpg");
+        //super("badlogic.jpg");
+        super(Assets.manager.get(Assets.BADLOGIC_TEXTURE));
     }
 
     @Override

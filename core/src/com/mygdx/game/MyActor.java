@@ -19,4 +19,17 @@ abstract public class MyActor extends Actor {
         super.act(delta);
         elapsedTime += delta;
     }
+
+    public void resetElapsedTime()
+    {
+        elapsedTime = 0;
+    }
+
+    public float getElapsedTime() {
+        return elapsedTime;
+    }
+
+    public void setElapsedTime(float elapsedTime) {
+        this.elapsedTime = elapsedTime;
+    }
 }

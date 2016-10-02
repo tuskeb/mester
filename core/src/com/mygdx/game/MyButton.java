@@ -32,10 +32,11 @@ public class MyButton extends TextButton{
     }
     public MyButton(String text) {
         super(text, textButtonStyle);
+        init();
     }
 
 
-    private void init()
+    protected void init()
     {
     }
 }

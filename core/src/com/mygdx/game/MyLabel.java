@@ -18,11 +18,6 @@ public class MyLabel extends Label {
 
     static
     {
-
-    }
-
-    static
-    {
         style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
         style.font = Globals.FONT_HOBO_STD;
         style.fontColor = Color.YELLOW;

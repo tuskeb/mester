@@ -14,10 +14,18 @@ abstract public class OneSpriteAnimatedActor extends OneSpriteActor{
 
     TextureAtlas textureAtlas;
     private float fps = 30;
+    private boolean running = true;
 
     public OneSpriteAnimatedActor(String file) {
         super(null);
         textureAtlas = new TextureAtlas(Gdx.files.internal(file));
+        sprite = new Sprite(textureAtlas.getRegions().get(0).getTexture());
+        init();
+    }
+
+    public OneSpriteAnimatedActor(TextureAtlas textureAtlas) {
+        super(null);
+        this.textureAtlas = textureAtlas;
         sprite = new Sprite(textureAtlas.getRegions().get(0).getTexture());
         init();
     }
@@ -39,7 +47,35 @@ abstract public class OneSpriteAnimatedActor extends OneSpriteActor{
     @Override
     public void act(float delta) {
         super.act(delta);
-        sprite.setRegion(textureAtlas.getRegions().get(((int)(elapsedTime*fps)) % textureAtlas.getRegions().size));
+        if (running) {
+            setFrame(((int) (elapsedTime * fps)));
+        }
     }
+
+    public void setFrame(int frame)
+    {
+        sprite.setRegion(textureAtlas.getRegions().get(frame % textureAtlas.getRegions().size));
+    }
+
+    public void setFramePercent(float percent) {
+        setFrame((int)(getFrameCount()*percent));
+    }
+
+    public int getFrameCount()
+    {
+        return textureAtlas.getRegions().size;
+    }
+
+    public void start()
+    {
+        running = true;
+    }
+
+    public void stop()
+    {
+        running = false;
+    }
+
+
 
 }

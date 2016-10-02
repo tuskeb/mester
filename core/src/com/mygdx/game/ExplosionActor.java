@@ -5,7 +5,8 @@ package com.mygdx.game;
  */
 public class ExplosionActor extends OneSpriteAnimatedActor {
     public ExplosionActor() {
-        super("explosion.atlas");
+        //super("explosion.atlas");
+        super(Assets.manager.get(Assets.EXPLOSION_TEXTUREATLAS));
         setFps(2);
     }
 }

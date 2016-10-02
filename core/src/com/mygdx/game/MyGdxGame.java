@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g3d.particles.ResourceData;
 
 public class MyGdxGame extends Game {
 	SpriteBatch batch;
@@ -13,19 +14,19 @@ public class MyGdxGame extends Game {
 	
 	@Override
 	public void create () {
-		setScreen(new MenuScreen(this));
+		Assets.prepare();
+		setScreen(new LoadingScreen(this));
 	}
-/*
+
 	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+	public void resume() {
+		super.resume();
+		Assets.manager.update();
 	}
-	*/
+
 	@Override
 	public void dispose () {
+		super.dispose();
+		Assets.unload();
 	}
 }

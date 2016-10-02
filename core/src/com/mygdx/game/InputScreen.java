@@ -2,7 +2,9 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 
 /**
@@ -25,9 +27,13 @@ public class InputScreen extends MyScreen {
 
             //Itt a MyStage osztályt folytatjuk. Referenciaként a myStage változó lesz, amiből például a render is dolgozik.
             Table table;
+
+
             @Override
-            protected void init(Game game) {
+            protected void init(final Game game) {
                 super.init(game);
+                setBackGroundColor(0f,0.2f,0.4f);
+
                 table = new Table();
                 table.setWidth(640);
                 table.setHeight(480);
@@ -42,7 +48,22 @@ public class InputScreen extends MyScreen {
                 table.add(new MyButton(random())).width(100).align(Align.center);
                 table.add(new MyLabel("=")).width(100).align(Align.center);
                 table.add(new MyTextField("?"));
+                table.row();
+                table.add(new MyButton("Vissza"){
+                    @Override
+                    protected void init() {
+                        addListener(new ClickListener(){
+                            @Override
+                            public void clicked(InputEvent event, float x, float y) {
+                                super.clicked(event, x, y);
+                                game.setScreen(new MenuScreen(game));
+                            }
+                        });
+                    }
+                }).colspan(5).align(Align.center);
+                table.debug();
                 addActor(table);
+
             }
         };
         Gdx.input.setInputProcessor(myStage);

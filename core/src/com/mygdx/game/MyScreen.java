@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.math.Matrix3;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -18,9 +20,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  */
 abstract public class MyScreen implements Screen {
     public final float WORLD_WIDTH = 640, WORLD_HEIGHT = 480;
-    protected Viewport viewport = new ExtendViewport(WORLD_WIDTH, WORLD_HEIGHT);
     protected SpriteBatch spriteBatch = new SpriteBatch();
     protected OrthographicCamera camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
+    protected ExtendViewport viewport = new ExtendViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
 
     public float r=0,g=0,b=0;
 
@@ -30,6 +32,8 @@ abstract public class MyScreen implements Screen {
 
     public MyScreen(Game game) {
         this.game = game;
+        camera.translate(WORLD_WIDTH/2, WORLD_HEIGHT/2);
+        camera.update();
     }
 
     @Override
@@ -57,6 +61,7 @@ abstract public class MyScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
+        camera.update();
     }
 
     @Override

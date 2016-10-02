@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
  */
 public class BadlActor extends OneSpriteStaticActor {
     public BadlActor() {
-        super("badlogic.jpg");
+        super(Assets.manager.get(Assets.BADLOGIC_TEXTURE));
     }
 
     @Override
