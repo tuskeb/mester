@@ -19,7 +19,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  * Created by tuskeb on 2016. 09. 30..
  */
 abstract public class MyScreen implements Screen {
-    public final float WORLD_WIDTH = 640, WORLD_HEIGHT = 480;
+    public final static float WORLD_WIDTH = 640, WORLD_HEIGHT = 480;
     protected SpriteBatch spriteBatch = new SpriteBatch();
     protected OrthographicCamera camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
     protected ExtendViewport viewport = new ExtendViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);

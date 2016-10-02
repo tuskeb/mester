@@ -11,10 +11,11 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  * Created by tuskeb on 2016. 09. 30..
  */
 public class MenuStage extends MyStage {
-    private BadlActor actor;
+    private BadlActor badlActor;
     private CrossActor crossActor;
     private TextButton textButton, textButton2;
     private ExplosionActor explosionActor;
+    private MyLabel utkozesMyLabel;
 
     public MenuStage(Game game) {
         super(game);
@@ -30,7 +31,7 @@ public class MenuStage extends MyStage {
 
     public void init(final Game game)
     {
-        actor = new BadlActor();
+        badlActor = new BadlActor();
         crossActor = new CrossActor();
         textButton = new MyButton("Előre");
         textButton.addListener(new ClickListener(){
@@ -50,7 +51,7 @@ public class MenuStage extends MyStage {
             }
         });
 
-        addActor(actor);
+        addActor(badlActor);
         addActor(crossActor);
         textButton.setPosition(200,200);
         addActor(textButton);
@@ -60,12 +61,23 @@ public class MenuStage extends MyStage {
         explosionActor = new ExplosionActor();
         explosionActor.setPosition(0, getHeight() - explosionActor.getHeight());
         addActor(explosionActor);
+        utkozesMyLabel = new MyLabel("");
+        utkozesMyLabel.setPosition(MyScreen.WORLD_WIDTH/2,MyScreen.WORLD_HEIGHT-25);
+        addActor(utkozesMyLabel);
     }
 
 
     @Override
     public void act(float delta) {
         super.act(delta);
+        if (badlActor.overlaps(MyActor.ShapeType.Rectangle, crossActor))
+        {
+            utkozesMyLabel.setText("Ütközés!");
+        }
+        else
+        {
+            utkozesMyLabel.setText("Nincs ütközés.");
+        }
     }
 
     @Override
