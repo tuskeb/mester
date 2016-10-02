@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
-abstract public class OneSpriteStaticActor extends OneSpriteActor{
+public class OneSpriteStaticActor extends OneSpriteActor{
 
     public OneSpriteStaticActor(String file) {
         super(new Sprite(new Texture(file)));

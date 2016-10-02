@@ -30,19 +30,28 @@ abstract public class OneSpriteActor extends MyActor {
 
 
     @Override
-    public void setPosition(float x, float y) {
-        super.setPosition(x, y);
-        sprite.setPosition(x,y);
-    }
-
-    @Override
     protected void finalize() throws Throwable {
         super.finalize();
     }
 
+
     @Override
-    public void setSize(float width, float height) {
-        super.setSize(width, height);
-        sprite.setSize(width, height);
+    protected void positionChanged() {
+        super.positionChanged();
+        sprite.setPosition(getX(), getY());
+    }
+
+    @Override
+    protected void rotationChanged() {
+        super.rotationChanged();
+        sprite.setRotation(getRotation());
+
+    }
+
+    @Override
+    protected void sizeChanged() {
+        super.sizeChanged();
+        sprite.setSize(getWidth(), getHeight());
+        sprite.setOrigin(getWidth()/2, getHeight()/2);
     }
 }

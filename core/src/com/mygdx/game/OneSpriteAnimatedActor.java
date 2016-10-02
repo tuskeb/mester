@@ -10,11 +10,11 @@ import com.badlogic.gdx.maps.ImageResolver;
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
-abstract public class OneSpriteAnimatedActor extends OneSpriteActor{
+public class OneSpriteAnimatedActor extends OneSpriteActor{
 
-    TextureAtlas textureAtlas;
-    private float fps = 30;
-    private boolean running = true;
+    protected final TextureAtlas textureAtlas;
+    protected float fps = 30;
+    protected boolean running = true;
 
     public OneSpriteAnimatedActor(String file) {
         super(null);
@@ -76,6 +76,8 @@ abstract public class OneSpriteAnimatedActor extends OneSpriteActor{
         running = false;
     }
 
-
+    public TextureAtlas getTextureAtlas() {
+        return textureAtlas;
+    }
 
 }

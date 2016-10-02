@@ -13,5 +13,6 @@ public class CrossActor extends OneSpriteStaticActor {
     public void act(float delta) {
         super.act(delta);
         setPosition(getX()+1, getY()+1);
+        rotateBy(1);
     }
 }

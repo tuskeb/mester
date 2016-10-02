@@ -20,6 +20,12 @@ abstract public class MyActor extends Actor {
         elapsedTime += delta;
     }
 
+    @Override
+    protected void sizeChanged() {
+        super.sizeChanged();
+        setOrigin(getWidth()/2, getHeight()/2);
+    }
+
     public void resetElapsedTime()
     {
         elapsedTime = 0;
