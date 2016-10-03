@@ -25,9 +25,7 @@ public class OtherStage extends MyStage {
         super(viewport, game);
     }
 
-    @Override
-    protected void init(final Game game) {
-        super.init(game);
+    protected void init() {
         textButton = new MyButton("Vissza");
         textButton.addListener(new ClickListener(){
             @Override

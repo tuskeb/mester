@@ -9,11 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  */
 abstract public class MyActor extends Actor {
 
-    enum ShapeType
-    {
-        Circle, Rectangle
-    }
-
     protected float elapsedTime = 0;
     protected Rectangle rectangle = new Rectangle();
     protected Circle circle = new Circle();

@@ -26,12 +26,10 @@ public class InputScreen extends MyScreen {
             }
 
             //Itt a MyStage osztályt folytatjuk. Referenciaként a myStage változó lesz, amiből például a render is dolgozik.
-            Table table;
+            private Table table;
 
 
-            @Override
-            protected void init(final Game game) {
-                super.init(game);
+            protected void init() {
                 setBackGroundColor(0f,0.2f,0.4f);
 
                 table = new Table();

@@ -29,7 +29,7 @@ public class MenuStage extends MyStage {
         super(viewport, game);
     }
 
-    public void init(final Game game)
+    public void init()
     {
         badlActor = new BadlActor();
         crossActor = new CrossActor();
@@ -70,7 +70,7 @@ public class MenuStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (badlActor.overlaps(MyActor.ShapeType.Rectangle, crossActor))
+        if (badlActor.overlaps(ShapeType.Rectangle, crossActor))
         {
             utkozesMyLabel.setText("Ütközés!");
         }
