@@ -6,5 +6,6 @@ package com.mygdx.game;
 public class StarActor extends OneSpriteAnimatedActor {
     public StarActor() {
         super("star.atlas");
+        setFps(2);
     }
 }
