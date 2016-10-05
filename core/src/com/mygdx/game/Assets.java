@@ -33,10 +33,10 @@ public class Assets {
 	/*
     public static final AssetDescriptor<Music> MUSIC
             = new AssetDescriptor<Music>("***.mp3", Music.class);
-
-    public static final AssetDescriptor<Sound> SOUND
-            = new AssetDescriptor<Sound>("***.wav", Sound.class);
 */
+    public static final AssetDescriptor<Sound> STAR_SOUND
+            = new AssetDescriptor<Sound>("star.wav", Sound.class);
+
 
 
     public static void prepare() {
@@ -53,9 +53,9 @@ public class Assets {
 		manager.load(EXPLOSION_TEXTUREATLAS);
 		manager.load(STAR_TEXTUREATLAS);
 
+		manager.load(STAR_SOUND);
 		/*
         manager.load(MUSIC);
-        manager.load(SOUND);
         */
 
 	}
