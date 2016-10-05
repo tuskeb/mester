@@ -24,7 +24,7 @@ public class LoadingScreen extends MyScreen {
 
     public LoadingScreen(Game game) {
 		super(game);
-        setBackGroundColor(0f, 0f, 0f);
+        setBackGroundColor(0f, 0.5f, 0f);
     }
 
     @Override

@@ -60,7 +60,9 @@ abstract public class MyScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height);
+        viewport.update(width, height, true);
+        camera.translate(((viewport.getWorldWidth() - WORLD_WIDTH) / 2) < 0 ? 0 : -((viewport.getWorldWidth() - WORLD_WIDTH) / 2),
+                ((viewport.getWorldHeight() - WORLD_HEIGHT) / 2) < 0 ? 0 : -((viewport.getWorldHeight() - WORLD_HEIGHT) / 2));
         camera.update();
     }
 
