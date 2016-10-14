@@ -14,6 +14,10 @@ public class OtherScreen extends MyScreen {
         g = 0.5f;
         b = 0.3f;
         otherStage = new OtherStage(viewport, spriteBatch, game);
+        SinActor sinActor = new SinActor(5, 5);
+        sinActor.setY(100);
+        sinActor.setHeight(400);
+        otherStage.addActor(sinActor);
         Gdx.input.setInputProcessor(otherStage);
     }
 
