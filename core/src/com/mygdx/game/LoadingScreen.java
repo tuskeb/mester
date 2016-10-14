@@ -17,7 +17,6 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import javafx.scene.Camera;
 
 public class LoadingScreen extends MyScreen {
 
