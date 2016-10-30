@@ -18,7 +18,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
-abstract public class MyScreen implements Screen {
+abstract public class MyScreen implements Screen, InitableInterface {
     public final static float WORLD_WIDTH = 640, WORLD_HEIGHT = 480;
     protected SpriteBatch spriteBatch = new SpriteBatch();
     protected OrthographicCamera camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
@@ -32,8 +32,7 @@ abstract public class MyScreen implements Screen {
 
     public MyScreen(Game game) {
         this.game = game;
-        camera.translate(WORLD_WIDTH/2, WORLD_HEIGHT/2);
-        camera.update();
+        init();
     }
 
     @Override
@@ -58,12 +57,18 @@ abstract public class MyScreen implements Screen {
         spriteBatch.setProjectionMatrix(camera.combined);
     }
 
+    public void setCameraReset(ExtendViewport viewport, int width, int height)
+    {
+        viewport.update(width, height, true);
+        ((OrthographicCamera)viewport.getCamera()).setToOrtho(false, viewport.getWorldWidth(), viewport.getWorldHeight());
+        ((OrthographicCamera)viewport.getCamera()).translate((viewport.getWorldWidth() -  - viewport.getMinWorldWidth() / 2) < 0 ? 0 : -((viewport.getWorldWidth()  - viewport.getMinWorldWidth()) / 2),
+                ((viewport.getWorldHeight()  - viewport.getMinWorldHeight()) / 2) < 0 ? 0 : -((viewport.getWorldHeight() - viewport.getMinWorldHeight()) / 2));
+        ((OrthographicCamera)viewport.getCamera()).update();
+    }
+
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height, true);
-        camera.translate(((viewport.getWorldWidth() - WORLD_WIDTH) / 2) < 0 ? 0 : -((viewport.getWorldWidth() - WORLD_WIDTH) / 2),
-                ((viewport.getWorldHeight() - WORLD_HEIGHT) / 2) < 0 ? 0 : -((viewport.getWorldHeight() - WORLD_HEIGHT) / 2));
-        camera.update();
+        setCameraReset(viewport, width, height);
     }
 
     @Override
@@ -87,4 +92,11 @@ abstract public class MyScreen implements Screen {
         this.b = b;
     }
 
+    @Override
+    public void init() {
+        camera.setToOrtho(false);
+        /*
+        camera.translate(WORLD_WIDTH/2, WORLD_HEIGHT/2);*/
+        camera.update();
+    }
 }

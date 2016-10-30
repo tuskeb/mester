@@ -8,8 +8,21 @@ import com.badlogic.gdx.Gdx;
  */
 public class OtherScreen extends MyScreen {
     protected OtherStage otherStage;
+
     public OtherScreen(Game game) {
         super(game);
+    }
+
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+        otherStage.act(delta);
+        otherStage.draw();
+
+    }
+
+    @Override
+    public void init() {
         r = 1;
         g = 0.5f;
         b = 0.3f;
@@ -19,13 +32,5 @@ public class OtherScreen extends MyScreen {
         sinActor.setHeight(400);
         otherStage.addActor(sinActor);
         Gdx.input.setInputProcessor(otherStage);
-    }
-
-    @Override
-    public void render(float delta) {
-        super.render(delta);
-        otherStage.act(delta);
-        otherStage.draw();
-
     }
 }

@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
-abstract public class MyActor extends Actor {
+abstract public class MyActor extends Actor{
 
     protected float elapsedTime = 0;
     protected Rectangle rectangle = new Rectangle();
@@ -67,7 +67,6 @@ abstract public class MyActor extends Actor {
         }
         return false;
     }
-
 
     public void resetElapsedTime()
     {

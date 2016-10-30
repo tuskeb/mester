@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
-abstract public class OneSpriteActor extends MyActor {
+abstract public class OneSpriteActor extends MyActor implements InitableInterface {
     protected Sprite sprite;
 
     public OneSpriteActor(Sprite sprite) {
@@ -17,7 +17,8 @@ abstract public class OneSpriteActor extends MyActor {
         }
     }
 
-    protected void init()
+    @Override
+    public void init()
     {
         setSize(sprite.getWidth(), sprite.getHeight());
     }

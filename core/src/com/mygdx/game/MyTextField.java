@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.Align;
 /**
  * Created by tuskeb on 2016. 10. 01..
  */
-public class MyTextField extends TextField{
+public class MyTextField extends TextField implements InitableInterface{
     static TextFieldStyle style;
 
     static
@@ -37,5 +37,11 @@ public class MyTextField extends TextField{
         super(text, style);
         setWidth(300);
         setHeight(50);
+        init();
+    }
+
+    @Override
+    public void init() {
+
     }
 }

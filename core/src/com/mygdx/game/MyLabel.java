@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Align;
 /**
  * Created by tuskeb on 2016. 10. 01..
  */
-public class MyLabel extends Label {
+public class MyLabel extends Label implements InitableInterface {
     float elapsedtime =0;
     public static com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle style;
 
@@ -29,7 +29,7 @@ public class MyLabel extends Label {
     public MyLabel(String text) {
         super(text, style);
         setAlignment(Align.center);
-
+        init();
     }
 
     @Override
@@ -37,5 +37,10 @@ public class MyLabel extends Label {
         super.act(delta);
         elapsedtime += delta;
         setFontScale(Math.abs((float)Math.sin(elapsedtime*2f))/2f+0.8f);
+    }
+
+    @Override
+    public void init() {
+
     }
 }

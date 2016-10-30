@@ -14,21 +14,15 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class MenuStage extends MyStage {
     private BadlActor badlActor;
     private CrossActor crossActor;
-    private TextButton textButton, textButton2;
+    private TextButton textButton, textButton2, textButton3, textButton4;
     private ExplosionActor explosionActor;
     private MyLabel utkozesMyLabel;
 
-    public MenuStage(Game game) {
-        super(game);
-    }
 
     public MenuStage(Viewport viewport, Batch batch, Game game) {
         super(viewport, batch, game);
     }
 
-    public MenuStage(Viewport viewport, Game game) {
-        super(viewport, game);
-    }
 
     public void init()
     {
@@ -52,14 +46,38 @@ public class MenuStage extends MyStage {
             }
         });
 
+        textButton3 = new MyButton("Box2D teszt");
+        textButton3.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreen(new WorldDemoScreen(game));
+            }
+        });
+
+        textButton4 = new MyButton("Box2d Demo");
+        textButton4.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                //game.setScreen(new OtherScreen(game));
+            }
+        });
+
         addActor(badlActor);
         addActor(crossActor);
-        textButton.setPosition(200,200);
+        textButton.setPosition(200,100);
         textButton.debug();
         addActor(textButton);
-        textButton2.setPosition(200,300);
+        textButton2.setPosition(200,200);
         textButton2.debug();
         addActor(textButton2);
+        textButton3.setPosition(200,300);
+        textButton3.debug();
+        addActor(textButton3);
+        textButton4.setPosition(200,400);
+        textButton4.debug();
+        addActor(textButton4);
         addActor(new StarActor());
         explosionActor = new ExplosionActor();
         explosionActor.setPosition(0, getHeight() - explosionActor.getHeight());
@@ -81,7 +99,7 @@ public class MenuStage extends MyStage {
 
         a.setFps(5);
         addActor(a);
-
+        addActor(new OneSpriteAnimatedActor("walk.atlas"));
     }
 
 

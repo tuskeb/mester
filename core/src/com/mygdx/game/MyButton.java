@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
-public class MyButton extends TextButton{
+public class MyButton extends TextButton implements InitableInterface{
     static TextButton.TextButtonStyle textButtonStyle;
     static
     {
@@ -35,8 +35,8 @@ public class MyButton extends TextButton{
         init();
     }
 
+    @Override
+    public void init() {
 
-    protected void init()
-    {
     }
 }

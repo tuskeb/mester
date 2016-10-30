@@ -13,19 +13,13 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class OtherStage extends MyStage {
     private TextButton textButton;
 
-    public OtherStage(Game game) {
-        super(game);
-    }
 
     public OtherStage(Viewport viewport, Batch batch, Game game) {
         super(viewport, batch, game);
     }
 
-    public OtherStage(Viewport viewport, Game game) {
-        super(viewport, game);
-    }
 
-    protected void init() {
+    public void init() {
         textButton = new MyButton("Vissza");
         textButton.addListener(new ClickListener(){
             @Override

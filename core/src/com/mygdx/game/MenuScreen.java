@@ -16,8 +16,6 @@ public class MenuScreen extends MyScreen {
 
     public MenuScreen(Game game) {
         super(game);
-        menuStage  = new MenuStage(viewport, spriteBatch, game);
-        Gdx.input.setInputProcessor(menuStage);
     }
 
     @Override
@@ -38,5 +36,11 @@ public class MenuScreen extends MyScreen {
     public void dispose() {
         super.dispose();
         menuStage.dispose();
+    }
+
+    @Override
+    public void init() {
+        menuStage  = new MenuStage(viewport, spriteBatch, game);
+        Gdx.input.setInputProcessor(menuStage);
     }
 }

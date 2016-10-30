@@ -31,7 +31,7 @@ public class OneSpriteAnimatedActor extends OneSpriteActor{
     }
 
     @Override
-    protected void init() {
+    public void init() {
         super.init();
         setSize(textureAtlas.getRegions().get(0).getRegionWidth(), textureAtlas.getRegions().get(0).getRegionHeight());
     }

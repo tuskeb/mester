@@ -1,11 +1,11 @@
 apply plugin: "java"
-
 sourceCompatibility = 1.6
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-
-sourceSets.main.java.srcDirs = [ "src/" ]
-
-
+sourceSets.main.java.srcDirs = ["src/"]
 eclipse.project {
     name = appName + "-core"
+}
+dependencies {
+    compile files('C:/F/PENDROID/mester/android/libs/bodyeditor-loader.jar')
+    compile files('C:/F/PENDROID/mester/android/libs/bodyeditor-loader-sources.jar')
 }

@@ -16,6 +16,23 @@ public class InputScreen extends MyScreen {
 
     public InputScreen(Game game) {
         super(game);
+    }
+
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+        myStage.act(delta);
+        myStage.draw();
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        myStage.dispose();
+    }
+
+    @Override
+    public void init() {
 
         //Ha nem akarunk annyi fájlt, akkor lehet egy anonim osztály is.
         myStage = new MyStage(viewport, spriteBatch, game)
@@ -29,7 +46,7 @@ public class InputScreen extends MyScreen {
             private Table table;
 
 
-            protected void init() {
+            public void init() {
                 setBackGroundColor(0f,0.2f,0.4f);
 
                 table = new Table();
@@ -49,7 +66,7 @@ public class InputScreen extends MyScreen {
                 table.row();
                 table.add(new MyButton("Vissza"){
                     @Override
-                    protected void init() {
+                    public void init() {
                         addListener(new ClickListener(){
                             @Override
                             public void clicked(InputEvent event, float x, float y) {
@@ -66,19 +83,4 @@ public class InputScreen extends MyScreen {
         };
         Gdx.input.setInputProcessor(myStage);
     }
-
-    @Override
-    public void render(float delta) {
-        super.render(delta);
-        myStage.act(delta);
-        myStage.draw();
-
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
-        myStage.dispose();
-    }
-
 }

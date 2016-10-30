@@ -25,9 +25,4 @@ public class SinActor extends OneSpriteStaticActor {
         }
         return p;
     }
-
-    @Override
-    protected void init() {
-        super.init();
-    }
 }

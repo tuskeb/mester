@@ -9,26 +9,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
-abstract public class MyStage extends Stage {
+abstract public class MyStage extends Stage implements InitableInterface {
     protected Game game;
-
-    public MyStage(Game game) {
-        this.game = game;
-        init();
-    }
-
-    public MyStage(Viewport viewport, Game game) {
-        super(viewport);
-        this.game = game;
-        init();
-    }
 
     public MyStage(Viewport viewport, Batch batch, Game game) {
         super(viewport, batch);
         this.game = game;
         init();
     }
-
-    abstract protected void init();
-
 }
