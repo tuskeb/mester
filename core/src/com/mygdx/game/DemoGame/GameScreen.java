@@ -57,6 +57,7 @@ public class GameScreen extends MyScreen {
     public void resize(int width, int height) {
         super.resize(width, height);
         setCameraReset((ExtendViewport)box2dStage.getViewport(), width, height);
+        setCameraReset((ExtendViewport)controlStage.getViewport(), width, height);
     }
 
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.DestructionListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.WorldBodyEditorLoader;
@@ -31,6 +33,9 @@ public class GameStage extends MyStage {
         super(viewport, batch, game);
     }
 
+
+    WheelActor wheelActor;
+    UfoActor LastShutDownUfo = null;
     @Override
     public void init() {
         world = new World(new Vector2(0,-5),false);
@@ -55,7 +60,7 @@ public class GameStage extends MyStage {
             }
         });
 
-        WheelActor wheelActor;
+
         addActor(wheelActor = new WheelActor(world, worldBodyEditorLoader));
         wheelActor.addToWorld();
 
@@ -79,6 +84,7 @@ public class GameStage extends MyStage {
                     }
                     if (!ufoActor.isShutdown()) {
                         ufoActor.shutDown();
+                        LastShutDownUfo = ufoActor;
                         bulletActor.removeFromWorld();
                         bulletActor.removeFromStage();
                     }
@@ -100,7 +106,6 @@ public class GameStage extends MyStage {
 
             }
         });
-
     }
 
     public int countOfUfo()
@@ -116,11 +121,10 @@ public class GameStage extends MyStage {
 
     @Override
     public void act(float delta) {
-        world.step(delta,1,1);
+        world.step(delta, 1, 1);
         super.act(delta);
-        ufoCreateTimer+=delta;
-        if (ufoCreateTimer>1 && countOfUfo()<10)
-        {
+        ufoCreateTimer += delta;
+        if (ufoCreateTimer > 1 && countOfUfo() < 10) {
             addActor(new UfoActor(world, worldBodyEditorLoader) {
                 @Override
                 public void init() {
@@ -130,7 +134,23 @@ public class GameStage extends MyStage {
             });
             ufoCreateTimer = 0;
         }
+        /*System.out.println(wheelActor.getBody().getLinearVelocity());
+        if (Math.abs(wheelActor.getBody().getLinearVelocity().y) > 0.01f || Math.abs(wheelActor.getBody().getLinearVelocity().x) > 0.01f) {
+            setCameraMoveToXY(wheelActor.getX(), wheelActor.getY(), 0.5f, 2f);
+        } else {
+            setCameraMoveToXY(getCamera().viewportWidth / 2, getCamera().viewportHeight / 2, 1f, 2f);
+        }*/
+        if (LastShutDownUfo!=null) {
+            setCameraMoveToXY(LastShutDownUfo.getX(), LastShutDownUfo.getY(), 0.5f, 3f);
+            if (Math.abs(LastShutDownUfo.getBody().getLinearVelocity().y) < 0.01f && Math.abs(LastShutDownUfo.getBody().getLinearVelocity().x) < 0.01f){
+                LastShutDownUfo = null;
+            }
+        } else {
+            setCameraMoveToXY(getCamera().viewportWidth / 2, getCamera().viewportHeight / 2, 1f, 6f);
+        }
     }
+
+
 
     public World getWorld() {
         return world;
