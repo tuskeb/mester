@@ -2,10 +2,12 @@ package com.mygdx.game.DemoInput;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyLabel;
 import com.mygdx.game.MyBaseClasses.MyScreen;
@@ -40,7 +42,7 @@ public class InputScreen extends MyScreen {
     public void init() {
 
         //Ha nem akarunk annyi fájlt, akkor lehet egy anonim osztály is.
-        myStage = new MyStage(viewport, spriteBatch, game)
+        myStage = new MyStage(new ExtendViewport(1280,720,new OrthographicCamera(1280,720)), spriteBatch, game)
         {
             private String random()
             {

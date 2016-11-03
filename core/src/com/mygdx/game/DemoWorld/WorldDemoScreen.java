@@ -32,7 +32,7 @@ public class WorldDemoScreen extends MyScreen {
 
     @Override
     public void init() {
-        controlStage = new MyStage(viewport,spriteBatch,game) {
+        controlStage = new MyStage(new ExtendViewport(1280,720, new OrthographicCamera(1280,720)),spriteBatch,game) {
             @Override
             public void init() {
                 addActor(new MyLabel("Kattints a testekre!", game.getLabelStyle())
@@ -46,7 +46,7 @@ public class WorldDemoScreen extends MyScreen {
                     @Override
                     public void init() {
                         super.init();
-                        setPosition(0, MyScreen.WORLD_HEIGHT-getHeight());
+                        setPosition(0, getViewport().getWorldHeight()-getHeight());
                         addListener(new ClickListener()
                         {
                             @Override
@@ -81,7 +81,7 @@ public class WorldDemoScreen extends MyScreen {
         box2dStage.draw();
         box2DDebugRenderer.render(box2dStage.world,box2dStage.getCamera().combined);
 
-        spriteBatch.setProjectionMatrix(camera.combined);
+        spriteBatch.setProjectionMatrix(controlStage.getCamera().combined);
         controlStage.act();
         controlStage.draw();
 
@@ -90,6 +90,6 @@ public class WorldDemoScreen extends MyScreen {
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
-        setCameraReset((ExtendViewport)box2dStage.getViewport(), width, height);
+        box2dStage.resize(width,height);
     }
 }

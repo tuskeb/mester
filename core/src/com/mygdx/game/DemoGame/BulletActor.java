@@ -19,7 +19,7 @@ public class BulletActor extends WorldActorGroup {
         setSize(0.3f, 0.3f);
         addToWorld();
         Actor a;
-        addActor(a = new OneSpriteStaticActor(Assets.manager.get(AssetsGroup.HOUSE_TEXTURE)));
+        addActor(a = new OneSpriteStaticActor(Assets.manager.get(AssetsGroupDemoGame.HOUSE_TEXTURE)));
         a.setSize(0.3f, 0.3f);
         a.setPosition(0, 0);
         getBody().setTransform(7, 3, 0);

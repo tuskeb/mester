@@ -1,6 +1,7 @@
 package com.mygdx.game.DemoLoading;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.DemoMenu.MenuScreen;
 import com.mygdx.game.MyBaseClasses.MyScreen;
@@ -27,7 +28,7 @@ public class LoadingScreen extends MyScreen {
 		super.render(delta);
 
 		spriteBatch.begin();
-		bitmapFont.draw(spriteBatch,"Betöltés: " + Assets.manager.getLoadedAssets() + "/" + (Assets.manager.getQueuedAssets()+ Assets.manager.getLoadedAssets()) + " (" + ((int)(Assets.manager.getProgress()*100f)) + "%)",WORLD_WIDTH/2,WORLD_HEIGHT/2);
+		bitmapFont.draw(spriteBatch,"Betöltés: " + Assets.manager.getLoadedAssets() + "/" + (Assets.manager.getQueuedAssets()+ Assets.manager.getLoadedAssets()) + " (" + ((int)(Assets.manager.getProgress()*100f)) + "%)", Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
 		spriteBatch.end();
 		if (Assets.manager.update()) {
 			Assets.afterLoaded();

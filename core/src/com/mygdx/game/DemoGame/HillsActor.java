@@ -20,7 +20,7 @@ public class HillsActor extends WorldActorGroup {
     public void init() {
         super.init();
         setSize(16,9);
-        addActor(new OneSpriteStaticActor(Assets.manager.get(AssetsGroup.HILLS_TEXTURE)){
+        addActor(new OneSpriteStaticActor(Assets.manager.get(AssetsGroupDemoGame.HILLS_TEXTURE)){
             @Override
             public void init() {
                 super.init();

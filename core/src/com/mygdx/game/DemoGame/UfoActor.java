@@ -30,7 +30,7 @@ public class UfoActor extends WorldActorGroup{
     public void init() {
         super.init();
         setSize(1,1);
-        addActor(new OneSpriteStaticActor(Assets.manager.get(AssetsGroup.UFO_TEXTURE)){
+        addActor(new OneSpriteStaticActor(Assets.manager.get(AssetsGroupDemoGame.UFO_TEXTURE)){
             @Override
             public void init() {
                 super.init();

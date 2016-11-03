@@ -2,6 +2,8 @@ package com.mygdx.game.DemoMenu;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.mygdx.game.MyBaseClasses.MyScreen;
 import com.mygdx.game.MyGdxGame;
 
@@ -32,12 +34,13 @@ public class MenuScreen extends MyScreen {
 
     @Override
     public void dispose() {
+        menuStage.dispose();
         super.dispose();
     }
 
     @Override
     public void init() {
-        menuStage  = new MenuStage(viewport, spriteBatch, game);
+        menuStage  = new MenuStage(new ExtendViewport(1280,720,new OrthographicCamera(1280,720)), spriteBatch, game);
         Gdx.input.setInputProcessor(menuStage);
     }
 }

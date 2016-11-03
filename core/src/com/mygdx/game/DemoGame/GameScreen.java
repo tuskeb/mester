@@ -29,7 +29,7 @@ public class GameScreen extends MyScreen {
     public void init() {
         super.init();
         box2dStage = new GameStage(new ExtendViewport(16,9,new OrthographicCamera(16,9)),spriteBatch,game);
-        controlStage = new ControlStage(new ExtendViewport(WORLD_WIDTH,WORLD_HEIGHT,new OrthographicCamera(WORLD_WIDTH,WORLD_HEIGHT)),spriteBatch,game);
+        controlStage = new ControlStage(new ExtendViewport(720,720,new OrthographicCamera(720,720)),spriteBatch,game);
 
         setBackGroundColor(0.2f,0.4f,0.8f);
 
@@ -56,8 +56,11 @@ public class GameScreen extends MyScreen {
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
+/*
         setCameraReset((ExtendViewport)box2dStage.getViewport(), width, height);
-        setCameraReset((ExtendViewport)controlStage.getViewport(), width, height);
+        setCameraReset((ExtendViewport)controlStage.getViewport(), width, height);*/
+        box2dStage.resize(width, height);
+        controlStage.resize(width, height);
     }
 
 }

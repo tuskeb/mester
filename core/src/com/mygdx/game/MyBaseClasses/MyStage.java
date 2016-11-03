@@ -1,13 +1,8 @@
 package com.mygdx.game.MyBaseClasses;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -15,8 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
-
-import java.lang.reflect.InvocationTargetException;
 
 
 /**
@@ -28,6 +21,7 @@ abstract public class MyStage extends Stage implements InitableInterface {
     public MyStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch);
         this.game = game;
+        setCameraResetToCenterOfScreen();
         init();
     }
 
@@ -69,15 +63,31 @@ abstract public class MyStage extends Stage implements InitableInterface {
         cameraMoveSpeed = speed;
     }
 
-    public void setCameraReset()
+    public void setCameraResetToCenterOfScreen()
     {
         OrthographicCamera c = (OrthographicCamera)getCamera();
         ExtendViewport v = (ExtendViewport)getViewport();
         c.setToOrtho(false, getViewport().getWorldWidth(), getViewport().getWorldHeight());
-        c.translate((v.getWorldWidth() -  - v.getMinWorldWidth() / 2) < 0 ? 0 : -((v.getWorldWidth()  - v.getMinWorldWidth()) / 2),
+        c.translate((v.getWorldWidth() -  v.getMinWorldWidth() / 2) < 0 ? 0 : -((v.getWorldWidth()  - v.getMinWorldWidth()) / 2),
                 ((v.getWorldHeight()  - v.getMinWorldHeight()) / 2) < 0 ? 0 : -((v.getWorldHeight() - v.getMinWorldHeight()) / 2));
         c.update();
     }
+    public void setCameraResetToLeftBottomOfScreen(){
+        OrthographicCamera c = (OrthographicCamera)getCamera();
+        Viewport v = getViewport();
+        setCameraZoomXY(v.getWorldWidth()/2, v.getWorldHeight()/2,1);
+        c.update();
+
+    }
+
+    public void resize(int screenWidth, int screenHeight){
+        getViewport().update(screenWidth, screenHeight, true);
+        resized();
+    }
+
+    protected void resized(){
+        setCameraResetToCenterOfScreen();
+    };
 
     @Override
     public void act(float delta) {

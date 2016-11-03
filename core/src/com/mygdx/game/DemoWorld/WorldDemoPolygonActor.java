@@ -4,7 +4,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.mygdx.game.DemoGame.AssetsGroup;
+import com.mygdx.game.DemoGame.AssetsGroupDemoGame;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.WorldActorGroup;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
@@ -27,7 +27,7 @@ public class WorldDemoPolygonActor extends WorldActorGroup {
         setPosition(2,10);
         OneSpriteStaticActor oneSpriteStaticActor;
 
-        addActor(oneSpriteStaticActor = new OneSpriteStaticActor(Assets.manager.get(AssetsGroup.UFO2_TEXTURE)));
+        addActor(oneSpriteStaticActor = new OneSpriteStaticActor(Assets.manager.get(AssetsGroupDemoGame.UFO2_TEXTURE)));
         oneSpriteStaticActor.setSize(20,20);
         addListener(new ClickListener(){
             @Override

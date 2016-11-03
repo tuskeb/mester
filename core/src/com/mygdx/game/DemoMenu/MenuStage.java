@@ -94,7 +94,7 @@ public class MenuStage extends MyStage {
         explosionActor.setPosition(0, getHeight() - explosionActor.getHeight());
         addActor(explosionActor);
         utkozesMyLabel = new Label("",game.getLabelStyle());
-        utkozesMyLabel.setPosition(MyScreen.WORLD_WIDTH/2, MyScreen.WORLD_HEIGHT-25);
+        utkozesMyLabel.setPosition(getViewport().getWorldWidth()/2, getViewport().getWorldHeight()-25);
         addActor(utkozesMyLabel);
 
         addActor(new CrossActor());
