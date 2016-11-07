@@ -91,5 +91,6 @@ public class WorldDemoScreen extends MyScreen {
     public void resize(int width, int height) {
         super.resize(width, height);
         box2dStage.resize(width,height);
+        controlStage.resize(width, height);
     }
 }

@@ -16,7 +16,7 @@ import com.mygdx.game.MyBaseClasses.ShapeType;
 public class WorldDemoRectangleActor extends WorldActorGroup {
 
     public WorldDemoRectangleActor(World world) {
-        super(world, ShapeType.Rectangle, BodyDef.BodyType.DynamicBody, 0.2f, 0.2f, 0.2f, false);
+        super(world, ShapeType.Rectangle, BodyDef.BodyType.DynamicBody, 0.2f, 0.2f, 5.2f, false);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class WorldDemoRectangleActor extends WorldActorGroup {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //getBody().applyForce(-100,-100,x,y,true);
-                getBody().applyForceToCenter(-200,0,true);
+                getBody().applyForceToCenter(-20000,0,true);
             }
         });
 

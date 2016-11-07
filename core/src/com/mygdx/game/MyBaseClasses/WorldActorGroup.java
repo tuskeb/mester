@@ -301,7 +301,7 @@ public class WorldActorGroup extends Group implements WorldInterface, InitableIn
     }
 
     public void setPositionByLeftBottomCorner(float x, float y){
-        setPosition(x+getOriginX(),y+getOriginX());
+        setPosition(x+getOriginX(),y+getOriginY());
     }
 
     public float getXByLeftBottomCorner(){
