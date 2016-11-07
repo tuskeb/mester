@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.mygdx.game.MyGdxGame;
 
 
 /**
@@ -31,6 +32,7 @@ public class MyLabel extends Label implements InitableInterface{
     public void act(float delta) {
         super.act(delta);
         elapsedtime += delta;
+
         //setFontScale(Math.abs((float)Math.sin(elapsedtime*2f))/2f+0.8f);
     }
 }

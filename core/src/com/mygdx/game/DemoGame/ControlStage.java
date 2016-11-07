@@ -58,7 +58,7 @@ public class ControlStage extends MyStage {
     @Override
     protected void resized() {
         setCameraResetToLeftBottomOfScreen();
-        ExtendViewport w = (ExtendViewport)getViewport();
-        exitButton.setPosition(w.getWorldWidth()-getLastAdded().getWidth(),w.getWorldHeight()-getLastAdded().getHeight());
+        Viewport w = getViewport();
+        exitButton.setPosition(w.getWorldWidth()-exitButton.getWidth(),w.getWorldHeight()-exitButton.getHeight());
     }
 }

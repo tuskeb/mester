@@ -24,6 +24,7 @@ public class WorldDemoStage extends MyStage {
 
     @Override
     public void init() {
+        setDebugAll(true);
         addBackEventStackListener();
         world = new World(new Vector2(0,0),false);
         WorldDemoRectangleActor worldDemoRectangleActor = new WorldDemoRectangleActor(world);

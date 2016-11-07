@@ -28,6 +28,7 @@ public class WorldActorGroup extends Group implements WorldInterface, InitableIn
     public final String bodyID;
     private FixtureDef fixtureDef;
 
+
     private boolean visibilityControl = true;
 
     private boolean changeByWorld = false;
@@ -108,20 +109,25 @@ public class WorldActorGroup extends Group implements WorldInterface, InitableIn
             case Circle:
                 shape = new CircleShape();
                 ((CircleShape)shape).setRadius((getWidth()+getHeight())/4);
-                ((CircleShape)shape).setPosition(new Vector2((getWidth()+getHeight())/4, (getWidth()+getHeight())/4));
+                //((CircleShape)shape).setPosition(new Vector2((getWidth()+getHeight())/4, (getWidth()+getHeight())/4));
                 fixtureDef.shape = shape;
                 body.createFixture(fixtureDef);
+                setOrigin((getWidth()+getHeight())/4, (getWidth()+getHeight())/4);
                 shape.dispose();
                 break;
             case Rectangle:
                 shape = new PolygonShape();
-                ((PolygonShape)shape).setAsBox(getWidth()/2,getHeight()/2,new Vector2(getWidth()/2, getHeight()/2),0);
+                //((PolygonShape)shape).setAsBox(getWidth()/2,getHeight()/2,new Vector2(getWidth()/2, getHeight()/2),0);
+                ((PolygonShape)shape).setAsBox(getWidth()/2,getHeight()/2,new Vector2(0, 0),0);
                 fixtureDef.shape = shape;
                 body.createFixture(fixtureDef);
+                setOrigin(getWidth()/2,getHeight()/2);
                 shape.dispose();
                 break;
             case Polygon:
                 loader.attachFixture(body, bodyID, fixtureDef, getWidth()>getHeight()?getWidth():getHeight());
+                Vector2 vector2 = loader.getOrigin(bodyID,getWidth()>getHeight()?getWidth():getHeight());
+                setOrigin(vector2.x, vector2.y);
                 break;
         }
         body.getMassData().center.set(getWidth()/2,getHeight()/2);
@@ -257,7 +263,7 @@ public class WorldActorGroup extends Group implements WorldInterface, InitableIn
                 return;
             }
             changeByWorld = true;
-            setPosition(body.getPosition().x, body.getPosition().y);
+            setPosition(body.getPosition().x - getOriginX(), body.getPosition().y - getOriginY());
             setRotation(body.getAngle()* MathUtils.radiansToDegrees);
             changeByWorld = false;
         }
@@ -292,6 +298,17 @@ public class WorldActorGroup extends Group implements WorldInterface, InitableIn
 
     public boolean isFlaggedForDelete() {
         return flaggedForDeleteFromWorld;
+    }
+
+    public void setPositionByLeftBottomCorner(float x, float y){
+        setPosition(x+getOriginX(),y+getOriginX());
+    }
+
+    public float getXByLeftBottomCorner(){
+        return getX()-getOriginX();
+    }
+    public float getYByLeftBottomCorner(){
+        return getY()-getOriginY();
     }
 
 }

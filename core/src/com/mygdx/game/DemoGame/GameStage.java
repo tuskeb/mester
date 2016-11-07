@@ -65,6 +65,10 @@ public class GameStage extends MyStage {
         wheelActor.addToWorld();
 
 
+        addActor(new WheelActorKinematic(world, worldBodyEditorLoader));
+        ((WheelActorKinematic)getLastAdded()).addToWorld();
+
+
         addBackEventStackListener();
 
         world.setContactListener(new ContactListener() {

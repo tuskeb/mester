@@ -24,7 +24,7 @@ public class WheelActor extends WorldActorGroup{
         addActor(a = new OneSpriteStaticActor(Assets.manager.get(AssetsGroupDemoGame.WHEEL_TEXTURE)));
         a.setSize(2f, 2f);
         a.setPosition(0, 0);
-        setPosition(9, 4);
+        setPosition(9, 3);
 
         addListener(new ClickListener(){
             @Override

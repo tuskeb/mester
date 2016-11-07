@@ -24,6 +24,8 @@ public class WorldDemoCircleActor extends WorldActorGroup {
         setSize(x = MathUtils.random(0,5)+ 5, x);
         addToWorld();
         setPosition(MathUtils.random(0,64),MathUtils.random(0,48));
+        //setPosition(0,0);
+        //setPositionByLeftBottomCorner(0,0);
         addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
