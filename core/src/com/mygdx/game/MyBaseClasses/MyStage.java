@@ -65,12 +65,14 @@ abstract public class MyStage extends Stage implements InitableInterface {
 
     public void setCameraResetToCenterOfScreen()
     {
-        OrthographicCamera c = (OrthographicCamera)getCamera();
-        ExtendViewport v = (ExtendViewport)getViewport();
-        c.setToOrtho(false, getViewport().getWorldWidth(), getViewport().getWorldHeight());
-        c.translate((v.getWorldWidth() -  v.getMinWorldWidth() / 2) < 0 ? 0 : -((v.getWorldWidth()  - v.getMinWorldWidth()) / 2),
-                ((v.getWorldHeight()  - v.getMinWorldHeight()) / 2) < 0 ? 0 : -((v.getWorldHeight() - v.getMinWorldHeight()) / 2));
-        c.update();
+        if (getViewport() instanceof ExtendViewport) {
+            OrthographicCamera c = (OrthographicCamera) getCamera();
+            ExtendViewport v = (ExtendViewport) getViewport();
+            c.setToOrtho(false, getViewport().getWorldWidth(), getViewport().getWorldHeight());
+            c.translate((v.getWorldWidth() - v.getMinWorldWidth() / 2) < 0 ? 0 : -((v.getWorldWidth() - v.getMinWorldWidth()) / 2),
+                    ((v.getWorldHeight() - v.getMinWorldHeight()) / 2) < 0 ? 0 : -((v.getWorldHeight() - v.getMinWorldHeight()) / 2));
+            c.update();
+        }
     }
     public void setCameraResetToLeftBottomOfScreen(){
         OrthographicCamera c = (OrthographicCamera)getCamera();

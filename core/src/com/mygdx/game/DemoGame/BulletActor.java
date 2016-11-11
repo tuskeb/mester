@@ -37,7 +37,7 @@ public class BulletActor extends WorldActorGroup {
         super.act(delta);
         if (getBody()!=null && getBody().getPosition().y>10){
             removeFromWorld();
-            getStage().getActors().removeValue(this,true);
+            removeFromStage();
         }
 
     }
