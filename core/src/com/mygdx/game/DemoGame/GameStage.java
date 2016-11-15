@@ -2,6 +2,7 @@ package com.mygdx.game.DemoGame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
@@ -125,6 +126,14 @@ public class GameStage extends MyStage {
 
     @Override
     public void act(float delta) {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            world.setGravity(world.getGravity().rotate(60*delta));
+            ((OrthographicCamera)getCamera()).rotate(-60*delta);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            world.setGravity(world.getGravity().rotate(-60 * delta));
+            ((OrthographicCamera) getCamera()).rotate(60 * delta);
+        }
         world.step(delta, 1, 1);
         super.act(delta);
         ufoCreateTimer += delta;
