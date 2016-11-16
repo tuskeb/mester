@@ -3,6 +3,7 @@ package com.mygdx.game.DemoGame;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -20,6 +21,9 @@ public class GameScreen extends MyScreen {
     Box2DDebugRenderer box2DDebugRenderer = new Box2DDebugRenderer();
     InputMultiplexer inputMultiplexer;
 
+    public static final String PREFS = "MesterUfoGame";
+    //https://github.com/libgdx/libgdx/wiki/Preferences
+    private Preferences preferences = Gdx.app.getPreferences(PREFS);
 
     public GameScreen(MyGdxGame game) {
         super(game);
@@ -44,12 +48,12 @@ public class GameScreen extends MyScreen {
         super.render(delta);
 
         spriteBatch.setProjectionMatrix(box2dStage.getCamera().combined);
-        box2dStage.act();
+        box2dStage.act(delta);
         box2dStage.draw();
         box2DDebugRenderer.render(box2dStage.getWorld(),box2dStage.getCamera().combined);
 
         spriteBatch.setProjectionMatrix(controlStage.getCamera().combined);
-        controlStage.act();
+        controlStage.act(delta);
         controlStage.draw();
     }
 
@@ -63,4 +67,15 @@ public class GameScreen extends MyScreen {
         controlStage.resize(width, height);
     }
 
+    @Override
+    public void dispose() {
+        preferences.flush();
+        super.dispose();
+    }
+
+    @Override
+    public void hide() {
+        preferences.flush();
+        super.hide();
+    }
 }

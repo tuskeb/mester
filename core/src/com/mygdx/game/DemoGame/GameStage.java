@@ -3,6 +3,7 @@ package com.mygdx.game.DemoGame;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
@@ -29,6 +30,7 @@ public class GameStage extends MyStage {
     private World world;
     private float ufoCreateTimer=0;
     private WorldBodyEditorLoader worldBodyEditorLoader;
+    public static final String DEAD_UFO_COUNT = "DEAD_UFO_COUNT";
 
     public GameStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);

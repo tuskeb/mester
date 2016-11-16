@@ -1,5 +1,7 @@
 package com.mygdx.game.DemoGame;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
@@ -19,7 +21,8 @@ import com.mygdx.game.MyBaseClasses.WorldBodyEditorLoader;
 public class UfoActor extends WorldActorGroup{
     private float elapsedTime = 0;
     private float forceTimer = 0;
-
+    //https://github.com/libgdx/libgdx/wiki/Preferences
+    private Preferences preferences = Gdx.app.getPreferences(GameScreen.PREFS);
     private boolean shutdown = false;
 
     public UfoActor(World world, WorldBodyEditorLoader loader) {
@@ -79,6 +82,7 @@ public class UfoActor extends WorldActorGroup{
     public void shutDown()
     {
         if (shutdown) return;
+        preferences.putInteger(GameStage.DEAD_UFO_COUNT, preferences.getInteger(GameStage.DEAD_UFO_COUNT,0)+1);
         addActor(new OneSpriteAnimatedActor(Assets.manager.get(Assets.EXPLOSION_TEXTUREATLAS))        {
             @Override
             public void init() {
