@@ -13,13 +13,27 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.DemoLoading.LoadingScreen;
+import com.mygdx.game.MyBaseClasses.BluetoothSingleton;
 import com.mygdx.game.MyBaseClasses.MyScreen;
+import com.mygdx.game.MyBaseClasses.iBluetooth;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Stack;
 
 public class MyGdxGame extends Game {
+/*
+	public iBluetooth getBluetooth() {
+		return bluetooth;
+	}
 
+	private iBluetooth bluetooth = null;
+
+
+
+	public MyGdxGame() {
+		bluetooth = BluetoothSingleton.getInstance().bluetoothManager;
+	}
+*/
 	public final Stack<Class> backButtonStack = new Stack();
 
 	public Label.LabelStyle getLabelStyle() {
