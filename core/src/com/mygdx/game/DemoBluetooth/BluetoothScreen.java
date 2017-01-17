@@ -1,24 +1,29 @@
 package com.mygdx.game.DemoBluetooth;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.mygdx.game.MyBaseClasses.MyButton;
+import com.mygdx.game.MyBaseClasses.BluetoothChooseServerClientStage;
+import com.mygdx.game.MyBaseClasses.BluetoothClientConnectionStage;
+import com.mygdx.game.MyBaseClasses.BluetoothServerListenStage;
 import com.mygdx.game.MyBaseClasses.MyScreen;
-import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyGdxGame;
 
 /**
- * Created by tuskeb on 2017. 01. 16..
+ * Created by tuskeb on 2017. 01. 17..
  */
 
 public class BluetoothScreen extends MyScreen {
-    MyStage stage;
+
+    public enum BluetoothState{
+        Choose, Listening, Discovering, Connected, Disconnected
+    }
+
+    BluetoothChooseServerClientStage bluetoothChooseServerClientStage;
+    BluetoothServerListenStage bluetoothServerListenStage;
+    BluetoothClientConnectionStage bluetoothClientConnectionStage;
+    BTGameStage btGameStage;
+
+    BluetoothState bluetoothState = BluetoothState.Choose;
+
 
     public BluetoothScreen(MyGdxGame game) {
         super(game);
@@ -27,47 +32,89 @@ public class BluetoothScreen extends MyScreen {
     @Override
     public void init() {
         super.init();
-        stage = new MyStage(new ExtendViewport(640,480, new OrthographicCamera(640,480)), spriteBatch, game) {
+
+        btGameStage = new BTGameStage(game);
+
+
+        bluetoothChooseServerClientStage = new BluetoothChooseServerClientStage(game) {
             @Override
             public void init() {
+                super.init();
                 addBackEventStackListener();
-                addActor(new MyButton("Start server", game.getTextButtonStyle()){
+            }
+
+
+            @Override
+            public void startServer() {
+                bluetoothState = BluetoothState.Listening;
+                bluetoothServerListenStage = new BluetoothServerListenStage(game) {
                     @Override
                     public void init() {
                         super.init();
-                        setPosition(0,0);
-                        addListener(new ClickListener(){
-                            @Override
-                            public void clicked(InputEvent event, float x, float y) {
-                                super.clicked(event, x, y);
-                                game.setScreen(new ServerScreen(game));
-                            }
-                        });
+                        addBackEventStackListener();
                     }
-                });
-                addActor(new MyButton("Start client", game.getTextButtonStyle()){
+                    @Override
+                    public void acceptConnection() {
+                        bluetoothState = BluetoothState.Connected;
+                        Gdx.input.setInputProcessor(btGameStage);
+                    }
+                };
+                Gdx.input.setInputProcessor(bluetoothServerListenStage);
+            }
+
+            @Override
+            public void startClient() {
+                bluetoothState = BluetoothState.Discovering;
+                bluetoothClientConnectionStage = new BluetoothClientConnectionStage(game) {
                     @Override
                     public void init() {
                         super.init();
-                        setPosition(400,0);
-                        addListener(new ClickListener(){
-                            @Override
-                            public void clicked(InputEvent event, float x, float y) {
-                                super.clicked(event, x, y);
-                                game.setScreen(new ClientScreen(game));
-                            }
-                        });
+                        addBackEventStackListener();
                     }
-                });
+                    @Override
+                    public void startConnection() {
+                        bluetoothState = BluetoothState.Connected;
+                        Gdx.input.setInputProcessor(btGameStage);
+                    }
+                };
+                Gdx.input.setInputProcessor(bluetoothClientConnectionStage);
             }
         };
-        Gdx.input.setInputProcessor(stage);
+
+
+
+
+        Gdx.input.setInputProcessor(bluetoothChooseServerClientStage);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
-        stage.act(delta);
-        stage.draw();
+        switch (bluetoothState){
+            case Choose:
+                bluetoothChooseServerClientStage.act(delta);
+                bluetoothChooseServerClientStage.draw();
+                break;
+            case Listening:
+                bluetoothServerListenStage.act(delta);
+                bluetoothServerListenStage.draw();
+                break;
+            case Discovering:
+                bluetoothClientConnectionStage.act(delta);
+                bluetoothClientConnectionStage.draw();
+                break;
+            case Connected:
+                btGameStage.act(delta);
+                btGameStage.draw();
+                break;
+            case Disconnected:
+                break;
+        }
+    }
+
+    @Override
+    public void dispose() {
+        bluetoothChooseServerClientStage.dispose();
+        super.dispose();
     }
 }

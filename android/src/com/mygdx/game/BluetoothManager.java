@@ -68,8 +68,8 @@ public class BluetoothManager implements iBluetooth {
     public String getMessage() {
         if (!messageTaken) {
             messageTaken = true;
-            if (message != null)
-                message = message.substring(0, 2);
+            /*if (message != null)
+                message = message.substring(0, 2);*/
             return message;
         }
 
