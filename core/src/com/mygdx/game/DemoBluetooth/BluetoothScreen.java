@@ -3,6 +3,7 @@ package com.mygdx.game.DemoBluetooth;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.MyBaseClasses.BluetoothChooseServerClientStage;
 import com.mygdx.game.MyBaseClasses.BluetoothClientConnectionStage;
+import com.mygdx.game.MyBaseClasses.BluetoothDisconectionStage;
 import com.mygdx.game.MyBaseClasses.BluetoothServerListenStage;
 import com.mygdx.game.MyBaseClasses.MyScreen;
 import com.mygdx.game.MyGdxGame;
@@ -20,6 +21,7 @@ public class BluetoothScreen extends MyScreen {
     BluetoothChooseServerClientStage bluetoothChooseServerClientStage;
     BluetoothServerListenStage bluetoothServerListenStage;
     BluetoothClientConnectionStage bluetoothClientConnectionStage;
+    BluetoothDisconectionStage bluetoothDisconectionStage;
     BTGameStage btGameStage;
 
     BluetoothState bluetoothState = BluetoothState.Choose;
@@ -33,7 +35,19 @@ public class BluetoothScreen extends MyScreen {
     public void init() {
         super.init();
 
-        btGameStage = new BTGameStage(game);
+        btGameStage = new BTGameStage(game){
+            @Override
+            public void disconnected() {
+                bluetoothDisconectionStage = new BluetoothDisconectionStage(game) {
+
+                    @Override
+                    public void end() {
+                        game.setScreenBackByStackPop();
+                    }
+                };
+                bluetoothState = BluetoothState.Disconnected;
+            }
+        };
 
 
         bluetoothChooseServerClientStage = new BluetoothChooseServerClientStage(game) {
