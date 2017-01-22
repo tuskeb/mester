@@ -24,6 +24,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.badlogic.gdx.utils.Queue;
 import com.mygdx.game.MyBaseClasses.iBluetooth;
 
 public class BluetoothManager implements iBluetooth {
@@ -46,7 +47,8 @@ public class BluetoothManager implements iBluetooth {
     public boolean isConnected = false;
     public boolean canConnect = true;
 
-    public String message;
+    //public String message;
+    public Queue<String> messages = new Queue<String>();
     public boolean messageTaken = true;
 
     public BluetoothAdapter bta = null;
@@ -69,14 +71,16 @@ public class BluetoothManager implements iBluetooth {
     }
 
     public String getMessage() {
-        if (!messageTaken) {
+        if (messages.size>0){
+            return messages.removeFirst();
+        }
+        return null;
+        /*if (!messageTaken) {
             messageTaken = true;
-            /*if (message != null)
-                message = message.substring(0, 2);*/
             return message;
         }
 
-        return null;
+        return null;*/
     }
 
     public String getTest() {
@@ -366,6 +370,7 @@ public class BluetoothManager implements iBluetooth {
         private final BluetoothServerSocket mmServerSocket;
 
         public AcceptThread() {
+            messages.clear();
             BluetoothServerSocket tmp = null;
             try {
                 tmp = getAdapter()
@@ -424,6 +429,7 @@ public class BluetoothManager implements iBluetooth {
         private final BluetoothDevice mmDevice;
 
         public ConnectThread(BluetoothDevice device) {
+            messages.clear();
             BluetoothSocket tmp = null;
             mmDevice = device;
 
@@ -522,9 +528,10 @@ public class BluetoothManager implements iBluetooth {
     }
 
     private void setMessage(String message) {
-        if (messageTaken) {
+/*        if (messageTaken) {
             this.message = message;
             messageTaken = false;
-        }
+        }*/
+        messages.addLast(message);
     }
 }

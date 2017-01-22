@@ -12,8 +12,8 @@ import com.mygdx.game.MyGdxGame;
 
 abstract public class BluetoothConnectedStage extends BluetoothStage {
     private static final String HELLO_MSG="HelloBT";
-    private static final float HELLO_INTERVAL=1;
-    private static final float HELLO_TIMEOUT=2.5f;
+    private static final float HELLO_INTERVAL=0.4f;
+    private static final float HELLO_TIMEOUT=1.1f;
     private float lastReceiveHello = 0;
     private float lastSendHello = 0;
 
