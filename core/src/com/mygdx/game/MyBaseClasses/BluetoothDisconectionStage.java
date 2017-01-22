@@ -25,7 +25,7 @@ abstract public class BluetoothDisconectionStage extends BluetoothStage {
             @Override
             public void init() {
                 super.init();
-                setPosition(700, 380);
+                setPosition(300, 380);
                 addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {

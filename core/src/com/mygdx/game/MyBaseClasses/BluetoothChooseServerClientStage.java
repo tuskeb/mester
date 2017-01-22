@@ -31,6 +31,7 @@ abstract public class BluetoothChooseServerClientStage extends MyStage {
 
     @Override
     public void init() {
+        Gdx.app.error("BTM", "Choose client/server");
         addBackEventStackListener();
         addActor(new MyButton("Start server", game.getTextButtonStyle()) {
             @Override

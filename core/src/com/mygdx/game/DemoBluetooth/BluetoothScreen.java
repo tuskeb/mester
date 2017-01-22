@@ -22,7 +22,7 @@ public class BluetoothScreen extends MyScreen {
     BluetoothServerListenStage bluetoothServerListenStage;
     BluetoothClientConnectionStage bluetoothClientConnectionStage;
     BluetoothDisconectionStage bluetoothDisconectionStage;
-    BTGameStage btGameStage;
+    BTGameStage bluetoothGameStage;
 
     BluetoothState bluetoothState = BluetoothState.Choose;
 
@@ -35,19 +35,7 @@ public class BluetoothScreen extends MyScreen {
     public void init() {
         super.init();
 
-        btGameStage = new BTGameStage(game){
-            @Override
-            public void disconnected() {
-                bluetoothDisconectionStage = new BluetoothDisconectionStage(game) {
 
-                    @Override
-                    public void end() {
-                        game.setScreenBackByStackPop();
-                    }
-                };
-                bluetoothState = BluetoothState.Disconnected;
-            }
-        };
 
 
         bluetoothChooseServerClientStage = new BluetoothChooseServerClientStage(game) {
@@ -70,7 +58,21 @@ public class BluetoothScreen extends MyScreen {
                     @Override
                     public void acceptConnection() {
                         bluetoothState = BluetoothState.Connected;
-                        Gdx.input.setInputProcessor(btGameStage);
+                        bluetoothGameStage = new BTGameStage(game){
+                            @Override
+                            public void disconnected() {
+                                bluetoothDisconectionStage = new BluetoothDisconectionStage(game) {
+
+                                    @Override
+                                    public void end() {
+                                        game.setScreenBackByStackPop();
+                                    }
+                                };
+                                Gdx.input.setInputProcessor(bluetoothDisconectionStage);
+                                bluetoothState = BluetoothState.Disconnected;
+                            }
+                        };
+                        Gdx.input.setInputProcessor(bluetoothGameStage);
                     }
                 };
                 Gdx.input.setInputProcessor(bluetoothServerListenStage);
@@ -88,7 +90,21 @@ public class BluetoothScreen extends MyScreen {
                     @Override
                     public void startConnection() {
                         bluetoothState = BluetoothState.Connected;
-                        Gdx.input.setInputProcessor(btGameStage);
+                        bluetoothGameStage = new BTGameStage(game){
+                            @Override
+                            public void disconnected() {
+                                bluetoothDisconectionStage = new BluetoothDisconectionStage(game) {
+
+                                    @Override
+                                    public void end() {
+                                        game.setScreenBackByStackPop();
+                                    }
+                                };
+                                bluetoothState = BluetoothState.Disconnected;
+                                Gdx.input.setInputProcessor(bluetoothDisconectionStage);
+                            }
+                        };
+                        Gdx.input.setInputProcessor(bluetoothGameStage);
                     }
                 };
                 Gdx.input.setInputProcessor(bluetoothClientConnectionStage);
@@ -118,10 +134,12 @@ public class BluetoothScreen extends MyScreen {
                 bluetoothClientConnectionStage.draw();
                 break;
             case Connected:
-                btGameStage.act(delta);
-                btGameStage.draw();
+                bluetoothGameStage.act(delta);
+                bluetoothGameStage.draw();
                 break;
             case Disconnected:
+                bluetoothDisconectionStage.act(delta);
+                bluetoothDisconectionStage.draw();
                 break;
         }
     }

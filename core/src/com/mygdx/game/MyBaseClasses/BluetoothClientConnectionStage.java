@@ -1,5 +1,6 @@
 package com.mygdx.game.MyBaseClasses;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -41,6 +42,7 @@ abstract public class BluetoothClientConnectionStage extends BluetoothStage {
 
     @Override
     public void init() {
+        Gdx.app.error("BTM", "Client start discovering");
         startBluetoothDiscovering();
         addActor(waitingLabel = new MyLabel("", game.getLabelStyle()));
         waitingLabel.setPosition(300,300);

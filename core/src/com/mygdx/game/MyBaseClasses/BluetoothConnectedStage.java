@@ -1,5 +1,6 @@
 package com.mygdx.game.MyBaseClasses;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.Queue;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -25,9 +26,11 @@ abstract public class BluetoothConnectedStage extends BluetoothStage {
 
     public BluetoothConnectedStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
+        Gdx.app.error("BTM", "Connected");
     }
 
     private void sendHello(){
+        Gdx.app.error("BTM", "Send HELLO");
         getBluetoothManager().sendMessage(HELLO_MSG);
     }
 
@@ -49,7 +52,10 @@ abstract public class BluetoothConnectedStage extends BluetoothStage {
     public void act(float delta) {
         String s;
         if ((s = getBluetoothManager().getMessage())!= null) {
+            s = s.trim();
+            Gdx.app.error("BTM", "Receive " + s);
             if (s.compareTo(HELLO_MSG) == 0) {
+                Gdx.app.error("BTM", "Receive HELLO");
                 lastReceiveHello = getElapsedTime();
             } else {
                 messages.addLast(s);
@@ -61,6 +67,7 @@ abstract public class BluetoothConnectedStage extends BluetoothStage {
         }
         if (getElapsedTime() - HELLO_TIMEOUT> lastReceiveHello){
             getBluetoothManager().stop();
+            Gdx.app.error("BTM", "Timeout. Start disconnecting.");
             disconnected();
         }
         super.act(delta);

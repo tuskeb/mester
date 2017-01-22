@@ -3,8 +3,10 @@ package com.mygdx.game;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.LinkedList;
+import java.util.Scanner;
 import java.util.UUID;
 
 
@@ -20,6 +22,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.mygdx.game.MyBaseClasses.iBluetooth;
 
@@ -484,12 +487,14 @@ public class BluetoothManager implements iBluetooth {
         }
 
         public void run() {
-            byte[] buffer = new byte[1024];
             int bytes;
 
             while (true) {
                 try {
+                    byte[] buffer = new byte[1024];
                     bytes = mmInStream.read(buffer);
+                    Log.e("BTM", "Read (BT thread)");
+                    //Scanner scanner = new Scanner(mmInStream);
                     setMessage(new String(buffer, "UTF-8"));
                     mHandler.obtainMessage(BTActivity.MESSAGE_READ, bytes, -1,
                             buffer).sendToTarget();
