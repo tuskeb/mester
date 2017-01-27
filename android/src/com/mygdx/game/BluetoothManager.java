@@ -171,7 +171,7 @@ public class BluetoothManager implements iBluetooth {
     private synchronized void setState(int state) {
         mState = state;
 
-        mHandler.obtainMessage(BTActivity.MESSAGE_STATE_CHANGE, state, -1)
+        mHandler.obtainMessage(AndroidLauncher.MESSAGE_STATE_CHANGE, state, -1)
                 .sendToTarget();
     }
 
@@ -235,9 +235,9 @@ public class BluetoothManager implements iBluetooth {
         mConnectedThread = new ConnectedThread(socket);
         mConnectedThread.start();
 
-        Message msg = mHandler.obtainMessage(BTActivity.MESSAGE_DEVICE_NAME);
+        Message msg = mHandler.obtainMessage(AndroidLauncher.MESSAGE_DEVICE_NAME);
         Bundle bundle = new Bundle();
-        bundle.putString(BTActivity.DEVICE_NAME, device.getName());
+        bundle.putString(AndroidLauncher.DEVICE_NAME, device.getName());
         msg.setData(bundle);
         mHandler.sendMessage(msg);
 
@@ -275,9 +275,9 @@ public class BluetoothManager implements iBluetooth {
         setState(STATE_LISTEN);
 
         canConnect = false;
-        Message msg = mHandler.obtainMessage(BTActivity.MESSAGE_TOAST);
+        Message msg = mHandler.obtainMessage(AndroidLauncher.MESSAGE_TOAST);
         Bundle bundle = new Bundle();
-        bundle.putString(BTActivity.TOAST, "Unable to connect device");
+        bundle.putString(AndroidLauncher.TOAST, "Unable to connect device");
         msg.setData(bundle);
         mHandler.sendMessage(msg);
     }
@@ -285,9 +285,9 @@ public class BluetoothManager implements iBluetooth {
     private void connectionLost() {
         setState(STATE_LISTEN);
 
-        Message msg = mHandler.obtainMessage(BTActivity.MESSAGE_TOAST);
+        Message msg = mHandler.obtainMessage(AndroidLauncher.MESSAGE_TOAST);
         Bundle bundle = new Bundle();
-        bundle.putString(BTActivity.TOAST, "Device connection was lost");
+        bundle.putString(AndroidLauncher.TOAST, "Device connection was lost");
         msg.setData(bundle);
         mHandler.sendMessage(msg);
     }
@@ -502,7 +502,7 @@ public class BluetoothManager implements iBluetooth {
                     Log.e("BTM", "Read (BT thread)");
                     //Scanner scanner = new Scanner(mmInStream);
                     setMessage(new String(buffer, "UTF-8"));
-                    mHandler.obtainMessage(BTActivity.MESSAGE_READ, bytes, -1,
+                    mHandler.obtainMessage(AndroidLauncher.MESSAGE_READ, bytes, -1,
                             buffer).sendToTarget();
                 } catch (IOException e) {
                     connectionLost();
