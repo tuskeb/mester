@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -13,11 +14,14 @@ import com.mygdx.game.DemoMenu.StarActor;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.BluetoothConnectedStage;
 import com.mygdx.game.MyBaseClasses.BluetoothStage;
+import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyScreen;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteAnimatedActor;
 import com.mygdx.game.MyBaseClasses.iBluetooth;
 import com.mygdx.game.MyGdxGame;
+
+import java.util.ArrayList;
 
 /**
  * Created by tuskeb on 2017. 01. 16..
@@ -33,6 +37,20 @@ abstract public class BTGameStage extends BluetoothConnectedStage {
     public void init() {
         Gdx.input.setInputProcessor(this);
         addBackEventStackListener();
+        addActor(new MyButton("Clear", game.getTextButtonStyle()){
+            @Override
+            public void init() {
+                super.init();
+                addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        clearStars();
+                        sendMessage("clear");
+                    }
+                });
+            }
+        });
         addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -41,6 +59,14 @@ abstract public class BTGameStage extends BluetoothConnectedStage {
                 Gdx.app.log("BTM", "Send: " + x + ";" + y);
                 sendMessage(x + ";" + y);
                 return true;
+            }
+
+            @Override
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                super.touchDragged(event, x, y, pointer);
+                addStar(x,y);
+                Gdx.app.log("BTM", "Send: " + x + ";" + y);
+                sendMessage("star:" + x + ";" + y);
             }
         });
     }
@@ -56,15 +82,37 @@ abstract public class BTGameStage extends BluetoothConnectedStage {
         });
     }
 
+    public void clearStars(){
+        ArrayList<Actor> actorList = new ArrayList<Actor>();
+        for (Actor a: getActors()) {
+            if (a instanceof OneSpriteAnimatedActor){
+                actorList.add(a);
+            }
+        }
+        for (Actor a: actorList) {
+            getActors().removeValue(a, true);
+        }
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
         String s;
-        if ((s = getMessage()) != null){
-            Gdx.app.log("BTM","Receive: " + s);
-            String[] v = s.split(";");
-            if (v.length==2) {
-                addStar(Float.valueOf(v[0]), Float.valueOf(v[1]));
+        while ((s = getMessage()) != null) {
+            Gdx.app.log("BTM", "Receive: " + s);
+            try {
+                String[] u = s.split(":");
+                if (u[0].compareTo("clear") == 0) {
+                    clearStars();
+                }
+                if (u[0].compareTo("star") == 0) {
+                    String[] v = u[1].split(";");
+                    if (v.length == 2) {
+                        addStar(Float.valueOf(v[0]), Float.valueOf(v[1]));
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

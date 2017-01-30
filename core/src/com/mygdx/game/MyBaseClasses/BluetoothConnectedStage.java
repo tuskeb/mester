@@ -51,7 +51,7 @@ abstract public class BluetoothConnectedStage extends BluetoothStage {
     @Override
     public void act(float delta) {
         String s;
-        if ((s = getBluetoothManager().getMessage())!= null) {
+        while ((s = getBluetoothManager().getMessage())!= null) {
             s = s.trim();
             Gdx.app.error("BTM", "Receive " + s);
             if (s.compareTo(HELLO_MSG) == 0) {
