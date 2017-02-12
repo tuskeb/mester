@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.DemoBluetooth.BluetoothScreen;
+import com.mygdx.game.DemoHttp.HttpDemoScreen;
 import com.mygdx.game.MyBaseClasses.BluetoothChooseServerClientStage;
 import com.mygdx.game.DemoGame.GameScreen;
 import com.mygdx.game.DemoInput.InputScreen;
@@ -23,7 +24,7 @@ import com.mygdx.game.MyGdxGame;
 public class MenuStage extends MyStage {
     private BadlActor badlActor;
     private CrossActor crossActor;
-    private TextButton textButton, textButton2, textButton3, textButton4, textButton5;
+    private TextButton textButton, textButton2, textButton3, textButton4, textButton5, textButton6;
     private ExplosionActor explosionActor;
     private Label utkozesMyLabel;
 
@@ -84,6 +85,16 @@ public class MenuStage extends MyStage {
             }
         });
 
+        textButton6 = new MyButton("Http demo", game.getTextButtonStyle());
+        textButton6.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreen(new HttpDemoScreen(game));
+            }
+        });
+
+
         addActor(badlActor);
         addActor(crossActor);
         textButton.setPosition(200,100);
@@ -100,6 +111,8 @@ public class MenuStage extends MyStage {
         addActor(textButton4);
         textButton5.setPosition(200,500);
         textButton5.debug();
+        textButton6.setPosition(200,600);
+        textButton6.debug();
         addActor(textButton5);
         addActor(new StarActor());
         explosionActor = new ExplosionActor();
