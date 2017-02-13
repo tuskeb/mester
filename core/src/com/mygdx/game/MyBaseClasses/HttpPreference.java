@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.Preferences;
 
+import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * Created by tuskeb on 2017. 02. 11..
@@ -12,98 +14,104 @@ import java.util.Map;
 
 public class HttpPreference extends HttpConnect implements Preferences {
 
-    boolean locked = false;
+    private boolean locked = false;
+    private Map<String, Object> map = new HashMap<String, Object>();
+
 
     public HttpPreference(String Url, int UserID, String Password) {
         super(Url, UserID, Password);
         refresh();
+        Gdx.app.getPreferences("dsdd");
     }
-
-
 
     public boolean isLocked() {
         return locked;
     }
 
-
     public void clear() {
-
+        map.clear();
     }
 
     public Preferences putBoolean(String key, boolean val) {
-        return null;
+        map.put(key, new Boolean(val));
+        return this;
     }
 
     public Preferences putInteger(String key, int val) {
-        return null;
+        map.put(key, new Integer(val));
+        return this;
     }
 
     public Preferences putLong(String key, long val) {
-        return null;
+        map.put(key, new Long(val));
+        return this;
     }
 
     public Preferences putFloat(String key, float val) {
-        return null;
+        map.put(key, new Float(val));
+        return this;
     }
 
     public Preferences putString(String key, String val) {
-        return null;
+        map.put(key, new String(val));
+        return this;
     }
 
     public Preferences put(Map<String, ?> vals) {
-        return null;
+        map.putAll(vals);
+        return this;
     }
 
     public boolean getBoolean(String key) {
-        return false;
+        return ((Boolean) map.get(key)).booleanValue();
     }
 
     public int getInteger(String key) {
-        return 0;
+        return ((Integer) map.get(key)).intValue();
     }
 
     public long getLong(String key) {
-        return 0;
+        return ((Long) map.get(key)).longValue();
     }
 
     public float getFloat(String key) {
-        return 0;
+        return ((Float) map.get(key)).floatValue();
     }
 
     public String getString(String key) {
-        return null;
+        return ((String) map.get(key)).toString();
     }
 
     public boolean getBoolean(String key, boolean defValue) {
-        return false;
+        return ((Boolean) map.get(key)).booleanValue();
     }
 
     public int getInteger(String key, int defValue) {
-        return 0;
+        return map.get(key) == null ? defValue : ((Integer) map.get(key)).intValue();
     }
 
     public long getLong(String key, long defValue) {
-        return 0;
+        return map.get(key) == null ? defValue : ((Long) map.get(key)).longValue();
     }
 
     public float getFloat(String key, float defValue) {
-        return 0;
+        return map.get(key) == null ? defValue : ((Float) map.get(key)).floatValue();
     }
 
     public String getString(String key, String defValue) {
-        return null;
+        return map.get(key) == null ? defValue : ((String) map.get(key)).toString();
     }
 
     public Map<String, ?> get() {
-        return null;
+        return map;
     }
 
     public boolean contains(String key) {
-        return false;
+        return map.containsKey(key);
     }
 
     public void remove(String key) {
-
+        map.remove(key);
     }
 
     public void flush() {
@@ -130,11 +138,12 @@ public class HttpPreference extends HttpConnect implements Preferences {
         System.out.println("Flush done");
     }
 
-    private void dataFromString(String data){
-
+    private void dataFromString(String data) {
+        System.out.println("Not implemented yet.");
     }
 
-    private String dataToString(){
+    private String dataToString() {
+        System.out.println("Not implemented yet.");
         return "";
     }
 
@@ -169,12 +178,12 @@ public class HttpPreference extends HttpConnect implements Preferences {
         System.out.println("Refresh function exit.");
     }
 
-    protected void failed(HttpErrors httpErrors){
+    protected void failed(HttpErrors httpErrors) {
 
     }
 
-    protected void waitingWhileLocked(){
-        while (isLocked()){
+    protected void waitingWhileLocked() {
+        while (isLocked()) {
             try {
                 Thread.sleep(50);
                 System.out.println("Waiting (Http req)");
