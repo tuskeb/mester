@@ -113,6 +113,7 @@ public class MenuStage extends MyStage {
         textButton5.debug();
         textButton6.setPosition(200,600);
         textButton6.debug();
+        addActor(textButton6);
         addActor(textButton5);
         addActor(new StarActor());
         explosionActor = new ExplosionActor();

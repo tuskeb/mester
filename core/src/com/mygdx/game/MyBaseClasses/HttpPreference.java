@@ -12,10 +12,19 @@ import java.util.Map;
 
 public class HttpPreference extends HttpConnect implements Preferences {
 
+    boolean locked = false;
+
     public HttpPreference(String Url, int UserID, String Password) {
         super(Url, UserID, Password);
         refresh();
     }
+
+
+
+    public boolean isLocked() {
+        return locked;
+    }
+
 
     public void clear() {
 
@@ -98,23 +107,27 @@ public class HttpPreference extends HttpConnect implements Preferences {
     }
 
     public void flush() {
+        System.out.println("Flush start");
         httpRequest.setContent("USER:" + this.userID + "\nPASSWORD:" + this.password + "\nDATA:FLUSH\n" + dataToString());
         Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
             @Override
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
-
+                System.out.println("Result:\n" + httpResponse.getResultAsString());
             }
 
             @Override
             public void failed(Throwable t) {
+                System.out.println("Flush failed: " + t.getMessage());
                 HttpPreference.this.failed(HttpErrors.timeout);
             }
 
             @Override
             public void cancelled() {
+                System.out.println("Flush cancelled");
                 HttpPreference.this.failed(HttpErrors.cancelled);
             }
         });
+        System.out.println("Flush done");
     }
 
     private void dataFromString(String data){
@@ -125,27 +138,49 @@ public class HttpPreference extends HttpConnect implements Preferences {
         return "";
     }
 
-    public void refresh(){
+    public void refresh() {
+        System.out.println("Refresh thread start");
+        waitingWhileLocked();
+        locked = true;
         httpRequest.setContent("USER:" + this.userID + "\nPASSWORD:" + this.password + "\nDATA:GET");
         Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
             @Override
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
+                locked = false;
+                System.out.println("Refresh thread done");
+                System.out.println("Result:\n" + httpResponse.getResultAsString());
                 dataFromString(httpResponse.getResultAsString());
             }
 
             @Override
             public void failed(Throwable t) {
+                locked = false;
+                System.out.println("Refresh failed: " + t.getMessage());
                 HttpPreference.this.failed(HttpErrors.timeout);
             }
 
             @Override
             public void cancelled() {
+                locked = false;
+                System.out.println("Refresh cancelled");
                 HttpPreference.this.failed(HttpErrors.cancelled);
             }
         });
+        System.out.println("Refresh function exit.");
     }
 
     protected void failed(HttpErrors httpErrors){
 
+    }
+
+    protected void waitingWhileLocked(){
+        while (isLocked()){
+            try {
+                Thread.sleep(50);
+                System.out.println("Waiting (Http req)");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

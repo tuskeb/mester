@@ -16,7 +16,7 @@ public class HttpConnect {
     public HttpConnect(String Url, int UserID, String Password) {
         httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
         httpRequest.setUrl(Url);
-        httpRequest.setTimeOut(2);
+        httpRequest.setTimeOut(2000);
         this.url = Url;
         this.password = Password;
         this.userID = UserID;

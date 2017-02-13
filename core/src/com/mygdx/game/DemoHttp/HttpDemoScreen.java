@@ -2,6 +2,7 @@ package com.mygdx.game.DemoHttp;
 
 import com.badlogic.gdx.Net;
 import com.mygdx.game.MyBaseClasses.MyScreen;
+import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyGdxGame;
 
 /**
@@ -9,11 +10,10 @@ import com.mygdx.game.MyGdxGame;
  */
 
 public class HttpDemoScreen extends MyScreen {
+    HttpDemoStage stage;
     public HttpDemoScreen(MyGdxGame game) {
         super(game);
-        Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpRequest.setUrl("http://192.168.4.100");
-
+        stage = new HttpDemoStage(game);
     }
 
 
@@ -21,5 +21,7 @@ public class HttpDemoScreen extends MyScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
+        stage.act(delta);
+        stage.draw();
     }
 }
