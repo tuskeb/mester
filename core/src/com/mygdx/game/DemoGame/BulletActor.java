@@ -4,9 +4,9 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.GlobalClasses.Assets;
-import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
-import com.mygdx.game.MyBaseClasses.ShapeType;
-import com.mygdx.game.MyBaseClasses.WorldActorGroup;
+import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+import com.mygdx.game.MyBaseClasses.Scene2D.ShapeType;
+import com.mygdx.game.MyBaseClasses.Box2dWorld.WorldActorGroup;
 
 /**
  * Created by tuskeb on 2016. 10. 31..

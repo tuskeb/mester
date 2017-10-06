@@ -1,4 +1,4 @@
-package com.mygdx.game.MyBaseClasses;
+package com.mygdx.game.MyBaseClasses.Box2dWorld;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -11,6 +11,8 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
+import com.mygdx.game.MyBaseClasses.Scene2D.ShapeType;
 
 /**
  * Created by tuskeb on 2016. 10. 29..

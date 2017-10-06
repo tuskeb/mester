@@ -1,11 +1,6 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -13,28 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.DemoLoading.LoadingScreen;
-import com.mygdx.game.MyBaseClasses.BluetoothSingleton;
-import com.mygdx.game.MyBaseClasses.MyScreen;
-import com.mygdx.game.MyBaseClasses.iBluetooth;
+import com.mygdx.game.MyBaseClasses.Game.MyGame;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Stack;
+public class MyGdxGame extends MyGame {
 
-public class MyGdxGame extends Game {
-/*
-	public iBluetooth getBluetooth() {
-		return bluetooth;
-	}
-
-	private iBluetooth bluetooth = null;
-
-
-
-	public MyGdxGame() {
-		bluetooth = BluetoothSingleton.getInstance().bluetoothManager;
-	}
-*/
-	public final Stack<Class> backButtonStack = new Stack();
 
 	public Label.LabelStyle getLabelStyle() {
 		Label.LabelStyle style;
@@ -72,8 +49,6 @@ public class MyGdxGame extends Game {
 	public void create () {
 		Assets.prepare();
 		setScreen(new LoadingScreen(this));
-		Gdx.input.setCatchBackKey(true);
-		Gdx.input.setCatchMenuKey(true);
 	}
 
 	@Override
@@ -83,49 +58,14 @@ public class MyGdxGame extends Game {
 	}
 
 	@Override
-	public void dispose () {
-		super.dispose();
-		Assets.unload();
-	}
-
-	@Override
 	public void pause() {
 		super.pause();
 	}
 
 	@Override
-	public void setScreen(Screen screen) {
-		setScreen(screen,true);
-	}
-
-	public void setScreenBackByStackPop(){
-		if (backButtonStack.size()>1){
-			try {
-				setScreen((MyScreen) backButtonStack.pop().getConstructor(MyGdxGame.class).newInstance(this),false);
-			} catch (InstantiationException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			Gdx.app.exit();
-		}
-	}
-
-
-	public void setScreen(Screen screen, boolean pushToStack) {
-		Screen prevScreen = getScreen();
-		if (prevScreen!=null) {
-			if (pushToStack) {backButtonStack.push(prevScreen.getClass());}
-			prevScreen.dispose();
-		}
-		super.setScreen(screen);
+	public void dispose () {
+		super.dispose();
+		Assets.unload();
 	}
 
 }

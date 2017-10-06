@@ -1,11 +1,11 @@
 package com.mygdx.game.DemoBluetooth;
 
 import com.badlogic.gdx.Gdx;
-import com.mygdx.game.MyBaseClasses.BluetoothChooseServerClientStage;
-import com.mygdx.game.MyBaseClasses.BluetoothClientConnectionStage;
-import com.mygdx.game.MyBaseClasses.BluetoothDisconectionStage;
-import com.mygdx.game.MyBaseClasses.BluetoothServerListenStage;
-import com.mygdx.game.MyBaseClasses.MyScreen;
+import com.mygdx.game.MyBaseClasses.Bluetooth.BluetoothChooseServerClientStage;
+import com.mygdx.game.MyBaseClasses.Bluetooth.BluetoothClientConnectionStage;
+import com.mygdx.game.MyBaseClasses.Bluetooth.BluetoothDisconectionStage;
+import com.mygdx.game.MyBaseClasses.Bluetooth.BluetoothServerListenStage;
+import com.mygdx.game.MyBaseClasses.Scene2D.MyScreen;
 import com.mygdx.game.MyGdxGame;
 
 /**

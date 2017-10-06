@@ -1,8 +1,6 @@
 package com.mygdx.game.DemoHttp;
 
-import com.badlogic.gdx.Net;
-import com.mygdx.game.MyBaseClasses.MyScreen;
-import com.mygdx.game.MyBaseClasses.MyStage;
+import com.mygdx.game.MyBaseClasses.Scene2D.MyScreen;
 import com.mygdx.game.MyGdxGame;
 
 /**

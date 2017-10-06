@@ -1,7 +1,7 @@
 package com.mygdx.game.DemoMenu;
 
 import com.mygdx.game.GlobalClasses.Assets;
-import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
+import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 /**
  * Created by tuskeb on 2016. 09. 30..

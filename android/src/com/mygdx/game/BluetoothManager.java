@@ -3,10 +3,8 @@ package com.mygdx.game;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.LinkedList;
-import java.util.Scanner;
 import java.util.UUID;
 
 
@@ -22,10 +20,9 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 import com.badlogic.gdx.utils.Queue;
-import com.mygdx.game.MyBaseClasses.iBluetooth;
+import com.mygdx.game.MyBaseClasses.Bluetooth.iBluetooth;
 
 public class BluetoothManager implements iBluetooth {
 

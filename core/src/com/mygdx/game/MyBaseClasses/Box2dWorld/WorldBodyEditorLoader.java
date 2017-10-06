@@ -1,4 +1,4 @@
-package com.mygdx.game.MyBaseClasses;
+package com.mygdx.game.MyBaseClasses.Box2dWorld;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;

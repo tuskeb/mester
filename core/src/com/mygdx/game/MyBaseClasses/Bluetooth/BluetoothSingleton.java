@@ -1,5 +1,5 @@
 //https://algorhymes.wordpress.com/2013/02/07/java-bluetooth-on-android-with-and-wo-libgdx/
-package com.mygdx.game.MyBaseClasses;
+package com.mygdx.game.MyBaseClasses.Bluetooth;
 
 /**
  * Created by tuskeb on 2017. 01. 12..

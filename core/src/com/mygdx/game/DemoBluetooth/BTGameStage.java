@@ -2,23 +2,16 @@ package com.mygdx.game.DemoBluetooth;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.DemoMenu.StarActor;
 import com.mygdx.game.GlobalClasses.Assets;
-import com.mygdx.game.MyBaseClasses.BluetoothConnectedStage;
-import com.mygdx.game.MyBaseClasses.BluetoothStage;
-import com.mygdx.game.MyBaseClasses.MyButton;
-import com.mygdx.game.MyBaseClasses.MyScreen;
-import com.mygdx.game.MyBaseClasses.MyStage;
-import com.mygdx.game.MyBaseClasses.OneSpriteAnimatedActor;
-import com.mygdx.game.MyBaseClasses.iBluetooth;
+import com.mygdx.game.MyBaseClasses.Bluetooth.BluetoothConnectedStage;
+import com.mygdx.game.MyBaseClasses.UI.MyButton;
+import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
 import com.mygdx.game.MyGdxGame;
 
 import java.util.ArrayList;

@@ -1,14 +1,14 @@
-package com.mygdx.game.MyBaseClasses;
+package com.mygdx.game.MyBaseClasses.Bluetooth;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.MyBaseClasses.UI.MyButton;
+import com.mygdx.game.MyBaseClasses.UI.MyLabel;
 import com.mygdx.game.MyGdxGame;
 
 import java.util.ArrayList;

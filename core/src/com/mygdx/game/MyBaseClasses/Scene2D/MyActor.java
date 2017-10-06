@@ -1,14 +1,14 @@
-package com.mygdx.game.MyBaseClasses;
+package com.mygdx.game.MyBaseClasses.Scene2D;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.mygdx.game.*;
+import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
 
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
-abstract public class MyActor extends Actor implements InitableInterface{
+abstract public class MyActor extends Actor implements InitableInterface {
 
     protected float elapsedTime = 0;
     protected Rectangle rectangle = new Rectangle();

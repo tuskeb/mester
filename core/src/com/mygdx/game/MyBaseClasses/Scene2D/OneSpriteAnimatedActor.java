@@ -1,4 +1,4 @@
-package com.mygdx.game.MyBaseClasses;
+package com.mygdx.game.MyBaseClasses.Scene2D;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;

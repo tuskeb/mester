@@ -1,12 +1,10 @@
 package com.mygdx.game.DemoHttp;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.MyBaseClasses.HttpPreference;
-import com.mygdx.game.MyBaseClasses.MyStage;
+import com.mygdx.game.MyBaseClasses.Http.HttpPreference;
+import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
 import com.mygdx.game.MyGdxGame;
 
 /**

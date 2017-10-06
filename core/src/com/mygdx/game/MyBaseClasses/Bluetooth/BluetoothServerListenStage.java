@@ -1,15 +1,10 @@
-package com.mygdx.game.MyBaseClasses;
+package com.mygdx.game.MyBaseClasses.Bluetooth;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.mygdx.game.DemoBluetooth.BTGameStage;
-import com.mygdx.game.MyBaseClasses.BluetoothSingleton;
-import com.mygdx.game.MyBaseClasses.MyLabel;
-import com.mygdx.game.MyBaseClasses.MyScreen;
-import com.mygdx.game.MyBaseClasses.MyStage;
-import com.mygdx.game.MyBaseClasses.iBluetooth;
+import com.mygdx.game.MyBaseClasses.UI.MyLabel;
 import com.mygdx.game.MyGdxGame;
 
 /**

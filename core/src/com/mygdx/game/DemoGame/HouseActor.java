@@ -6,9 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.GlobalClasses.Assets;
-import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
-import com.mygdx.game.MyBaseClasses.WorldActorGroup;
-import com.mygdx.game.MyBaseClasses.WorldBodyEditorLoader;
+import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+import com.mygdx.game.MyBaseClasses.Box2dWorld.WorldActorGroup;
+import com.mygdx.game.MyBaseClasses.Box2dWorld.WorldBodyEditorLoader;
 
 /**
  * Created by tuskeb on 2016. 10. 31..

@@ -1,4 +1,4 @@
-package com.mygdx.game.MyBaseClasses;
+package com.mygdx.game.MyBaseClasses.Http;
 
 import com.badlogic.gdx.Net;
 

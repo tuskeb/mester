@@ -11,7 +11,7 @@ SERVER -> Accept the connection
 BOTH -> Start listening for messages
 BOTH -> Exchange data
  */
-package com.mygdx.game.MyBaseClasses;
+package com.mygdx.game.MyBaseClasses.Bluetooth;
 
 /**
  * Created by tuskeb on 2017. 01. 12..

@@ -1,6 +1,4 @@
-package com.mygdx.game.MyBaseClasses;
-
-import com.badlogic.gdx.Net;
+package com.mygdx.game.MyBaseClasses.Http;
 
 /**
  * Created by tuskeb on 2017. 02. 12..

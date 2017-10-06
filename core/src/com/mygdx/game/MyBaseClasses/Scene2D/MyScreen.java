@@ -1,14 +1,12 @@
-package com.mygdx.game.MyBaseClasses;
+package com.mygdx.game.MyBaseClasses.Scene2D;
 
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ObjectSet;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
 import com.mygdx.game.MyGdxGame;
 
 /**

@@ -1,6 +1,5 @@
 package com.mygdx.game.DemoGame;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -8,10 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.MyBaseClasses.MyButton;
-import com.mygdx.game.MyBaseClasses.MyLabel;
-import com.mygdx.game.MyBaseClasses.MyStage;
-import com.mygdx.game.MyBaseClasses.MyTextField;
+import com.mygdx.game.MyBaseClasses.UI.MyButton;
+import com.mygdx.game.MyBaseClasses.UI.MyLabel;
+import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
 import com.mygdx.game.MyGdxGame;
 
 /**

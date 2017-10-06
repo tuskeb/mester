@@ -5,7 +5,7 @@ import android.os.Handler;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.mygdx.game.MyBaseClasses.BluetoothSingleton;
+import com.mygdx.game.MyBaseClasses.Bluetooth.BluetoothSingleton;
 
 public class AndroidLauncher extends AndroidApplication {
 

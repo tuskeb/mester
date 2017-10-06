@@ -8,14 +8,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.DemoBluetooth.BluetoothScreen;
 import com.mygdx.game.DemoHttp.HttpDemoScreen;
-import com.mygdx.game.MyBaseClasses.BluetoothChooseServerClientStage;
 import com.mygdx.game.DemoGame.GameScreen;
 import com.mygdx.game.DemoInput.InputScreen;
-import com.mygdx.game.MyBaseClasses.MyButton;
-import com.mygdx.game.MyBaseClasses.MyStage;
-import com.mygdx.game.MyBaseClasses.OneSpriteAnimatedActor;
+import com.mygdx.game.MyBaseClasses.UI.MyButton;
+import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
+import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
 import com.mygdx.game.DemoOtherScr.OtherScreen;
-import com.mygdx.game.MyBaseClasses.ShapeType;
+import com.mygdx.game.MyBaseClasses.Scene2D.ShapeType;
 import com.mygdx.game.MyGdxGame;
 
 /**
