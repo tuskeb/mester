@@ -59,6 +59,18 @@ public class Assets {
 
 
 
+    public static final AssetDescriptor<Texture> BLUE_TEXTURE
+            = new AssetDescriptor<Texture>("blue.png", Texture.class);
+
+
+    public static final AssetDescriptor<Texture> GREEN_TEXTURE
+            = new AssetDescriptor<Texture>("green.png", Texture.class);
+
+    public static final AssetDescriptor<Texture> YELLOW_TEXTURE
+            = new AssetDescriptor<Texture>("yellow.png", Texture.class);
+
+
+
     public static void prepare() {
 		manager = new AssetManager();
 		Texture.setAssetManager(manager);
@@ -88,6 +100,11 @@ public class Assets {
         manager.load(MUSIC);
         */
 		manager.load(ALEGREYAREGULAR_FONT);
+
+
+        manager.load(BLUE_TEXTURE);
+        manager.load(GREEN_TEXTURE);
+        manager.load(YELLOW_TEXTURE);
 	}
 
     public static void afterLoaded() {

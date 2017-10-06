@@ -41,9 +41,6 @@ public class MyGdxGame extends Game {
 		style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
 		style.font = Assets.manager.get(Assets.ALEGREYAREGULAR_FONT);
 		style.fontColor = Color.YELLOW;
-		Pixmap p = new Pixmap(1,1, Pixmap.Format.RGB888);
-		p.setColor(0.4f,0.2f,0.8f, 0.5f);
-		p.fill();
 		return style;
 	}
 
@@ -56,31 +53,17 @@ public class MyGdxGame extends Game {
 		style.cursor = new TextureRegionDrawable(new TextureRegion(new TextureRegion(Assets.manager.get(Assets.CURSOR_TEXTURE))));
 		style.cursor.setMinWidth(50);
 		style.fontColor = Color.BLACK;
-		Pixmap p = new Pixmap(1,1, Pixmap.Format.RGB888);
-		p.setColor(0.4f,0.2f,0.8f, 0.5f);
-		p.fill();
-		style.selection = new TextureRegionDrawable(new TextureRegion(new Texture(p)));
+		style.selection = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.BLUE_TEXTURE)));
 		return style;
 	}
 
 
 	public TextButton.TextButtonStyle getTextButtonStyle() {
-
 		TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
 		textButtonStyle.font = Assets.manager.get(Assets.ALEGREYAREGULAR_FONT);
-
-		Pixmap p = new Pixmap(1,1, Pixmap.Format.RGB888);
-		p.setColor(0.1f,0.2f,0.2f, 0.5f);
-		p.fill();
-		textButtonStyle.up = new TextureRegionDrawable(new TextureRegion(new Texture(p)));
-
-		p.setColor(0.3f,0.5f,0.8f, 0.5f);
-		p.fill();
-		textButtonStyle.over = new TextureRegionDrawable(new TextureRegion(new Texture(p)));
-
-		p.setColor(1f,0.5f,0.8f, 1f);
-		p.fill();
-		textButtonStyle.down = new TextureRegionDrawable(new TextureRegion(new Texture(p)));
+		textButtonStyle.up = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.BLUE_TEXTURE)));
+		textButtonStyle.over = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.GREEN_TEXTURE)));
+		textButtonStyle.down = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.YELLOW_TEXTURE)));
 		return textButtonStyle;
 	}
 
