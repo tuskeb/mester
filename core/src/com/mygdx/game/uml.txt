@@ -7,11 +7,19 @@ Abstract Class Game{
     +dispose()
 }
 
+Abstract Class MyGame{
+    +create()
+    +setScreen(Screen screen)
+    +setScreen(Screen screen, boolean pushToStack)
+    +void setScreenBackByStackPop()
+}
+
 Class MyGdxGame{
 
 }
 
-Game <|--MyGdxGame
+Game <|--MyGame
+MyGame <|--MyGdxGame
 
 Interface Screen{
     +dispose()
@@ -73,6 +81,15 @@ Abstract Class MyStage{
     +MyStage(Viewport viewport, Game game)
     +MyStage(Viewport viewport, Batch batch, Game game)
     +{abstract}init(Game game)
+    +addBackEventStackListener()
+    +getLastAdded()
+    +setCameraZoomXY(float x, float y, float zoom)
+    +setCameraMoveToXY(float x, float y, float zoom, float speed)
+    +setCameraResetToCenterOfScreen()
+    +setCameraResetToLeftBottomOfScreen()
+    +resize(int screenWidth, int screenHeight)
+    #resized()
+    +act(float delta)
 }
 Stage <|-- MyStage
 
@@ -125,6 +142,13 @@ Abstract class MyActor{
     +resetElapsedTime()
     +getElapsedTime()
     +setElapsedTime(float elapsedTime)
+    +resetElapsedTime()
+    +getElapsedTime()
+    +setElapsedTime(float elapsedTime)
+    #sizeChanged()
+    #positionChanged()
+    +overlaps(ShapeType shapeType, MyActor anotherActor)
+    +<static>overlaps(ShapeType shapeType, MyActor actorA, MyActor actorB)
 }
 Actor <|-- MyActor
 

@@ -15,17 +15,12 @@ import java.util.Stack;
 
 abstract public class MyGame extends Game {
 
-
-
-
     /*
 	public iBluetooth getBluetooth() {
 		return bluetooth;
 	}
 
 	private iBluetooth bluetooth = null;
-
-
 
 	public MyGdxGame() {
 		bluetooth = BluetoothSingleton.getInstance().bluetoothManager;
