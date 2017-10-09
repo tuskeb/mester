@@ -15,6 +15,10 @@ public class HttpDemoScreen extends MyScreen {
     }
 
 
+    @Override
+    public void init() {
+
+    }
 
     @Override
     public void render(float delta) {

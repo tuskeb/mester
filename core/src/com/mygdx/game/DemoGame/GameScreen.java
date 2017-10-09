@@ -30,7 +30,7 @@ public class GameScreen extends MyScreen {
 
     @Override
     public void init() {
-        super.init();
+
         box2dStage = new GameStage(new ExtendViewport(16,9,new OrthographicCamera(16,9)),spriteBatch,game);
         controlStage = new ControlStage(new ExtendViewport(720,720,new OrthographicCamera(720,720)),spriteBatch,game);
 

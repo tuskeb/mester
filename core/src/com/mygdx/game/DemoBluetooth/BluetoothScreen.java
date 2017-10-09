@@ -33,10 +33,6 @@ public class BluetoothScreen extends MyScreen {
 
     @Override
     public void init() {
-        super.init();
-
-
-
 
         bluetoothChooseServerClientStage = new BluetoothChooseServerClientStage(game) {
             @Override
