@@ -13,6 +13,10 @@ public class OneSpriteAnimatedActor extends OneSpriteActor {
     protected float fps = 30;
     protected boolean running = true;
     protected boolean looping = true;
+    protected float animationTime = 0;
+
+    private int actualFrame = 0;
+    private int prevFrame = 0;
 
 
     public boolean isLooping() {
@@ -23,6 +27,9 @@ public class OneSpriteAnimatedActor extends OneSpriteActor {
         this.looping = looping;
     }
 
+    public int getActualFrame() {
+        return actualFrame;
+    }
 
     public OneSpriteAnimatedActor(String file) {
         super(null);
@@ -56,19 +63,21 @@ public class OneSpriteAnimatedActor extends OneSpriteActor {
     public void act(float delta) {
         super.act(delta);
         if (running) {
-            if (!looping){
-                if (textureAtlas.getRegions().size <=((int) (elapsedTime * fps))) {
+            animationTime+=delta;
+            int actualFrame=((int) (animationTime * fps)) % textureAtlas.getRegions().size;
+            if (actualFrame<prevFrame){
+                repeated();
+                if (!looping) {
                     stop();
-                    ended();
                     return;
                 }
             }
-            setFrame(((int) (elapsedTime * fps)));
+            setFrame(actualFrame);
+            prevFrame = actualFrame;
         }
     }
 
-    protected void ended(){
-
+    protected void repeated(){
     }
 
     public void setFrame(int frame)

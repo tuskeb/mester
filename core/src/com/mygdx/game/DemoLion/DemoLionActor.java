@@ -14,9 +14,11 @@ public class DemoLionActor extends OneSpriteAnimatedActor {
         setFps(5);
     }
 
+
     @Override
     public void act(float delta) {
         super.act(delta);
         setX(getX()+1000*delta);
     }
+
 }

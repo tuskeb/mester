@@ -1,6 +1,5 @@
 package com.mygdx.game.DemoLion;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
 
@@ -9,7 +8,7 @@ import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
  */
 
 public class DemoTree extends OneSpriteAnimatedActor {
-    boolean expliding = false;
+    boolean exploding = false;
 
     public DemoTree() {
         super(Assets.manager.get(Assets.TREE_TEXTURE));
@@ -20,14 +19,15 @@ public class DemoTree extends OneSpriteAnimatedActor {
     }
 
     public void explode(){
-        if (expliding) return;
-        expliding = true;
+        if (exploding) return;
+        exploding = true;
         start();
     }
 
     @Override
-    protected void ended() {
-        super.ended();
+    protected void repeated() {
+        super.repeated();
         getStage().getActors().removeValue(this, true);
     }
+
 }

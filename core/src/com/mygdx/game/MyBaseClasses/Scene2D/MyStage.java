@@ -56,6 +56,7 @@ abstract public class MyStage extends Stage implements InitableInterface {
     private float cameraTargetY = 0;
     private float cameraTargetZoom = 0;
     private float cameraMoveSpeed = 0;
+    private float cameraZoomSpeed = 0;
 
     public void setCameraMoveToXY(float x, float y, float zoom, float speed)
     {
@@ -63,7 +64,18 @@ abstract public class MyStage extends Stage implements InitableInterface {
         cameraTargetY = y;
         cameraTargetZoom = zoom;
         cameraMoveSpeed = speed;
+        cameraZoomSpeed = speed;
     }
+
+    public void setCameraMoveToXY(float x, float y, float zoom, float zoomSpeed, float moveSpeed)
+    {
+        cameraTargetX = x;
+        cameraTargetY = y;
+        cameraTargetZoom = zoom;
+        cameraMoveSpeed = moveSpeed;
+        cameraZoomSpeed = zoomSpeed;
+    }
+
 
     public void setCameraResetToCenterOfScreen()
     {
@@ -117,13 +129,13 @@ abstract public class MyStage extends Stage implements InitableInterface {
                     c.position.y -= cameraMoveSpeed*delta;
                 }
             }
-            if (Math.abs(c.zoom-cameraTargetZoom)<cameraMoveSpeed*delta) {
+            if (Math.abs(c.zoom-cameraTargetZoom)<cameraZoomSpeed*delta) {
                 c.zoom = (c.zoom + cameraTargetZoom) / 2;
             } else {
                 if (c.zoom<cameraTargetZoom){
-                    c.zoom += cameraMoveSpeed*delta;
+                    c.zoom += cameraZoomSpeed*delta;
                 }else{
-                    c.zoom -= cameraMoveSpeed*delta;
+                    c.zoom -= cameraZoomSpeed*delta;
                 }
             }
             c.update();

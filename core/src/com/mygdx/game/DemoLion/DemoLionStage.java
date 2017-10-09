@@ -29,16 +29,21 @@ public class DemoLionStage extends MyStage
     @Override
     public void act(float delta) {
         super.act(delta);
-        setCameraZoomXY(demoLionActor.getX(), demoLionActor.getY(), 4);
         if ((int)getElapsedTime() != (int)prevElapsedTime){
             addActor(new DemoTree());
             getLastAdded().setPosition(demoLionActor.getX()+1024 + random.nextInt(1024), demoLionActor.getY());
+            setCameraMoveToXY(getLastAdded().getX(), getLastAdded().getY(), 4, 2, 1500);
         }
+
+
         prevElapsedTime = getElapsedTime();
+
+
         for (Actor a: getActors()) {
             if (a instanceof DemoTree){
-                if (((DemoTree)a).overlaps(ShapeType.Rectangle, demoLionActor)){
-                    ((DemoTree)a).explode();
+                DemoTree demoTree = ((DemoTree)a);
+                if (demoTree.overlaps(ShapeType.Rectangle, demoLionActor)){
+                    demoTree.explode();
                 }
             }
         }
