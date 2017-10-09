@@ -71,6 +71,10 @@ public class Assets {
 
 
 
+	public static final AssetDescriptor<TextureAtlas> LION_TEXTURE = new AssetDescriptor<TextureAtlas>("mountainlion.atlas", TextureAtlas.class);
+	public static final AssetDescriptor<TextureAtlas> TREE_TEXTURE = new AssetDescriptor<TextureAtlas>("tree.atlas", TextureAtlas.class);
+
+
     public static void prepare() {
 		manager = new AssetManager();
 		Texture.setAssetManager(manager);
@@ -88,6 +92,8 @@ public class Assets {
 
 		manager.load(EXPLOSION_TEXTUREATLAS);
 		manager.load(STAR_TEXTUREATLAS);
+		manager.load(LION_TEXTURE);
+		manager.load(TREE_TEXTURE);
 
 		manager.load(STAR_SOUND);
 

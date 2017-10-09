@@ -1,5 +1,7 @@
 package com.mygdx.game.DemoMenu;
 
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
@@ -9,6 +11,13 @@ import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class BadlActor extends OneSpriteStaticActor {
     public BadlActor() {
         super(Assets.manager.get(Assets.BADLOGIC_TEXTURE));
+        addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                event.getStage().addActor(new BadlActor());
+            }
+        });
     }
 
     @Override

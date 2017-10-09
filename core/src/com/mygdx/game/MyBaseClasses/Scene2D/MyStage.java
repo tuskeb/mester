@@ -18,6 +18,7 @@ import com.mygdx.game.MyGdxGame;
  */
 abstract public class MyStage extends Stage implements InitableInterface {
     public final MyGdxGame game;
+    protected float elapsedTime = 0;
 
     public MyStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch);
@@ -95,6 +96,7 @@ abstract public class MyStage extends Stage implements InitableInterface {
     @Override
     public void act(float delta) {
         super.act(delta);
+        elapsedTime += delta;
         OrthographicCamera c = (OrthographicCamera)getCamera();
         if (cameraTargetX!=c.position.x || cameraTargetY!=c.position.y || cameraTargetZoom!=c.zoom){
             if (Math.abs(c.position.x-cameraTargetX)<cameraMoveSpeed*delta) {
@@ -128,5 +130,19 @@ abstract public class MyStage extends Stage implements InitableInterface {
 
         }
 
+    }
+
+
+    public void resetElapsedTime()
+    {
+        elapsedTime = 0;
+    }
+
+    public float getElapsedTime() {
+        return elapsedTime;
+    }
+
+    public void setElapsedTime(float elapsedTime) {
+        this.elapsedTime = elapsedTime;
     }
 }

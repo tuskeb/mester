@@ -10,6 +10,7 @@ import com.mygdx.game.DemoBluetooth.BluetoothScreen;
 import com.mygdx.game.DemoHttp.HttpDemoScreen;
 import com.mygdx.game.DemoGame.GameScreen;
 import com.mygdx.game.DemoInput.InputScreen;
+import com.mygdx.game.DemoLion.DemoLionScreen;
 import com.mygdx.game.MyBaseClasses.UI.MyButton;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
 import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
@@ -23,7 +24,7 @@ import com.mygdx.game.MyGdxGame;
 public class MenuStage extends MyStage {
     private BadlActor badlActor;
     private CrossActor crossActor;
-    private TextButton textButton, textButton2, textButton3, textButton4, textButton5, textButton6;
+    private TextButton textButton, textButton2, textButton3, textButton4, textButton5, textButton6, textButton7;
     private ExplosionActor explosionActor;
     private Label utkozesMyLabel;
 
@@ -93,6 +94,15 @@ public class MenuStage extends MyStage {
             }
         });
 
+        textButton7 = new MyButton("Mountain Lion", game.getTextButtonStyle());
+        textButton7.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreen(new DemoLionScreen(game));
+            }
+        });
+
 
         addActor(badlActor);
         addActor(crossActor);
@@ -114,6 +124,10 @@ public class MenuStage extends MyStage {
         textButton6.debug();
         addActor(textButton6);
         addActor(textButton5);
+        textButton7.setPosition(200,700);
+        textButton7.debug();
+        addActor(textButton7);
+
         addActor(new StarActor());
         explosionActor = new ExplosionActor();
         explosionActor.setPosition(0, getHeight() - explosionActor.getHeight());
@@ -150,6 +164,11 @@ public class MenuStage extends MyStage {
         {
             utkozesMyLabel.setText("Nincs ütközés.");
         }
+    }
+
+    @Override
+    protected void resized() {
+
     }
 
     @Override

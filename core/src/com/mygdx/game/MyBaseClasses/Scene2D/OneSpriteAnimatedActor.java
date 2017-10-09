@@ -59,11 +59,16 @@ public class OneSpriteAnimatedActor extends OneSpriteActor {
             if (!looping){
                 if (textureAtlas.getRegions().size <=((int) (elapsedTime * fps))) {
                     stop();
+                    ended();
                     return;
                 }
             }
             setFrame(((int) (elapsedTime * fps)));
         }
+    }
+
+    protected void ended(){
+
     }
 
     public void setFrame(int frame)
@@ -94,4 +99,21 @@ public class OneSpriteAnimatedActor extends OneSpriteActor {
         return textureAtlas;
     }
 
+    @Override
+    protected void positionChanged() {
+        super.positionChanged();
+        setFrame(((int) (elapsedTime * fps)));
+    }
+
+    @Override
+    protected void rotationChanged() {
+        super.rotationChanged();
+        setFrame(((int) (elapsedTime * fps)));
+    }
+
+    @Override
+    protected void sizeChanged() {
+        super.sizeChanged();
+        setFrame(((int) (elapsedTime * fps)));
+    }
 }
