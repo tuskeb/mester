@@ -43,6 +43,11 @@ abstract public class MyStage extends Stage implements InitableInterface {
         });
     }
 
+    public MyGdxGame getGame() {
+        return game;
+    }
+
+
 
     public Actor getLastAdded() {
         return getActors().get(getActors().size-1);
