@@ -1,9 +1,13 @@
 package com.mygdx.game.MyBaseClasses.Scene2D;
 
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by tuskeb on 2016. 09. 30..
@@ -13,6 +17,23 @@ abstract public class MyActor extends Actor implements InitableInterface {
     protected float elapsedTime = 0;
     protected Rectangle rectangle = new Rectangle();
     protected Circle circle = new Circle();
+    protected HashMap<String, Rectangle> rectangleMap;
+
+    public HashMap<String, Rectangle> getCollisionRectangleMap(){
+        return rectangleMap;
+    }
+
+    public void addCollisionRectangle(String name, Rectangle rectangle){
+        if (rectangleMap == null){
+            rectangleMap = new HashMap<String, Rectangle>();
+        }
+        rectangleMap.put(name, rectangle);
+    }
+
+    @Override
+    protected void drawDebugBounds(ShapeRenderer shapes) {
+        super.drawDebugBounds(shapes);
+    }
 
     public MyActor() {
         super();
