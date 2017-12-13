@@ -3,7 +3,12 @@ package com.mygdx.game.MyBaseClasses.Scene2D;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
+
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by tuskeb on 2016. 09. 30..
@@ -81,4 +86,44 @@ abstract public class MyActor extends Actor implements InitableInterface {
     public void setElapsedTime(float elapsedTime) {
         this.elapsedTime = elapsedTime;
     }
+
+
+
+    public void fitToViewportRealWorldSize(){
+        throw new NotImplementedException();
+    }
+    public void fitToViewportMinWorldSize(){
+        throw new NotImplementedException();
+    }
+    public void stretchToViewportRealWorldSizeWithoutBlackBars(){
+        throw new NotImplementedException();
+    }
+    public void stretchToViewportMinWorldSizeWithoutBlackBars(){
+        throw new NotImplementedException();
+    }
+    public void fitToViewportRealWorldSizeWithoutBlackBars(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null){
+            ev = (ExtendViewport)s.getViewport();
+            setSize(ev.getWorldHeight()*getWidth()/getHeight(), ev.getWorldHeight());
+            if (getWidth() < ev.getWorldWidth()){
+                float mul = ev.getWorldWidth()/getWidth();
+                setSize(getWidth()*mul, getHeight()*mul);
+            }
+        }
+    }
+    public void fitToViewportMinWorldSizeWithoutBlackBars(){
+        throw new NotImplementedException();
+    }
+
+    public void setPositionCenterOfActorToCenterOfViewport(){
+        Stage s;
+        Viewport ev;
+        if ((s = getStage()) != null) {
+            ev = s.getViewport();
+            setPosition(ev.getWorldWidth()/2-getWidth()/2, ev.getWorldHeight()/2-getHeight()/2);
+        }
+    }
+
 }
