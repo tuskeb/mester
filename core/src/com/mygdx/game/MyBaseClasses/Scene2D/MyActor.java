@@ -1,8 +1,10 @@
 package com.mygdx.game.MyBaseClasses.Scene2D;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -20,7 +22,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 abstract public class MyActor extends Actor implements InitableInterface {
 
     protected float elapsedTime = 0;
-    protected Rectangle rectangle = new Rectangle();
+    protected MyRectangle rectangle = new MyRectangle();
     protected Circle circle = new Circle();
     protected HashMap<String, Rectangle> rectangleMap;
 
@@ -38,6 +40,14 @@ abstract public class MyActor extends Actor implements InitableInterface {
     @Override
     protected void drawDebugBounds(ShapeRenderer shapes) {
         super.drawDebugBounds(shapes);
+        Vector2[] v = rectangle.getCorners();
+        float w = (float)Math.cos(elapsedTime*5f);
+        Color c = new Color(w,w,w,w);
+        shapes.setColor(c);
+        shapes.line(v[0].x, v[0].y, v[1].x, v[1].y);
+        shapes.line(v[1].x, v[1].y, v[2].x, v[2].y);
+        shapes.line(v[2].x, v[2].y, v[3].x, v[3].y);
+        shapes.line(v[3].x, v[3].y, v[0].x, v[0].y);
     }
 
     public MyActor() {
@@ -69,6 +79,7 @@ abstract public class MyActor extends Actor implements InitableInterface {
     @Override
     protected void rotationChanged() {
         super.rotationChanged();
+        rectangle.rotation = getRotation();
     }
 
     public boolean overlaps(ShapeType shapeType, MyActor anotherActor)
