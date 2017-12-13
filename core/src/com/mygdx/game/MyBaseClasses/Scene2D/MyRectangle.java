@@ -8,9 +8,8 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * Created by tanulo on 2017. 12. 13..
  */
 
-public class MyRectangle {
+public class MyRectangle implements MyShape{
     public float centerX = 0, centerY = 0, width = 0, height = 0, rotation = 0;
-    public float originX = 0, originY = 0;
 
     public MyRectangle(float centerX, float centerY, float width, float height, float rotation) {
         this.centerX = centerX;
@@ -20,11 +19,12 @@ public class MyRectangle {
         this.rotation = rotation;
     }
 
-    public MyRectangle() {
-    }
 
     public MyRectangle(float x, float y, float width, float height) {
-        throw new NotImplementedException();
+        this.centerX = centerX - width/2;
+        this.centerY = centerY - height/2;
+        this.width = width;
+        this.height = height;
     }
 
     public Vector2[] getCorners() {
@@ -41,14 +41,6 @@ public class MyRectangle {
         return vector2;
     }
 
-
-    public void rotate(float originX, float originY, float degree) {
-        throw new NotImplementedException();
-    }
-
-    public void setRotation(float originX, float originY, float degree) {
-        throw new NotImplementedException();
-    }
 
     static float PI = (float) Math.PI;
 
@@ -145,8 +137,11 @@ public class MyRectangle {
         return true;
     }
 
-    public boolean overlaps(MyRectangle other) {
-        return overlaps(this, other);
+    public boolean overlaps(MyShape other) {
+        if (other instanceof MyRectangle){
+            return overlaps(this, (MyRectangle)other);
+        }
+        return false;
     }
 
     public void setSize(float width, float height) {
@@ -159,6 +154,14 @@ public class MyRectangle {
         this.centerY = centerY;
     }
 
+
+    public void rotate(float degree) {
+        rotation += degree;
+    }
+
+    public void setRotation(float degree) {
+        rotation = degree;
+    }
 
     public static void main(String[] args) {
         MyRectangle r1 = new MyRectangle(1, 1, 2, 2, 0);

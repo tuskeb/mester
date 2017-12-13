@@ -150,13 +150,17 @@ public class MenuStage extends MyStage {
         a.setFps(5);
         addActor(a);
         addActor(new OneSpriteAnimatedActor("walk.atlas"));
+
+        badlActor.addBaseCollisionRectangleShape();
+        crossActor.addBaseCollisionRectangleShape();
     }
 
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (badlActor.overlaps(ShapeType.Rectangle, crossActor))
+        //if (badlActor.overlaps(ShapeType.Rectangle, crossActor))
+        if (badlActor.overlaps(crossActor))
         {
             utkozesMyLabel.setText("Ütközés!");
         }
