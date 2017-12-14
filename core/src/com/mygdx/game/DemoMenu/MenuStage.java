@@ -11,6 +11,7 @@ import com.mygdx.game.DemoHttp.HttpDemoScreen;
 import com.mygdx.game.DemoGame.GameScreen;
 import com.mygdx.game.DemoInput.InputScreen;
 import com.mygdx.game.DemoLion.DemoLionScreen;
+import com.mygdx.game.MyBaseClasses.Scene2D.MyCircle;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyRectangle;
 import com.mygdx.game.MyBaseClasses.UI.MyButton;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
@@ -85,7 +86,7 @@ public class MenuStage extends MyStage {
                 game.setScreen(new BluetoothScreen(game));
             }
         });
-
+/*
         textButton6 = new MyButton("Http demo", game.getTextButtonStyle());
         textButton6.addListener(new ClickListener(){
             @Override
@@ -94,7 +95,7 @@ public class MenuStage extends MyStage {
                 game.setScreen(new HttpDemoScreen(game));
             }
         });
-
+*/
         textButton7 = new MyButton("Mountain Lion", game.getTextButtonStyle());
         textButton7.addListener(new ClickListener(){
             @Override
@@ -121,9 +122,9 @@ public class MenuStage extends MyStage {
         addActor(textButton4);
         textButton5.setPosition(200,500);
         textButton5.debug();
-        textButton6.setPosition(200,600);
+/*        textButton6.setPosition(200,600);
         textButton6.debug();
-        addActor(textButton6);
+        addActor(textButton6);*/
         addActor(textButton5);
         textButton7.setPosition(200,700);
         textButton7.debug();
@@ -146,6 +147,7 @@ public class MenuStage extends MyStage {
                 setX(getX()+delta*70);
             }
         };
+        a.addCollisionShape("Fej",new MyCircle(20,80,60));
 
         a.setFps(5);
         addActor(a);

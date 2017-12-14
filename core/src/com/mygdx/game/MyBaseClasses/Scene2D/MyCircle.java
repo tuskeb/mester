@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class MyCircle extends MyShape {
     protected float radius = 0;
-    public static int debugLineNumbers = 32;
+    public static int debugLineNumbers = 16;
 
     public MyCircle(float x, float y, float radius, float originX, float originY, float offsetX, float offsetY, boolean alignToLeftBottom) {
         super(x, y, radius, radius, 0, originX, originY, offsetX, offsetY, alignToLeftBottom);
@@ -47,7 +47,7 @@ public class MyCircle extends MyShape {
         Vector2[] vector2 = new Vector2[debugLineNumbers];
         for(int i=0; i<debugLineNumbers;i++){
             vector2[i] = new Vector2(radius/2, 0);
-            vector2[i].rotate(360.0f/debugLineNumbers*i);
+            vector2[i].rotate(360.0f/debugLineNumbers*i+rotation);
             vector2[i].add(realCenterX, realCenterY);
         }
         return vector2;

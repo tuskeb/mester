@@ -14,14 +14,14 @@ public class CrossActor extends OneSpriteStaticActor {
         //super("badlogic.jpg");
         super(Assets.manager.get(Assets.BADLOGIC_TEXTURE));
 
-        addBaseCollisionRectangleShape();
-        addBaseCollisionCircleShape();
-        addCollisionShape("LeftBottom1",new MyRectangle(20,20,40,40,0,getOriginX(), getOriginY()));
+        //addBaseCollisionRectangleShape();
+        //addBaseCollisionCircleShape();
+        addCollisionShape("LeftBottom1",new MyRectangle(20,20,40,40,40,getOriginX(), getOriginY()));
         addCollisionShape("LeftBottom2",new MyRectangle(40,40,40,40,0,getOriginX(), getOriginY()));
         addCollisionShape("Circle1", new MyCircle(90,180,30,getOriginX(), getOriginY()));
         addCollisionShape("Circle2", new MyCircle(0,0,60,getOriginX(), getOriginY()));
 
-        setPosition(300,300);
+        setPosition(600,300);
     }
 
     @Override
