@@ -11,8 +11,11 @@ import com.mygdx.game.DemoHttp.HttpDemoScreen;
 import com.mygdx.game.DemoGame.GameScreen;
 import com.mygdx.game.DemoInput.InputScreen;
 import com.mygdx.game.DemoLion.DemoLionScreen;
+import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.MyBaseClasses.Scene2D.MultiSpriteActor;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyCircle;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyRectangle;
+import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
 import com.mygdx.game.MyBaseClasses.UI.MyButton;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
 import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
@@ -137,6 +140,14 @@ public class MenuStage extends MyStage {
         utkozesMyLabel = new Label("",game.getLabelStyle());
         utkozesMyLabel.setPosition(getViewport().getWorldWidth()/2, getViewport().getWorldHeight()-25);
         addActor(utkozesMyLabel);
+
+        addActor(new MultiSpriteActor(new OffsetSprite(Assets.manager.get(Assets.BLUE_TEXTURE),0,0), new OffsetSprite(Assets.manager.get(Assets.BADLOGIC_TEXTURE),0,50)) {
+            @Override
+            public void init() {
+                this.setPosition(900,600);
+                this.setSize(50,100);
+            }
+        });
 
         //getActors().get(getActors().size-1).setPosition(-300, 100);
 
