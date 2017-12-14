@@ -11,6 +11,7 @@ import com.mygdx.game.DemoHttp.HttpDemoScreen;
 import com.mygdx.game.DemoGame.GameScreen;
 import com.mygdx.game.DemoInput.InputScreen;
 import com.mygdx.game.DemoLion.DemoLionScreen;
+import com.mygdx.game.MyBaseClasses.Scene2D.MyRectangle;
 import com.mygdx.game.MyBaseClasses.UI.MyButton;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
 import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
@@ -136,8 +137,7 @@ public class MenuStage extends MyStage {
         utkozesMyLabel.setPosition(getViewport().getWorldWidth()/2, getViewport().getWorldHeight()-25);
         addActor(utkozesMyLabel);
 
-        addActor(new CrossActor());
-        getActors().get(getActors().size-1).setPosition(-300, 100);
+        //getActors().get(getActors().size-1).setPosition(-300, 100);
 
         OneSpriteAnimatedActor a = new OneSpriteAnimatedActor("walk.atlas"){
             @Override
@@ -152,7 +152,8 @@ public class MenuStage extends MyStage {
         addActor(new OneSpriteAnimatedActor("walk.atlas"));
 
         badlActor.addBaseCollisionRectangleShape();
-        crossActor.addBaseCollisionRectangleShape();
+        //crossActor.addBaseCollisionCircleShape();
+
     }
 
 

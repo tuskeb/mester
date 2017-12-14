@@ -6,30 +6,64 @@ import com.badlogic.gdx.math.Vector2;
  * Created by tanulo on 2017. 12. 13..
  */
 
-public class MyCircle implements MyShape {
-    float centerX = 0, centerY = 0;
-    float radius = 0;
+public class MyCircle extends MyShape {
+    protected float radius = 0;
 
-    public MyCircle(float centerX, float centerY, float radius) {
-        this.centerX = centerX;
-        this.centerY = centerY;
-        this.radius = radius;
+    public MyCircle(float x, float y, float radius, float originX, float originY, float offsetX, float offsetY, boolean alignToLeftBottom) {
+        super(x, y, radius, radius, 0, originX, originY, offsetX, offsetY, alignToLeftBottom);
+        setRadius(radius);
     }
 
+    public MyCircle(float offsetX, float offsetY, float radius, float originX, float originY,  boolean alignToLeftBottom) {
+        super(0, 0, radius, radius, 0, originX, originY, offsetX, offsetY, alignToLeftBottom);
+        setRadius(radius);
+    }
+
+    public MyCircle(float offsetX, float offsetY, float radius,  boolean alignToLeftBottom) {
+        super(0, 0, radius, radius, 0, 0,0, offsetX, offsetY, alignToLeftBottom);
+        setRadius(radius);
+        setOriginToCenter();
+    }
+
+    public MyCircle(float x, float y, float radius, float originX, float originY, float offsetX, float offsetY) {
+        super(x, y, radius, radius, 0, originX, originY, offsetX, offsetY, true);
+        setRadius(radius);
+    }
+
+    public MyCircle(float offsetX, float offsetY, float radius, float originX, float originY) {
+        super(0, 0, radius, radius, 0, originX, originY, offsetX, offsetY, true);
+        setRadius(radius);
+    }
+
+    public MyCircle(float offsetX, float offsetY, float radius) {
+        super(0, 0, radius, radius, 0, 0,0, offsetX, offsetY, true);
+        setRadius(radius);
+        setOriginToCenter();
+    }
+    /*
+        public MyCircle(float x, float y, float radius, float originX, float originY, boolean alignToLeftBottom) {
+            this.originX = originX;
+            this.originY = originY;
+            setRadius(radius);
+            this.rotation = 0;
+            if (alignToLeftBottom){
+                setPosition(x,y);
+            }else {
+                setPositionFromCenter(x,y);
+            }
+        }
+    */
     @Override
     public Vector2[] getCorners() {
-        return new Vector2[0];
+        Vector2[] vector2 = new Vector2[16];
+        for(int i=0; i<16;i++){
+            vector2[i] = new Vector2(radius, 0);
+            vector2[i].rotate(360/16*i);
+            vector2[i].add(realCenterX, realCenterY);
+        }
+        return vector2;
     }
 
-    @Override
-    public void rotate(float degree) {
-
-    }
-
-    @Override
-    public void setRotation(float degree) {
-
-    }
 
     @Override
     public boolean overlaps(MyShape other) {
@@ -38,11 +72,17 @@ public class MyCircle implements MyShape {
 
     @Override
     public void setSize(float width, float height) {
-
+        radius = (float)Math.sqrt(width*height)/2;
+        super.setSize(width,height);
     }
 
-    @Override
-    public void setPosition(float centerX, float centerY) {
+    public float getRadius() {
+        return radius;
+    }
 
+    public void setRadius(float radius) {
+        this.radius = radius;
+        this.width = radius*2;
+        this.height = radius*2;
     }
 }

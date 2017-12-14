@@ -2,31 +2,46 @@ package com.mygdx.game.MyBaseClasses.Scene2D;
 
 import com.badlogic.gdx.math.Vector2;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  * Created by tanulo on 2017. 12. 13..
  */
 
-public class MyRectangle implements MyShape{
-    public float centerX = 0, centerY = 0, width = 0, height = 0, rotation = 0;
+public class MyRectangle extends MyShape{
 
-    public MyRectangle(float centerX, float centerY, float width, float height, float rotation) {
-        this.centerX = centerX;
-        this.centerY = centerY;
-        this.width = width;
-        this.height = height;
-        this.rotation = rotation;
+
+    public MyRectangle(float x, float y, float width, float height, float rotation, float originX, float originY, float offsetX, float offsetY, boolean alignToLeftBottom) {
+        super(x, y, width, height, rotation, originX, originY, offsetX, offsetY, alignToLeftBottom);
     }
 
-
-    public MyRectangle(float x, float y, float width, float height) {
-        this.centerX = centerX - width/2;
-        this.centerY = centerY - height/2;
-        this.width = width;
-        this.height = height;
+    public MyRectangle(float offsetX, float offsetY, float width, float height, float rotation, float originX, float originY, boolean alignToLeftBottom) {
+        super(0, 0 , width, height, rotation, originX, originY, offsetX, offsetY, alignToLeftBottom);
     }
 
+    public MyRectangle(float offsetX, float offsetY, float width, float height, float originX, float originY, boolean alignToLeftBottom) {
+        super(0, 0 , width, height, 0, originX, originY, offsetX, offsetY, alignToLeftBottom);
+    }
+
+    public MyRectangle(float offsetX, float offsetY, float width, float height, boolean alignToLeftBottom) {
+        super(0, 0 , width, height, 0, 0, 0, offsetX, offsetY, alignToLeftBottom);
+        setOriginToCenter();
+    }
+
+    public MyRectangle(float x, float y, float width, float height, float rotation, float originX, float originY, float offsetX, float offsetY) {
+        super(x, y, width, height, rotation, originX, originY, offsetX, offsetY, true);
+    }
+
+    public MyRectangle(float offsetX, float offsetY, float width, float height, float rotation, float originX, float originY) {
+        super(0, 0 , width, height, rotation, originX, originY, offsetX, offsetY, true);
+    }
+
+    public MyRectangle(float offsetX, float offsetY, float width, float height, float originX, float originY) {
+        super(0, 0 , width, height, 0, originX, originY, offsetX, offsetY, true);
+    }
+
+    public MyRectangle(float offsetX, float offsetY, float width, float height) {
+        super(0, 0 , width, height, 0, 0, 0, offsetX, offsetY, true);
+        setOriginToCenter();
+    }
     public Vector2[] getCorners() {
         Vector2[] vector2 = new Vector2[4];
         float w2 = width/2;
@@ -34,15 +49,14 @@ public class MyRectangle implements MyShape{
         float radius = (float) Math.sqrt(h2*h2 + w2*w2);
         float radrot = (float) Math.toRadians(rotation);
         float angle = (float) Math.asin(h2 / radius);
-        vector2[0] = new Vector2(w2 + centerX + radius * (float) Math.cos(radrot - angle), h2 + centerY + radius * (float) Math.sin(radrot - angle));
-        vector2[1] = new Vector2(w2 + centerX + radius * (float) Math.cos(radrot + angle), h2 + centerY + radius * (float) Math.sin(radrot + angle));
-        vector2[2] = new Vector2(w2 + centerX + radius * (float) Math.cos(radrot + PI - angle), h2 + centerY + radius * (float) Math.sin(radrot + PI - angle));
-        vector2[3] = new Vector2(w2 + centerX + radius * (float) Math.cos(radrot + PI + angle), h2 + centerY + radius * (float) Math.sin(radrot + PI + angle));
+        vector2[0] = new Vector2( realCenterX + radius * (float) Math.cos(radrot - angle), realCenterY + radius * (float) Math.sin(radrot - angle));
+        vector2[1] = new Vector2(realCenterX + radius * (float) Math.cos(radrot + angle),  realCenterY + radius * (float) Math.sin(radrot + angle));
+        vector2[2] = new Vector2( realCenterX + radius * (float) Math.cos(radrot + PI - angle),  realCenterY + radius * (float) Math.sin(radrot + PI - angle));
+        vector2[3] = new Vector2( realCenterX + radius * (float) Math.cos(radrot + PI + angle),  realCenterY + radius * (float) Math.sin(radrot + PI + angle));
         return vector2;
     }
 
 
-    static float PI = (float) Math.PI;
 
     //https://forums.coronalabs.com/topic/39094-code-for-rotated-rectangle-collision-detection/
     static boolean overlaps(MyRectangle objA, MyRectangle objB) {
@@ -69,23 +83,23 @@ public class MyRectangle implements MyShape{
         float x2[] = new float[5];
         float y2[] = new float[5];
 
-        x1[1] = objA.centerX + radius1 * (float) Math.cos(radrot1 - angle1);
-        y1[1] = objA.centerY + radius1 * (float) Math.sin(radrot1 - angle1);
-        x1[2] = objA.centerX + radius1 * (float) Math.cos(radrot1 + angle1);
-        y1[2] = objA.centerY + radius1 * (float) Math.sin(radrot1 + angle1);
-        x1[3] = objA.centerX + radius1 * (float) Math.cos(radrot1 + PI - angle1);
-        y1[3] = objA.centerY + radius1 * (float) Math.sin(radrot1 + PI - angle1);
-        x1[4] = objA.centerX + radius1 * (float) Math.cos(radrot1 + PI + angle1);
-        y1[4] = objA.centerY + radius1 * (float) Math.sin(radrot1 + PI + angle1);
+        x1[1] = objA.realCenterX + radius1 * (float) Math.cos(radrot1 - angle1);
+        y1[1] = objA.realCenterY + radius1 * (float) Math.sin(radrot1 - angle1);
+        x1[2] = objA.realCenterX + radius1 * (float) Math.cos(radrot1 + angle1);
+        y1[2] = objA.realCenterY + radius1 * (float) Math.sin(radrot1 + angle1);
+        x1[3] = objA.realCenterX + radius1 * (float) Math.cos(radrot1 + PI - angle1);
+        y1[3] = objA.realCenterY + radius1 * (float) Math.sin(radrot1 + PI - angle1);
+        x1[4] = objA.realCenterX + radius1 * (float) Math.cos(radrot1 + PI + angle1);
+        y1[4] = objA.realCenterY + radius1 * (float) Math.sin(radrot1 + PI + angle1);
 
-        x2[1] = objB.centerX + radius2 * (float) Math.cos(radrot2 - angle2);
-        y2[1] = objB.centerY + radius2 * (float) Math.sin(radrot2 - angle2);
-        x2[2] = objB.centerX + radius2 * (float) Math.cos(radrot2 + angle2);
-        y2[2] = objB.centerY + radius2 * (float) Math.sin(radrot2 + angle2);
-        x2[3] = objB.centerX + radius2 * (float) Math.cos(radrot2 + PI - angle2);
-        y2[3] = objB.centerY + radius2 * (float) Math.sin(radrot2 + PI - angle2);
-        x2[4] = objB.centerX + radius2 * (float) Math.cos(radrot2 + PI + angle2);
-        y2[4] = objB.centerY + radius2 * (float) Math.sin(radrot2 + PI + angle2);
+        x2[1] = objB.realCenterX + radius2 * (float) Math.cos(radrot2 - angle2);
+        y2[1] = objB.realCenterY + radius2 * (float) Math.sin(radrot2 - angle2);
+        x2[2] = objB.realCenterX + radius2 * (float) Math.cos(radrot2 + angle2);
+        y2[2] = objB.realCenterY + radius2 * (float) Math.sin(radrot2 + angle2);
+        x2[3] = objB.realCenterX + radius2 * (float) Math.cos(radrot2 + PI - angle2);
+        y2[3] = objB.realCenterY + radius2 * (float) Math.sin(radrot2 + PI - angle2);
+        x2[4] = objB.realCenterX + radius2 * (float) Math.cos(radrot2 + PI + angle2);
+        y2[4] = objB.realCenterY + radius2 * (float) Math.sin(radrot2 + PI + angle2);
 
         float[] axisx = new float[5];
         float[] axisy = new float[5];
@@ -144,32 +158,15 @@ public class MyRectangle implements MyShape{
         return false;
     }
 
-    public void setSize(float width, float height) {
-        this.width = width;
-        this.height = height;
-    }
-
-    public void setPosition(float centerX, float centerY) {
-        this.centerX = centerX;
-        this.centerY = centerY;
-    }
-
-
-    public void rotate(float degree) {
-        rotation += degree;
-    }
-
-    public void setRotation(float degree) {
-        rotation = degree;
-    }
 
     public static void main(String[] args) {
-        MyRectangle r1 = new MyRectangle(1, 1, 2, 2, 0);
-        MyRectangle r2 = new MyRectangle(3.2f, 1, 2, 2, 0);
+        /*
+        MyRectangle r1 = new MyRectangle(1, 1, 2, 2, 0,false);
+        MyRectangle r2 = new MyRectangle(3.2f, 1, 2, 2, 0,false);
         for (float f = 0; f < 360; f += 10) {
             r2.rotation = f;
             System.out.println(f + " - " + MyRectangle.overlaps(r1, r2));
-        }
+        }*/
     }
 }
 

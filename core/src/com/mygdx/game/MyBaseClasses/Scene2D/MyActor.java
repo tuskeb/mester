@@ -33,17 +33,32 @@ abstract public class MyActor extends Actor implements InitableInterface {
     }
 
     public void addBaseCollisionRectangleShape(){
-        addCollisionShape("Base",new MyRectangle(0,0,getWidth(),getHeight()));
+        addCollisionShape("BaseRectangle",new MyRectangle(0,0,getWidth(),getHeight(),getRotation(),getOriginX(), getOriginY(),0,0, true));
     }
 
     public void addBaseCollisionCircleShape(){
-        addCollisionShape("Base",new MyCircle(0,0,(float)Math.sqrt(getWidth()*getHeight())));
+        addCollisionShape("BaseCircle",new MyCircle(0,0,(float)Math.sqrt(getWidth()*getHeight())/2,getOriginX(), getOriginY(),0,0, true));
     }
 
+    public void removeBaseCollisionRectangleShape(){
+        removeCollisionShape("BaseRectangle");
+    }
+
+    public void removeBaseCollisionCircleShape(){
+        removeCollisionShape("BaseCircle");
+    }
+
+    /**
+     *
+     * @param name
+     * @param shape A pozíciója és a forgatása relatív az Actortól
+     */
     public void addCollisionShape(String name, MyShape shape){
         if (shapeMap == null){
             shapeMap = new HashMap<String, MyShape>();
         }
+        //shape.setOffset(shape.getX(), shape.getY());
+        //shape.setPosition(getX(),getY());
         shapeMap.put(name, shape);
     }
 
