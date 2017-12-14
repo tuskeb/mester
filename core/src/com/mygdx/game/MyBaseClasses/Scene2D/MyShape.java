@@ -108,7 +108,6 @@ public abstract class MyShape {
         //this.realCenterY = centerY + offsetY;
         this.realCenterX = s.x;
         this.realCenterY = s.y;
-        System.out.println("Origin (" + originX + " : " + originY+")");
     }
 
     public void setPosition(float X, float Y) {
@@ -219,5 +218,7 @@ public abstract class MyShape {
         originY = y - height / 2 - offsetY;
         calculateCenterXY();
         System.out.println("SetOrigin " + x + " - " + y);
+        System.out.println("Shape Origin (" + originX + " : " + originY+")  CenterXY (" + centerX + " : " + centerY + ")");
+
     }
 }

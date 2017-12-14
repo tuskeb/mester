@@ -37,7 +37,7 @@ abstract public class MyActor extends Actor implements InitableInterface {
     }
 
     public void addBaseCollisionCircleShape(){
-        addCollisionShape("BaseCircle",new MyCircle(0,0,(float)Math.sqrt(getWidth()*getHeight())/2,getOriginX(), getOriginY(),0,0, true));
+        addCollisionShape("BaseCircle",new MyCircle(0,0,(float)Math.sqrt(getWidth()*getHeight()),getOriginX(), getOriginY(),0,0, true));
     }
 
     public void removeBaseCollisionRectangleShape(){
@@ -74,16 +74,16 @@ abstract public class MyActor extends Actor implements InitableInterface {
         if (shapeMap!=null) {
             for (MyShape shape:shapeMap.values()) {
                 Vector2[] v = shape.getCorners();
-                float w = (float) Math.cos(elapsedTime * 5f);
+                float w = 0.8f + (float)Math.cos(elapsedTime * 10f)/5f;
                 Color c = new Color(w, w, w, w);
                 shapes.setColor(c);
                 for (int i = 0; i < v.length - 1; i++) {
                     shapes.line(v[i].x, v[i].y, v[i + 1].x, v[i + 1].y);
                 }
                 shapes.line(v[v.length - 1].x, v[v.length - 1].y, v[0].x, v[0].y);
-                for (int i = 0; i < v.length - 2; i+=2) {
+                /*for (int i = 0; i < v.length - 2; i+=2) {
                     shapes.line(v[i].x, v[i].y, v[i + 2].x, v[i + 2].y);
-                }
+                }*/
             }
         }
     }
