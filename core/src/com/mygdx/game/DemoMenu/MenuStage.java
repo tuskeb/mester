@@ -11,8 +11,11 @@ import com.mygdx.game.DemoHttp.HttpDemoScreen;
 import com.mygdx.game.DemoGame.GameScreen;
 import com.mygdx.game.DemoInput.InputScreen;
 import com.mygdx.game.DemoLion.DemoLionScreen;
+import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.MyBaseClasses.Scene2D.MultiSpriteActor;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyCircle;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyRectangle;
+import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
 import com.mygdx.game.MyBaseClasses.UI.MyButton;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
 import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
@@ -29,7 +32,10 @@ public class MenuStage extends MyStage {
     private TextButton textButton, textButton2, textButton3, textButton4, textButton5, textButton6, textButton7;
     private ExplosionActor explosionActor;
     private Label utkozesMyLabel;
+    private DemoMultiSpriteActor multiSpriteActor;
 
+
+    private boolean clck = false;
 
     public MenuStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -137,6 +143,34 @@ public class MenuStage extends MyStage {
         utkozesMyLabel = new Label("",game.getLabelStyle());
         utkozesMyLabel.setPosition(getViewport().getWorldWidth()/2, getViewport().getWorldHeight()-25);
         addActor(utkozesMyLabel);
+
+
+        addActor(multiSpriteActor = new DemoMultiSpriteActor(new OffsetSprite(Assets.manager.get(Assets.BLUE_TEXTURE),0,0), new OffsetSprite(Assets.manager.get(Assets.BADLOGIC_TEXTURE),0,50)) {
+            @Override
+            public void init() {
+                this.setPosition(900,600);
+                this.setSize(50,100);
+                this.setSize(getWidth(), getHeight() + 50);
+                OffsetSprite sprite = getSprite("Sprite1");
+                sprite.setSize(50,sprite.getHeight() * 2);
+                this.setOrigin(0,0);
+                addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        if(clck){
+                            OffsetSprite sprite = new OffsetSprite(Assets.manager.get(Assets.BADLOGIC_TEXTURE),0,50);
+                            sprite.setSize(50, 100);
+                            multiSpriteActor.addSprite(sprite);
+                            clck = false;
+                        }else{
+                            clck = true;
+                            multiSpriteActor.removeSprite("Sprite1");
+                        }
+                    }
+                });
+            }
+        });
 
         //getActors().get(getActors().size-1).setPosition(-300, 100);
 
