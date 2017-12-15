@@ -88,6 +88,7 @@ abstract public class MyActor extends Actor implements InitableInterface {
         }
     }
 
+
     public MyActor() {
         super();
         debug();
@@ -229,4 +230,32 @@ abstract public class MyActor extends Actor implements InitableInterface {
         }
     }
 
+
+    @Override
+    public void setOriginX(float originX) {
+        super.setOriginX(originX);
+        originChanged();
+    }
+
+    @Override
+    public void setOriginY(float originY) {
+        super.setOriginY(originY);
+        originChanged();
+    }
+
+    @Override
+    public void setOrigin(float originX, float originY) {
+        super.setOrigin(originX, originY);
+        originChanged();
+    }
+
+    @Override
+    public void setOrigin(int alignment) {
+        super.setOrigin(alignment);
+        originChanged();
+    }
+
+    protected void originChanged(){
+
+    }
 }
