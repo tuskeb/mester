@@ -29,8 +29,6 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
     @Override
     public void act(float delta) {
         super.act(delta);
-        // TODO: 12/15/2017 test
-        rotateBy(0.5f);
     }
 
     @Override

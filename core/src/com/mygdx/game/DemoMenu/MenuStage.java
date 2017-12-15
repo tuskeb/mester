@@ -32,7 +32,7 @@ public class MenuStage extends MyStage {
     private TextButton textButton, textButton2, textButton3, textButton4, textButton5, textButton6, textButton7;
     private ExplosionActor explosionActor;
     private Label utkozesMyLabel;
-    private MultiSpriteActor multiSpriteActor;
+    private DemoMultiSpriteActor multiSpriteActor;
 
 
     private boolean clck = false;
@@ -145,7 +145,7 @@ public class MenuStage extends MyStage {
         addActor(utkozesMyLabel);
 
 
-        addActor(multiSpriteActor = new MultiSpriteActor(new OffsetSprite(Assets.manager.get(Assets.BLUE_TEXTURE),0,0), new OffsetSprite(Assets.manager.get(Assets.BADLOGIC_TEXTURE),0,50)) {
+        addActor(multiSpriteActor = new DemoMultiSpriteActor(new OffsetSprite(Assets.manager.get(Assets.BLUE_TEXTURE),0,0), new OffsetSprite(Assets.manager.get(Assets.BADLOGIC_TEXTURE),0,50)) {
             @Override
             public void init() {
                 this.setPosition(900,600);

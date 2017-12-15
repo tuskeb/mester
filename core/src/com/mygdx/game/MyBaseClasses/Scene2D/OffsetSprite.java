@@ -73,8 +73,6 @@ public class OffsetSprite extends Sprite {
 
     public OffsetSprite(Texture texture, float xOffset, float yOffset) {
         super(texture);
-        // TODO: 12/14/2017 test
-        setSize(50,50);
         offsetVector = new Vector2(xOffset, yOffset);
         offsetX = offsetVector.x;
         offsetY = offsetVector.y;
