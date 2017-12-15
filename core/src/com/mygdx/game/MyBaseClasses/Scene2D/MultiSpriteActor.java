@@ -1,6 +1,9 @@
 package com.mygdx.game.MyBaseClasses.Scene2D;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
 
 import java.util.Collection;
@@ -12,6 +15,7 @@ import java.util.HashMap;
 
 public abstract class MultiSpriteActor extends MyActor implements InitableInterface {
     protected HashMap<String, OffsetSprite> spriteMap = new HashMap<String, OffsetSprite>();
+    public static int debugLineNumbers = 16;
 
     /*  OffsetSprite... olyam mint egy tömb de simán fel lehet sorolni a paramétereket. Nincs fix hossza.
         https://docs.oracle.com/javase/tutorial/java/javaOO/arguments.html#varargs */
@@ -102,4 +106,25 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
     public Collection<OffsetSprite> getSprites(){
         return spriteMap.values();
     }
+
+    @Override
+    protected void drawDebugBounds(ShapeRenderer shapes) {
+        super.drawDebugBounds(shapes);
+        if (spriteMap != null) {
+            for (OffsetSprite sprite: spriteMap.values()) {
+                Vector2[] v = sprite.getCorners();
+                float r = 5/255f + (float)Math.cos(elapsedTime * 10f)/5f;
+                float g = 155/255f + (float)Math.cos(elapsedTime * 10f)/5f;
+                float b = 222/255f + (float)Math.cos(elapsedTime * 10f)/5f;
+                // TODO: 12/15/2017 Másik szín
+                Color c = new Color(r, g, b, g);
+                shapes.setColor(c);
+                for (int i = 0; i < v.length - 1; i++) {
+                    shapes.line(v[i].x, v[i].y, v[i + 1].x, v[i + 1].y);
+                }
+                shapes.line(v[v.length - 1].x, v[v.length - 1].y, v[0].x, v[0].y);
+            }
+        }
+    }
+
 }
