@@ -12,11 +12,6 @@ import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
 public class OffsetSprite extends Sprite {
     private Vector2 offsetVector;
 
-    public OffsetSprite(float xOffset, float yOffset) {
-        super();
-        offsetVector = new Vector2(xOffset, yOffset);
-    }
-
     public OffsetSprite(Texture texture, float xOffset, float yOffset) {
         super(texture);
         // TODO: 12/14/2017 Ez nem maradhat csak test

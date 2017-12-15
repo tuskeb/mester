@@ -77,6 +77,7 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
     public void addSprite(OffsetSprite sprite, String key){
         spriteMap.put(key, sprite);
         sprite.setPosition(getX() + sprite.getOffsetVector().x, getY() + sprite.getOffsetVector().y);
+        sprite.setOrigin(getOriginX() - sprite.getOffsetVector().x, getOriginY() - sprite.getOffsetVector().y);
         //addCollisionShape("SpriteRect"+ spriteMap.size(), new MyRectangle(sprite.getOffsetVector().x, sprite.getOffsetVector().y, sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), getOriginX(), getOriginY()));
     }
 
