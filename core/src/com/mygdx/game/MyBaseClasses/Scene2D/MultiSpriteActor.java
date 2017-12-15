@@ -80,18 +80,18 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
         //addCollisionShape("SpriteRect"+ spriteMap.size(), new MyRectangle(sprite.getOffsetVector().x, sprite.getOffsetVector().y, sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), getOriginX(), getOriginY()));
     }
 
-    public void removeSprite(String key) throws Exception{
+    public void removeSprite(String key) {
         if(spriteMap.containsKey(key)){
             System.out.println("removing sprite");
             spriteMap.remove(key);
         }else{
-            throw new Exception(key + " nem létezik, nem lehet törölni");
+            System.out.println(key + " nem létezik, nem lehet törölni");
         }
     }
 
-    public OffsetSprite getSprite(String key) throws Exception{
+    public OffsetSprite getSprite(String key ){
         if(spriteMap.containsKey(key)) return spriteMap.get(key);
-        else throw new Exception(key + " nem létezik");
+        else return null;
     }
 
     public HashMap<String, OffsetSprite> getSpritesMap() {
