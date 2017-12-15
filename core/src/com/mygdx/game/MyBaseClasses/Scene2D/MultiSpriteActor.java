@@ -1,17 +1,17 @@
 package com.mygdx.game.MyBaseClasses.Scene2D;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Created by M on 12/14/2017.
  */
 
 public abstract class MultiSpriteActor extends MyActor implements InitableInterface {
-    protected ArrayList<OffsetSprite> sprites = new ArrayList<OffsetSprite>();
+    protected HashMap<String, OffsetSprite> spriteMap = new HashMap<String, OffsetSprite>();
 
     /*  OffsetSprite... olyam mint egy tömb de simán fel lehet sorolni a paramétereket. Nincs fix hossza.
         https://docs.oracle.com/javase/tutorial/java/javaOO/arguments.html#varargs */
@@ -25,47 +25,80 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
     @Override
     public void act(float delta) {
         super.act(delta);
+        // TODO: 12/15/2017 test
         rotateBy(0.5f);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        for (OffsetSprite sprite: sprites) {
+        for (OffsetSprite sprite: spriteMap.values()) {
             sprite.draw(batch);
         }
     }
 
-
     @Override
-    public void setSize(float width, float height) {
-        super.setSize(width, height);
-        for (OffsetSprite sprite: sprites) {
+    protected void sizeChanged() {
+        super.sizeChanged();
+        for (OffsetSprite sprite: spriteMap.values()) {
             //sprite.setSize(getWidth(), getHeight());
-            sprite.setOrigin(getWidth()/2 - sprite.getOffsetVector().x, getHeight()/2  - sprite.getOffsetVector().y);
+            sprite.setOrigin(getOriginX() - sprite.getOffsetVector().x, getOriginY() - sprite.getOffsetVector().y);
         }
     }
 
     @Override
-    public void setPosition(float x, float y) {
-        super.setPosition(x, y);
-        for (OffsetSprite sprite: sprites) {
-            sprite.setPosition(x + sprite.getOffsetVector().x, y + sprite.getOffsetVector().y);
+    protected void positionChanged() {
+        super.positionChanged();
+        for (OffsetSprite sprite: spriteMap.values()) {
+            sprite.setPosition(getX() + sprite.getOffsetVector().x, getY() + sprite.getOffsetVector().y);
+        }
+    }
+
+    @Override
+    protected void originChanged() {
+        super.originChanged();
+        for (OffsetSprite sprite: spriteMap.values()) {
+            sprite.setOrigin(getOriginX() - sprite.getOffsetVector().x, getOriginY() - sprite.getOffsetVector().y);
         }
     }
 
     @Override
     protected void rotationChanged() {
         super.rotationChanged();
-        for (OffsetSprite sprite: sprites) {
+        for (OffsetSprite sprite: spriteMap.values()) {
             sprite.setRotation(getRotation());
         }
     }
 
     public void addSprite(OffsetSprite sprite){
-        sprites.add(sprite);
-        sprite.setPosition(getX() + sprite.getOffsetVector().x, getY() + sprite.getOffsetVector().y);
-        //addCollisionShape("SpriteRect"+ sprites.size(), new MyRectangle(sprite.getOffsetVector().x, sprite.getOffsetVector().y, sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), getOriginX(), getOriginY()));
+        addSprite(sprite, "Sprite"+ spriteMap.size());
     }
 
+    public void addSprite(OffsetSprite sprite, String key){
+        spriteMap.put(key, sprite);
+        sprite.setPosition(getX() + sprite.getOffsetVector().x, getY() + sprite.getOffsetVector().y);
+        //addCollisionShape("SpriteRect"+ spriteMap.size(), new MyRectangle(sprite.getOffsetVector().x, sprite.getOffsetVector().y, sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), getOriginX(), getOriginY()));
+    }
+
+    public void removeSprite(String key) throws Exception{
+        if(spriteMap.containsKey(key)){
+            System.out.println("removing sprite");
+            spriteMap.remove(key);
+        }else{
+            throw new Exception(key + " nem létezik, nem lehet törölni");
+        }
+    }
+
+    public OffsetSprite getSprite(String key) throws Exception{
+        if(spriteMap.containsKey(key)) return spriteMap.get(key);
+        else throw new Exception(key + " nem létezik");
+    }
+
+    public HashMap<String, OffsetSprite> getSpritesMap() {
+        return spriteMap;
+    }
+
+    public Collection<OffsetSprite> getSprites(){
+        return spriteMap.values();
+    }
 }

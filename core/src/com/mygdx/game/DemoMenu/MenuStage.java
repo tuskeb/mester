@@ -32,6 +32,7 @@ public class MenuStage extends MyStage {
     private TextButton textButton, textButton2, textButton3, textButton4, textButton5, textButton6, textButton7;
     private ExplosionActor explosionActor;
     private Label utkozesMyLabel;
+    private MultiSpriteActor multiSpriteActor;
 
 
     public MenuStage(Viewport viewport, Batch batch, MyGdxGame game) {
@@ -141,11 +142,39 @@ public class MenuStage extends MyStage {
         utkozesMyLabel.setPosition(getViewport().getWorldWidth()/2, getViewport().getWorldHeight()-25);
         addActor(utkozesMyLabel);
 
-        addActor(new MultiSpriteActor(new OffsetSprite(Assets.manager.get(Assets.BLUE_TEXTURE),0,0), new OffsetSprite(Assets.manager.get(Assets.BADLOGIC_TEXTURE),0,50)) {
+        addActor(multiSpriteActor = new MultiSpriteActor(new OffsetSprite(Assets.manager.get(Assets.BLUE_TEXTURE),0,0), new OffsetSprite(Assets.manager.get(Assets.BADLOGIC_TEXTURE),0,50)) {
             @Override
             public void init() {
                 this.setPosition(900,600);
                 this.setSize(50,100);
+                try{
+                    this.setSize(getWidth(), getHeight() + 50);
+                    OffsetSprite sprite = getSprite("Sprite1");
+                    sprite.setSize(50,sprite.getHeight() * 2);
+                    this.setOrigin(0,0);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        try {
+                            multiSpriteActor.removeSprite("Sprite1");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            /*
+                            addSprite(new OffsetSprite(0, 50){
+                                @Override
+                                public void init() {
+                                    super.init();
+                                    this.setSize(50,100);
+                                }
+                            });
+                            */
+                        }
+                    }
+                });
             }
         });
 
