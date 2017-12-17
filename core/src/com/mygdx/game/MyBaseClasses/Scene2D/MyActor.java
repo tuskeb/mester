@@ -33,7 +33,7 @@ abstract public class MyActor extends Actor implements InitableInterface {
     }
 
     public void addBaseCollisionRectangleShape(){
-        addCollisionShape("BaseRectangle",new MyRectangle(0,0,getWidth(),getHeight(),getRotation(),getOriginX(), getOriginY(),0,0, true));
+        addCollisionShape("BaseRectangle",new MyRectangle(0,0,getWidth(),getHeight(),getRotation(), 0, getOriginX(), getOriginY(),0,0, true));
     }
 
     public void addBaseCollisionCircleShape(){

@@ -16,8 +16,8 @@ public class CrossActor extends OneSpriteStaticActor {
 
         //addBaseCollisionRectangleShape();
         //addBaseCollisionCircleShape();
-        addCollisionShape("LeftBottom1",new MyRectangle(20,20,40,40,40,getOriginX(), getOriginY()));
-        addCollisionShape("LeftBottom2",new MyRectangle(40,40,40,40,0,getOriginX(), getOriginY()));
+        addCollisionShape("LeftBottom1",new MyRectangle(20,20,40,40,getRotation(),40,getOriginX(), getOriginY()));
+        addCollisionShape("LeftBottom2",new MyRectangle(40,40,40,40,getRotation(),0,getOriginX(), getOriginY()));
         addCollisionShape("Circle1", new MyCircle(90,180,30,getOriginX(), getOriginY()));
         addCollisionShape("Circle2", new MyCircle(0,0,60,getOriginX(), getOriginY()));
 

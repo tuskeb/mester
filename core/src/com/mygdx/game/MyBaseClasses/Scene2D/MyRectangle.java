@@ -9,45 +9,56 @@ import com.badlogic.gdx.math.Vector2;
 public class MyRectangle extends MyShape{
 
 
-    public MyRectangle(float x, float y, float width, float height, float rotation, float originX, float originY, float offsetX, float offsetY, boolean alignToLeftBottom) {
-        super(x, y, width, height, rotation, originX, originY, offsetX, offsetY, alignToLeftBottom);
+    public MyRectangle(float x, float y, float width, float height, float rotation, float offsetRotation, float originX, float originY, float offsetX, float offsetY, boolean alignToLeftBottom) {
+        super(x, y, width, height, rotation, offsetRotation, originX, originY, offsetX, offsetY, alignToLeftBottom);
     }
 
-    public MyRectangle(float offsetX, float offsetY, float width, float height, float rotation, float originX, float originY, boolean alignToLeftBottom) {
-        super(0, 0 , width, height, rotation, originX, originY, offsetX, offsetY, alignToLeftBottom);
+    public MyRectangle(float offsetX, float offsetY, float width, float height, float rotation, float offsetRotation, float originX, float originY, boolean alignToLeftBottom) {
+        super(0, 0 , width, height, rotation, offsetRotation, originX, originY, offsetX, offsetY, alignToLeftBottom);
     }
 
     public MyRectangle(float offsetX, float offsetY, float width, float height, float originX, float originY, boolean alignToLeftBottom) {
-        super(0, 0 , width, height, 0, originX, originY, offsetX, offsetY, alignToLeftBottom);
+        super(0, 0 , width, height, 0, 0, originX, originY, offsetX, offsetY, alignToLeftBottom);
+    }
+
+    public MyRectangle(float width, float height, boolean alignToLeftBottom) {
+        super(0, 0 , width, height, 0, 0, 0, 0, 0, 0, alignToLeftBottom);
+        setOriginToCenter();
     }
 
     public MyRectangle(float offsetX, float offsetY, float width, float height, boolean alignToLeftBottom) {
-        super(0, 0 , width, height, 0, 0, 0, offsetX, offsetY, alignToLeftBottom);
+        super(0, 0 , width, height, 0, 0, 0, 0, offsetX, offsetY, alignToLeftBottom);
         setOriginToCenter();
     }
 
-    public MyRectangle(float x, float y, float width, float height, float rotation, float originX, float originY, float offsetX, float offsetY) {
-        super(x, y, width, height, rotation, originX, originY, offsetX, offsetY, true);
+    public MyRectangle(float x, float y, float width, float height, float rotation, float offsetRotation, float originX, float originY, float offsetX, float offsetY) {
+        super(x, y, width, height, rotation, offsetRotation, originX, originY, offsetX, offsetY, true);
     }
 
-    public MyRectangle(float offsetX, float offsetY, float width, float height, float rotation, float originX, float originY) {
-        super(0, 0 , width, height, rotation, originX, originY, offsetX, offsetY, true);
+    public MyRectangle(float offsetX, float offsetY, float width, float height, float rotation,  float offsetRotation, float originX, float originY) {
+        super(0, 0 , width, height, rotation, offsetRotation, originX, originY, offsetX, offsetY, true);
     }
 
     public MyRectangle(float offsetX, float offsetY, float width, float height, float originX, float originY) {
-        super(0, 0 , width, height, 0, originX, originY, offsetX, offsetY, true);
+        super(0, 0 , width, height, 0, 0, originX, originY, offsetX, offsetY, true);
     }
 
     public MyRectangle(float offsetX, float offsetY, float width, float height) {
-        super(0, 0 , width, height, 0, 0, 0, offsetX, offsetY, true);
+        super(0, 0 , width, height, 0, 0, 0, 0, offsetX, offsetY, true);
         setOriginToCenter();
     }
+
+    public MyRectangle(float width, float height) {
+        super(0, 0 , width, height, 0, 0, 0, 0, 0, 0, true);
+        setOriginToCenter();
+    }
+
     public Vector2[] getCorners() {
         Vector2[] vector2 = new Vector2[4];
         float w2 = width/2;
         float h2 = height/2;
         float radius = (float) Math.sqrt(h2*h2 + w2*w2);
-        float radrot = (float) Math.toRadians(rotation);
+        float radrot = (float) Math.toRadians(realRotation);
         float angle = (float) Math.asin(h2 / radius);
         vector2[0] = new Vector2( realCenterX + radius * (float) Math.cos(radrot - angle), realCenterY + radius * (float) Math.sin(radrot - angle));
         vector2[1] = new Vector2(realCenterX + radius * (float) Math.cos(radrot + angle),  realCenterY + radius * (float) Math.sin(radrot + angle));
@@ -69,8 +80,8 @@ public class MyRectangle extends MyShape{
         float width1 = objA.width / 2;
         float width2 = objB.width / 2;
 
-        float radrot1 = (float) Math.toRadians(objA.rotation);
-        float radrot2 = (float) Math.toRadians(objB.rotation);
+        float radrot1 = (float) Math.toRadians(objA.realRotation);
+        float radrot2 = (float) Math.toRadians(objB.realRotation);
 
         float radius1 = (float) Math.sqrt(height1 * height1 + width1 * width1);
         float radius2 = (float) Math.sqrt(height2 * height2 + width2 * width2);

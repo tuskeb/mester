@@ -11,33 +11,45 @@ public class MyCircle extends MyShape {
     public static int debugLineNumbers = 16;
 
     public MyCircle(float x, float y, float radius, float originX, float originY, float offsetX, float offsetY, boolean alignToLeftBottom) {
-        super(x, y, radius, radius, 0, originX, originY, offsetX, offsetY, alignToLeftBottom);
+        super(x, y, radius, radius, 0, 0, originX, originY, offsetX, offsetY, alignToLeftBottom);
         setRadius(radius);
     }
 
     public MyCircle(float offsetX, float offsetY, float radius, float originX, float originY,  boolean alignToLeftBottom) {
-        super(0, 0, radius, radius, 0, originX, originY, offsetX, offsetY, alignToLeftBottom);
+        super(0, 0, radius, radius, 0, 0, originX, originY, offsetX, offsetY, alignToLeftBottom);
         setRadius(radius);
     }
 
     public MyCircle(float offsetX, float offsetY, float radius,  boolean alignToLeftBottom) {
-        super(0, 0, radius, radius, 0, 0,0, offsetX, offsetY, alignToLeftBottom);
+        super(0, 0, radius, radius, 0, 0,0, 0, offsetX, offsetY, alignToLeftBottom);
+        setRadius(radius);
+        setOriginToCenter();
+    }
+
+    public MyCircle(float radius,  boolean alignToLeftBottom) {
+        super(0, 0, radius, radius, 0, 0, 0, 0, 0, 0, alignToLeftBottom);
         setRadius(radius);
         setOriginToCenter();
     }
 
     public MyCircle(float x, float y, float radius, float originX, float originY, float offsetX, float offsetY) {
-        super(x, y, radius, radius, 0, originX, originY, offsetX, offsetY, true);
+        super(x, y, radius, radius, 0, 0, originX, originY, offsetX, offsetY, true);
         setRadius(radius);
     }
 
     public MyCircle(float offsetX, float offsetY, float radius, float originX, float originY) {
-        super(0, 0, radius, radius, 0, originX, originY, offsetX, offsetY, true);
+        super(0, 0, radius, radius, 0, 0, originX, originY, offsetX, offsetY, true);
         setRadius(radius);
     }
 
     public MyCircle(float offsetX, float offsetY, float radius) {
-        super(0, 0, radius, radius, 0, 0,0, offsetX, offsetY, true);
+        super(0, 0, radius, radius, 0, 0,0, 0, offsetX, offsetY, true);
+        setRadius(radius);
+        setOriginToCenter();
+    }
+
+    public MyCircle(float radius) {
+        super(0, 0, radius, radius, 0, 0, 0, 0, 0, 0, true);
         setRadius(radius);
         setOriginToCenter();
     }

@@ -19,6 +19,12 @@ public abstract class MyShape {
     protected float realCenterY = 0;
 
     /**
+     * Tényleges forgatás. A offsetRotation forgatás és az elforgatás összege.
+     */
+    protected float realRotation = 0;
+
+
+    /**
      * Szélesség. Forgatásnál nem változik.
      */
     protected float width = 0;
@@ -32,6 +38,11 @@ public abstract class MyShape {
      * Forgatás fokban megadva.
      */
     protected float rotation = 0;
+
+    /**
+     * Relatív elforgatás. realRotation=offsetRotation+rotation
+     */
+    protected float offsetRotation = 0;
 
     /**
      * Relatív eltolás cx-től számítva. center=cx+offsetx
@@ -69,11 +80,26 @@ public abstract class MyShape {
     abstract public Vector2[] getCorners();
     abstract public boolean overlaps(MyShape other);
 
-    public MyShape(float x, float y, float width, float height, float rotation, float originX, float originY, float offsetX, float offsetY, boolean alignToLeftBottom) {
+    /**
+     *
+     * @param x Az alakzat helye
+     * @param y Az alakzat helye
+     * @param width  Az alakzat szélessége
+     * @param height Az alakzat magassága
+     * @param rotation Az alakzat forgatása az origin körül
+     * @param offsetRotation Az alakzat forgatása saját maga körül
+     * @param originX A forgatás középpontja
+     * @param originY A forgatás középpontja
+     * @param offsetX Eltolás az X koordinátától
+     * @param offsetY Eltolás az Y koordinátától
+     * @param alignToLeftBottom Igaz esetén az alakzatot a bal alsó sarkától számított X és Y koordinátákkal hozza létre, ellenkező esetben a küzepétől.
+     */
+    public MyShape(float x, float y, float width, float height, float rotation,  float offsetRotation, float originX, float originY, float offsetX, float offsetY, boolean alignToLeftBottom) {
         this.offsetX = offsetX;
         this.offsetY = offsetY;
         this.width = width;
         this.height = height;
+        this.offsetRotation = offsetRotation;
         this.rotation = rotation;
         if (alignToLeftBottom){
             setPosition(x,y);
@@ -88,6 +114,7 @@ public abstract class MyShape {
     public void setSizeByCenter(float width, float height) {
         this.width = width;
         this.height = height;
+        calculateCenterXY();
     }
 
     public void setSize(float width, float height) {
@@ -99,6 +126,7 @@ public abstract class MyShape {
     }
 
     protected void calculateCenterXY(){
+        realRotation = rotation + offsetRotation;
         Vector2 origCenter = new Vector2(centerX + offsetX, centerY + offsetY);
         Vector2 origin =  new Vector2(originX + centerX + offsetX,originY + centerY + offsetY);
         Vector2 v = origCenter.sub(origin);
@@ -132,6 +160,7 @@ public abstract class MyShape {
 
     public void rotate(float degree) {
         rotation += degree;
+        calculateCenterXY();
     }
 
     public void setRotation(float degree) {
@@ -195,6 +224,7 @@ public abstract class MyShape {
     public void setOriginToCenter(){
         originX = 0;
         originY = 0;
+        calculateCenterXY();
     }
 
     /**
@@ -217,8 +247,69 @@ public abstract class MyShape {
         originX = x - width / 2 - offsetX;
         originY = y - height / 2 - offsetY;
         calculateCenterXY();
-        System.out.println("SetOrigin " + x + " - " + y);
-        System.out.println("Shape Origin (" + originX + " : " + originY+")  CenterXY (" + centerX + " : " + centerY + ")");
+        //System.out.println("SetOrigin " + x + " - " + y);
+        //System.out.println("Shape Origin (" + originX + " : " + originY+")  CenterXY (" + centerX + " : " + centerY + ")");
 
+    }
+
+    public float getOffsetRotation() {
+        return offsetRotation;
+    }
+
+    public void setOffsetRotation(float offsetRotation) {
+        this.offsetRotation = offsetRotation;
+        calculateCenterXY();
+    }
+
+    public float getRealRotation() {
+        return realRotation;
+    }
+
+    public float getOriginX() {
+        return originX;
+    }
+
+    public void setOriginX(float originX) {
+        this.originX = originX;
+        calculateCenterXY();
+    }
+
+    public float getOriginY() {
+        return originY;
+    }
+
+    public void setOriginY(float originY) {
+        this.originY = originY;
+        calculateCenterXY();
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+        calculateCenterXY();
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+        calculateCenterXY();
+    }
+
+    public void setOffsetX(float offsetX) {
+        this.offsetX = offsetX;
+        calculateCenterXY();
+    }
+
+    public void setOffsetY(float offsetY) {
+        this.offsetY = offsetY;
+        calculateCenterXY();
+    }
+
+    public void setCenterX(float centerX) {
+        this.centerX = centerX;
+        calculateCenterXY();
+    }
+
+    public void setCenterY(float centerY) {
+        this.centerY = centerY;
+        calculateCenterXY();
     }
 }
