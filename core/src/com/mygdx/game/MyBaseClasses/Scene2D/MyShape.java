@@ -142,8 +142,6 @@ public abstract class MyShape {
         this.centerX = X + width/2;
         this.centerY = Y + height/2;
         calculateCenterXY();
-        //System.out.println(realCenterX + " - " +realCenterY);
-        //System.out.println(X + " -yx " +Y);
     }
 
     public void setPositionFromCenter(float centerX, float centerY) {

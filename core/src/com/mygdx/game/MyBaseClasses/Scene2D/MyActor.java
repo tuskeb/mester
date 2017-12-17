@@ -5,12 +5,14 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -179,6 +181,77 @@ abstract public class MyActor extends Actor implements InitableInterface {
         return false;
     }
 
+    public static ArrayList<String> getActorAOverlappedShapeKeys(MyActor actorA, MyActor actorB){
+        ArrayList<String> strings = new ArrayList<String>();
+        for(Map.Entry shapeA : actorA.getCollisionShapeMap().entrySet()){
+            for(Map.Entry shapeB : actorB.getCollisionShapeMap().entrySet()){
+                if(((MyShape)shapeA.getValue()).overlaps((MyShape)shapeB.getValue())){
+                    strings.add((String)(shapeA.getKey()));
+                }
+            }
+        }
+        return strings;
+    }
+
+    public static ArrayList<String> getActorBOverlappedShapeKeys(MyActor actorA, MyActor actorB){
+        return getActorAOverlappedShapeKeys(actorB,actorA);
+    }
+
+    public ArrayList<String> getMyOverlappedShapeKeys(MyActor anotherActor){
+        return getActorAOverlappedShapeKeys(this, anotherActor);
+    }
+
+    public ArrayList<String> getOtherOverlappedShapeKeys(MyActor anotherActor){
+        return getActorAOverlappedShapeKeys(anotherActor, this);
+    }
+
+    public static ArrayList<MyShape> getActorAOverlappedShapeValues(MyActor actorA, MyActor actorB){
+        ArrayList<MyShape> strings = new ArrayList<MyShape>();
+        for(Map.Entry shapeA : actorA.getCollisionShapeMap().entrySet()){
+            for(Map.Entry shapeB : actorB.getCollisionShapeMap().entrySet()){
+                if(((MyShape)shapeA.getValue()).overlaps((MyShape)shapeB.getValue())){
+                    strings.add((MyShape)(shapeA.getValue()));
+                }
+            }
+        }
+        return strings;
+    }
+
+    public static ArrayList<MyShape> getActorBOverlappedShapeValues(MyActor actorA, MyActor actorB){
+        return getActorAOverlappedShapeValues(actorB,actorA);
+    }
+
+    public ArrayList<MyShape> getMyOverlappedShapeValues(MyActor anotherActor){
+        return getActorAOverlappedShapeValues(this, anotherActor);
+    }
+
+    public ArrayList<MyShape> getOtherOverlappedShapeValues(MyActor anotherActor){
+        return getActorAOverlappedShapeValues(anotherActor, this);
+    }
+
+    public static ArrayList<Map.Entry<String, MyShape>> getActorAOverlappedShapeEntries(MyActor actorA, MyActor actorB){
+        ArrayList<Map.Entry<String, MyShape>> strings = new ArrayList<Map.Entry<String, MyShape>>();
+        for(Map.Entry shapeA : actorA.getCollisionShapeMap().entrySet()){
+            for(Map.Entry shapeB : actorB.getCollisionShapeMap().entrySet()){
+                if(((MyShape)shapeA.getValue()).overlaps((MyShape)shapeB.getValue())){
+                    strings.add((Map.Entry<String, MyShape>)(shapeA));
+                }
+            }
+        }
+        return strings;
+    }
+
+    public static ArrayList<Map.Entry<String, MyShape>> getActorBOverlappedShapeEntries(MyActor actorA, MyActor actorB){
+        return getActorAOverlappedShapeEntries(actorB,actorA);
+    }
+
+    public ArrayList<Map.Entry<String, MyShape>> getMyOverlappedShapeEntries(MyActor anotherActor){
+        return getActorAOverlappedShapeEntries(this, anotherActor);
+    }
+
+    public ArrayList<Map.Entry<String, MyShape>> getOtherOverlappedShapeEntries(MyActor anotherActor){
+        return getActorAOverlappedShapeEntries(anotherActor, this);
+    }
 
     public boolean overlaps(MyActor anotherActor){
         return overlaps(this, anotherActor);

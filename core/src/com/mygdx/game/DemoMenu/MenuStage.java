@@ -200,6 +200,7 @@ public class MenuStage extends MyStage {
         if (badlActor.overlaps(crossActor))
         {
             utkozesMyLabel.setText("Ütközés!");
+            //System.out.println(crossActor.getMyOverlappedShapeKeys(badlActor));
         }
         else
         {
