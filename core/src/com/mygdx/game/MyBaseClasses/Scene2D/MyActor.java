@@ -33,11 +33,11 @@ abstract public class MyActor extends Actor implements InitableInterface {
     }
 
     public void addBaseCollisionRectangleShape(){
-        addCollisionShape("BaseRectangle",new MyRectangle(0,0,getWidth(),getHeight(),getRotation(), 0, getOriginX(), getOriginY(),0,0, true));
+        addCollisionShape("BaseRectangle",new MyRectangle(getX(),getY(),getWidth(),getHeight(),getRotation(), 0, getOriginX(), getOriginY(),0,0, true));
     }
 
     public void addBaseCollisionCircleShape(){
-        addCollisionShape("BaseCircle",new MyCircle(0,0,(float)Math.sqrt(getWidth()*getHeight()),getOriginX(), getOriginY(),0,0, true));
+        addCollisionShape("BaseCircle",new MyCircle(getX(),getY(),(float)Math.sqrt(getWidth()*getHeight())/2,getOriginX(), getOriginY(),0,0, true));
     }
 
     public void removeBaseCollisionRectangleShape(){
@@ -66,6 +66,13 @@ abstract public class MyActor extends Actor implements InitableInterface {
         if (shapeMap != null){
             shapeMap.remove(name);
         }
+    }
+
+    public MyShape getCollisionShape(String name){
+        if (shapeMap != null){
+            return shapeMap.get(name);
+        }
+        return null;
     }
 
     @Override

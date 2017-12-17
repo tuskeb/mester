@@ -81,7 +81,6 @@ public abstract class MyShape {
     abstract public boolean overlaps(MyShape other);
 
     /**
-     *
      * @param x Az alakzat helye
      * @param y Az alakzat helye
      * @param width  Az alakzat szélessége
@@ -136,6 +135,7 @@ public abstract class MyShape {
         //this.realCenterY = centerY + offsetY;
         this.realCenterX = s.x;
         this.realCenterY = s.y;
+        //System.out.println(this.toString());
     }
 
     public void setPosition(float X, float Y) {
@@ -247,9 +247,6 @@ public abstract class MyShape {
         originX = x - width / 2 - offsetX;
         originY = y - height / 2 - offsetY;
         calculateCenterXY();
-        //System.out.println("SetOrigin " + x + " - " + y);
-        //System.out.println("Shape Origin (" + originX + " : " + originY+")  CenterXY (" + centerX + " : " + centerY + ")");
-
     }
 
     public float getOffsetRotation() {
@@ -311,5 +308,33 @@ public abstract class MyShape {
     public void setCenterY(float centerY) {
         this.centerY = centerY;
         calculateCenterXY();
+    }
+
+    @Override
+    public String toString() {
+        Vector2[] vector2s = getCorners();
+        String corners = "";
+        if (vector2s != null) {
+            int x = 1;
+            for (Vector2 v : vector2s) {
+                corners += " X" + x + "=" + v.x + "Y" + x + "=" + v.y;
+            }
+        }
+        return "MyShape{" +
+                "realCenterX=" + realCenterX +
+                ", realCenterY=" + realCenterY +
+                ", realRotation=" + realRotation +
+                ", width=" + width +
+                ", height=" + height +
+                ", rotation=" + rotation +
+                ", offsetRotation=" + offsetRotation +
+                ", offsetX=" + offsetX +
+                ", offsetY=" + offsetY +
+                ", centerX=" + centerX +
+                ", centerY=" + centerY +
+                ", originX=" + originX +
+                ", originY=" + originY +
+                " getCorners {" + corners +
+                "}}";
     }
 }

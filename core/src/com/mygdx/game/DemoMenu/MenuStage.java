@@ -187,7 +187,7 @@ public class MenuStage extends MyStage {
         addActor(a);
         addActor(new OneSpriteAnimatedActor("walk.atlas"));
 
-        badlActor.addBaseCollisionRectangleShape();
+        //badlActor.addBaseCollisionRectangleShape();
         //crossActor.addBaseCollisionCircleShape();
 
     }
