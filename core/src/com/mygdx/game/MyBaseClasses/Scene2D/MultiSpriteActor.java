@@ -3,7 +3,6 @@ package com.mygdx.game.MyBaseClasses.Scene2D;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
 
 import java.util.Collection;
@@ -110,17 +109,13 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
         super.drawDebugBounds(shapes);
         if (spriteMap != null) {
             for (OffsetSprite sprite: spriteMap.values()) {
-                Vector2[] v = sprite.getCorners();
                 float r = 5/255f + (float)Math.cos(elapsedTime * 10f)/5f;
                 float g = 155/255f + (float)Math.cos(elapsedTime * 10f)/5f;
                 float b = 222/255f + (float)Math.cos(elapsedTime * 10f)/5f;
                 // TODO: 12/15/2017 Másik szín
                 Color c = new Color(r, g, b, g);
                 shapes.setColor(c);
-                for (int i = 0; i < v.length - 1; i++) {
-                    shapes.line(v[i].x, v[i].y, v[i + 1].x, v[i + 1].y);
-                }
-                shapes.line(v[v.length - 1].x, v[v.length - 1].y, v[0].x, v[0].y);
+                drawDebugLines(sprite.getCorners(),shapes);
             }
         }
     }

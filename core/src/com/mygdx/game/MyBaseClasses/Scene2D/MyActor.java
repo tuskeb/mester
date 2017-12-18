@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -78,22 +77,21 @@ abstract public class MyActor extends Actor implements InitableInterface {
         return null;
     }
 
+    public static void drawDebugLines(Vector2[] v, ShapeRenderer shapes){
+        for (int i = 0; i < v.length - 1; i++) {
+            shapes.line(v[i].x, v[i].y, v[i + 1].x, v[i + 1].y);
+        }
+        shapes.line(v[v.length - 1].x, v[v.length - 1].y, v[0].x, v[0].y);
+    }
+
     @Override
     protected void drawDebugBounds(ShapeRenderer shapes) {
         super.drawDebugBounds(shapes);
         if (shapeMap!=null) {
             for (MyShape shape:shapeMap.values()) {
-                Vector2[] v = shape.getCorners();
                 float w = 0.8f + (float)Math.cos(elapsedTime * 10f)/5f;
-                Color c = new Color(w, w, w, w);
-                shapes.setColor(c);
-                for (int i = 0; i < v.length - 1; i++) {
-                    shapes.line(v[i].x, v[i].y, v[i + 1].x, v[i + 1].y);
-                }
-                shapes.line(v[v.length - 1].x, v[v.length - 1].y, v[0].x, v[0].y);
-                /*for (int i = 0; i < v.length - 2; i+=2) {
-                    shapes.line(v[i].x, v[i].y, v[i + 2].x, v[i + 2].y);
-                }*/
+                shapes.setColor(new Color(w, w, w, w));
+                drawDebugLines(shape.getCorners(), shapes);
             }
         }
     }
