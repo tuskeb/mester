@@ -76,6 +76,10 @@ public abstract class MyShape {
 
     static protected float PI = (float) Math.PI;
 
+    /**
+     * Az alakzathoz hozzácsatolható objektum, például egy Actor
+     */
+    public Object extraData = null;
 
     abstract public Vector2[] getCorners();
     abstract public boolean overlaps(MyShape other);
@@ -156,7 +160,7 @@ public abstract class MyShape {
         calculateCenterXY();
     }
 
-    public void rotate(float degree) {
+    public void rotateBy(float degree) {
         rotation += degree;
         calculateCenterXY();
     }
@@ -256,6 +260,11 @@ public abstract class MyShape {
         calculateCenterXY();
     }
 
+    public void offsetRotateBy(float degree) {
+        this.offsetRotation += degree;
+        calculateCenterXY();
+    }
+
     public float getRealRotation() {
         return realRotation;
     }
@@ -335,4 +344,13 @@ public abstract class MyShape {
                 " getCorners {" + corners +
                 "}}";
     }
+
+    public Object getExtraData() {
+        return extraData;
+    }
+
+    public void setExtraData(Object extraData) {
+        this.extraData = extraData;
+    }
+
 }

@@ -61,6 +61,7 @@ abstract public class MyActor extends Actor implements InitableInterface {
         }
         //shape.setOffset(shape.getX(), shape.getY());
         //shape.setPosition(getX(),getY());
+        shape.setExtraData(this);
         shapeMap.put(name, shape);
     }
 

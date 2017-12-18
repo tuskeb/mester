@@ -153,7 +153,7 @@ public class MenuStage extends MyStage {
                 this.setSize(getWidth(), getHeight() + 50);
                 OffsetSprite sprite = getSprite("Sprite1");
                 sprite.setSize(50,sprite.getHeight() * 2);
-                this.setOrigin(0,0);
+                this.setOrigin(20,20);
                 addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {

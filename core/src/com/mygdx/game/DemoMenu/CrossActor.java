@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyCircle;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyRectangle;
+import com.mygdx.game.MyBaseClasses.Scene2D.MyShape;
 import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 /**
@@ -37,6 +38,8 @@ public class CrossActor extends OneSpriteStaticActor {
     public void act(float delta) {
         super.act(delta);
         //setPosition(getX()+1f, getY()+1f);
+        getCollisionShape("LeftBottom1").offsetRotateBy(2);
+        getCollisionShape("LeftBottom2").offsetRotateBy(-1);
         rotateBy(1);
     }
 }
