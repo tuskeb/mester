@@ -9,6 +9,58 @@ import com.badlogic.gdx.math.Vector2;
 public class MyRectangle extends MyShape{
 
     /**
+     *
+     * @param width  Az alakzat szélessége
+     * @param height Az alakzat magassága
+     */
+    public MyRectangle(float width, float height) {
+        super(0, 0 , width, height, 0, 0, 0, 0, 0, 0, true);
+        setOriginToCenter();
+    }
+
+    /**
+     *
+     * @param width  Az alakzat szélessége
+     * @param height Az alakzat magassága
+     * @param offsetX Eltolás az X koordinátától
+     * @param offsetY Eltolás az Y koordinátától
+     */
+    public MyRectangle(float width, float height, float offsetX, float offsetY) {
+        super(0, 0 , width, height, 0, 0, 0, 0, offsetX, offsetY, true);
+        setOriginToCenter();
+    }
+
+
+
+    /**
+     *
+     * @param width  Az alakzat szélessége
+     * @param height Az alakzat magassága
+     * @param originX A forgatás középpontja
+     * @param originY A forgatás középpontja
+     * @param offsetX Eltolás az X koordinátától
+     * @param offsetY Eltolás az Y koordinátától
+     */
+    public MyRectangle(float width, float height, float offsetX, float offsetY, float originX, float originY) {
+        super(0, 0 , width, height, 0, 0, originX, originY, offsetX, offsetY, true);
+    }
+
+    /**
+     * @param width  Az alakzat szélessége
+     * @param height Az alakzat magassága
+     * @param rotation Az alakzat forgatása az origin körül
+     * @param offsetRotation Az alakzat forgatása saját maga körül
+     * @param originX A forgatás középpontja
+     * @param originY A forgatás középpontja
+     * @param offsetX Eltolás az X koordinátától
+     * @param offsetY Eltolás az Y koordinátától
+     */
+    public MyRectangle(float width, float height, float offsetX, float offsetY, float originX, float originY,  float rotation,  float offsetRotation) {
+        super(0, 0 , width, height, rotation, offsetRotation, originX, originY, offsetX, offsetY, true);
+    }
+
+    /**
+     *
      * @param x Az alakzat helye
      * @param y Az alakzat helye
      * @param width  Az alakzat szélessége
@@ -19,41 +71,13 @@ public class MyRectangle extends MyShape{
      * @param originY A forgatás középpontja
      * @param offsetX Eltolás az X koordinátától
      * @param offsetY Eltolás az Y koordinátától
-     * @param alignToLeftBottom Igaz esetén az alakzatot a bal alsó sarkától számított X és Y koordinátákkal hozza létre, ellenkező esetben a küzepétől.
      */
-    public MyRectangle(float x, float y, float width, float height, float rotation, float offsetRotation, float originX, float originY, float offsetX, float offsetY, boolean alignToLeftBottom) {
-        super(x, y, width, height, rotation, offsetRotation, originX, originY, offsetX, offsetY, alignToLeftBottom);
+    public MyRectangle(float width, float height, float offsetX, float offsetY, float originX, float originY,  float rotation,  float offsetRotation, float x, float y) {
+        super(x, y, width, height, rotation, offsetRotation, originX, originY, offsetX, offsetY, true);
     }
 
-    /**
-     *
-     * @param width  Az alakzat szélessége
-     * @param height Az alakzat magassága
-     * @param rotation Az alakzat forgatása az origin körül
-     * @param offsetRotation Az alakzat forgatása saját maga körül
-     * @param originX A forgatás középpontja
-     * @param originY A forgatás középpontja
-     * @param offsetX Eltolás az X koordinátától
-     * @param offsetY Eltolás az Y koordinátától
-     * @param alignToLeftBottom Igaz esetén az alakzatot a bal alsó sarkától számított X és Y koordinátákkal hozza létre, ellenkező esetben a küzepétől.
-     */
-    public MyRectangle(float offsetX, float offsetY, float width, float height, float rotation, float offsetRotation, float originX, float originY, boolean alignToLeftBottom) {
-        super(0, 0 , width, height, rotation, offsetRotation, originX, originY, offsetX, offsetY, alignToLeftBottom);
-    }
 
-    /**
-     *
-     * @param width  Az alakzat szélessége
-     * @param height Az alakzat magassága
-     * @param originX A forgatás középpontja
-     * @param originY A forgatás középpontja
-     * @param offsetX Eltolás az X koordinátától
-     * @param offsetY Eltolás az Y koordinátától
-     * @param alignToLeftBottom Igaz esetén az alakzatot a bal alsó sarkától számított X és Y koordinátákkal hozza létre, ellenkező esetben a küzepétől.
-     */
-    public MyRectangle(float offsetX, float offsetY, float width, float height, float originX, float originY, boolean alignToLeftBottom) {
-        super(0, 0 , width, height, 0, 0, originX, originY, offsetX, offsetY, alignToLeftBottom);
-    }
+
     /**
      *
      * @param width  Az alakzat szélessége
@@ -64,6 +88,7 @@ public class MyRectangle extends MyShape{
         super(0, 0 , width, height, 0, 0, 0, 0, 0, 0, alignToLeftBottom);
         setOriginToCenter();
     }
+
     /**
      *
      * @param width  Az alakzat szélessége
@@ -72,12 +97,41 @@ public class MyRectangle extends MyShape{
      * @param offsetY Eltolás az Y koordinátától
      * @param alignToLeftBottom Igaz esetén az alakzatot a bal alsó sarkától számított X és Y koordinátákkal hozza létre, ellenkező esetben a küzepétől.
      */
-    public MyRectangle(float offsetX, float offsetY, float width, float height, boolean alignToLeftBottom) {
+    public MyRectangle( float width, float height, float offsetX, float offsetY, boolean alignToLeftBottom) {
         super(0, 0 , width, height, 0, 0, 0, 0, offsetX, offsetY, alignToLeftBottom);
         setOriginToCenter();
     }
+
     /**
      *
+     * @param width  Az alakzat szélessége
+     * @param height Az alakzat magassága
+     * @param originX A forgatás középpontja
+     * @param originY A forgatás középpontja
+     * @param offsetX Eltolás az X koordinátától
+     * @param offsetY Eltolás az Y koordinátától
+     * @param alignToLeftBottom Igaz esetén az alakzatot a bal alsó sarkától számított X és Y koordinátákkal hozza létre, ellenkező esetben a küzepétől.
+     */
+    public MyRectangle(float width, float height, float offsetX, float offsetY, float originX, float originY, boolean alignToLeftBottom) {
+        super(0, 0 , width, height, 0, 0, originX, originY, offsetX, offsetY, alignToLeftBottom);
+    }
+
+    /**
+     *
+     * @param width  Az alakzat szélessége
+     * @param height Az alakzat magassága
+     * @param rotation Az alakzat forgatása az origin körül
+     * @param offsetRotation Az alakzat forgatása saját maga körül
+     * @param originX A forgatás középpontja
+     * @param originY A forgatás középpontja
+     * @param offsetX Eltolás az X koordinátától
+     * @param offsetY Eltolás az Y koordinátától
+     * @param alignToLeftBottom Igaz esetén az alakzatot a bal alsó sarkától számított X és Y koordinátákkal hozza létre, ellenkező esetben a küzepétől.
+     */
+    public MyRectangle(float width, float height, float offsetX, float offsetY, float originX, float originY,  float rotation,  float offsetRotation, boolean alignToLeftBottom) {
+        super(0, 0 , width, height, rotation, offsetRotation, originX, originY, offsetX, offsetY, alignToLeftBottom);
+    }
+    /**
      * @param x Az alakzat helye
      * @param y Az alakzat helye
      * @param width  Az alakzat szélessége
@@ -88,56 +142,13 @@ public class MyRectangle extends MyShape{
      * @param originY A forgatás középpontja
      * @param offsetX Eltolás az X koordinátától
      * @param offsetY Eltolás az Y koordinátától
+     * @param alignToLeftBottom Igaz esetén az alakzatot a bal alsó sarkától számított X és Y koordinátákkal hozza létre, ellenkező esetben a küzepétől.
      */
-    public MyRectangle(float x, float y, float width, float height, float rotation, float offsetRotation, float originX, float originY, float offsetX, float offsetY) {
-        super(x, y, width, height, rotation, offsetRotation, originX, originY, offsetX, offsetY, true);
+    public MyRectangle(float width, float height, float offsetX, float offsetY, float originX, float originY,  float rotation,  float offsetRotation, float x, float y, boolean alignToLeftBottom) {
+        super(x, y, width, height, rotation, offsetRotation, originX, originY, offsetX, offsetY, alignToLeftBottom);
     }
 
-    /**
-     * @param width  Az alakzat szélessége
-     * @param height Az alakzat magassága
-     * @param rotation Az alakzat forgatása az origin körül
-     * @param offsetRotation Az alakzat forgatása saját maga körül
-     * @param originX A forgatás középpontja
-     * @param originY A forgatás középpontja
-     * @param offsetX Eltolás az X koordinátától
-     * @param offsetY Eltolás az Y koordinátától
-     */
-    public MyRectangle(float offsetX, float offsetY, float width, float height, float rotation,  float offsetRotation, float originX, float originY) {
-        super(0, 0 , width, height, rotation, offsetRotation, originX, originY, offsetX, offsetY, true);
-    }
-    /**
-     *
-     * @param width  Az alakzat szélessége
-     * @param height Az alakzat magassága
-     * @param originX A forgatás középpontja
-     * @param originY A forgatás középpontja
-     * @param offsetX Eltolás az X koordinátától
-     * @param offsetY Eltolás az Y koordinátától
-     */
-    public MyRectangle(float offsetX, float offsetY, float width, float height, float originX, float originY) {
-        super(0, 0 , width, height, 0, 0, originX, originY, offsetX, offsetY, true);
-    }
-    /**
-     *
-     * @param width  Az alakzat szélessége
-     * @param height Az alakzat magassága
-     * @param offsetX Eltolás az X koordinátától
-     * @param offsetY Eltolás az Y koordinátától
-     */
-    public MyRectangle(float offsetX, float offsetY, float width, float height) {
-        super(0, 0 , width, height, 0, 0, 0, 0, offsetX, offsetY, true);
-        setOriginToCenter();
-    }
-    /**
-     *
-     * @param width  Az alakzat szélessége
-     * @param height Az alakzat magassága
-     */
-    public MyRectangle(float width, float height) {
-        super(0, 0 , width, height, 0, 0, 0, 0, 0, 0, true);
-        setOriginToCenter();
-    }
+
 
     public Vector2[] getCorners() {
         Vector2[] vector2 = new Vector2[4];
@@ -153,10 +164,94 @@ public class MyRectangle extends MyShape{
         return vector2;
     }
 
+    public static boolean overlaps(MyRectangle rectangle, MyCircle objB) {
+        //x10, y10 is centre point of rect1. x20, y20 is centre point of rect2
+        //height1, width1 are half heights/widths of rect1, radrot is rotation of rect in radians
 
+        MyCircle circle = (MyCircle)objB;
+
+        //System.out.println(circle);
+        //System.out.println(rectangle);
+
+        //Téglalap és kör forgatása a téglalap originje körül úgy, hogy az oldalai párhuzamosak legyenek a koordináta rendszerrel. A kör középpontja megváltozik, a téglalap forgatása 0 lesz.
+        Vector2 circleRotCenter = (new Vector2(circle.realCenterX-rectangle.realCenterX, circle.realCenterY-rectangle.realCenterY)).rotate(-rectangle.rotation - rectangle.offsetRotation).add(rectangle.realCenterX,rectangle.realCenterY);
+
+        //System.out.println(circleRotCenter);
+
+        //A négyzet sarkai
+        float xRect[] = new float[4];
+        float yRect[] = new float[4];
+
+        //A méret fele (gyorsítás)
+        float height1 = rectangle.height / 2;
+        float width1 = rectangle.width / 2;
+
+        //Forgatás nélküli sarkok
+        //Bal alsó
+        xRect[0] = rectangle.realCenterX - width1;
+        yRect[0] = rectangle.realCenterY - height1;
+
+        //Bal felső
+        xRect[1] = rectangle.realCenterX - width1;
+        yRect[1] = rectangle.realCenterY + height1;
+
+
+        //Jobb felső
+        xRect[2] = rectangle.realCenterX + width1;
+        yRect[2] = rectangle.realCenterY + height1;
+
+
+        //Jobb alső
+        xRect[3] = rectangle.realCenterX + width1;
+        yRect[3] = rectangle.realCenterY - height1;
+
+
+
+        //Ha a téglalap bármely sarka a körön beül van
+        for (int i = 0; i < 4; i++) {
+            if ((xRect[i] - circleRotCenter.x) * (xRect[i] - circleRotCenter.x) +
+                    (yRect[i] - circleRotCenter.y) * (yRect[i] - circleRotCenter.y) <=
+                    (circle.radius) * (circle.radius)){
+                return true;
+            }
+        }
+
+
+        //Elforgatott kör koordinátái
+        float xCirc[] = new float[4];
+        float yCirc[] = new float[4];
+
+        // A kör legfelső pontja
+        xCirc[0] = circleRotCenter.x + circle.radius;
+        yCirc[0] = circleRotCenter.y;
+
+        // legalsó pontja
+        xCirc[1] = circleRotCenter.x - circle.radius;
+        yCirc[1] = circleRotCenter.y;
+
+        // bal pontja
+        xCirc[2] = circleRotCenter.x;
+        yCirc[2] = circleRotCenter.y - circle.radius;
+
+        // jobb pontja
+        xCirc[3] = circleRotCenter.x;
+        yCirc[3] = circleRotCenter.y + circle.radius;
+
+
+
+        //Ha a kör bármelyik (bal, jobb, felső, alsó) pontja a téglalapon belül van
+        for (int i = 0; i < 4; i++) {
+            if (xRect[0] <= xCirc[i] && xRect[2] >= xCirc[i] && yRect[0] <= yCirc[i] && yRect[2] >= yCirc[i]) {
+                return true;
+            }
+        }
+
+
+        return false;
+    }
 
     //https://forums.coronalabs.com/topic/39094-code-for-rotated-rectangle-collision-detection/
-    static boolean overlaps(MyRectangle objA, MyRectangle objB) {
+    public static boolean overlaps(MyRectangle objA, MyRectangle objB) {
         //x10, y10 is centre point of rect1. x20, y20 is centre point of rect2
         //height1, width1 are half heights/widths of rect1, radrot is rotation of rect in radians
 
@@ -252,10 +347,33 @@ public class MyRectangle extends MyShape{
         if (other instanceof MyRectangle){
             return overlaps(this, (MyRectangle)other);
         }
+        if (other instanceof MyCircle){
+            return overlaps(this, (MyCircle)other);
+        }
         return false;
     }
 
     public static void main(String[] args) {
+        MyRectangle rectangle = new MyRectangle(50,30);
+        rectangle.setPosition(70,20);
+        //rectangle.setOffset(20,50);
+        rectangle.setRotation(20);
+        //rectangle.setOffsetRotation(30);
+        rectangle.setOriginToCenter();
+        //rectangle.setOriginFromCenter(-10,-5);
+        //rectangle.setOrigin(-10,-10);
+        MyCircle circle = new MyCircle(10);
+        circle.setPositionFromCenter(80,40);
+        circle.setOriginToCenter();
+        System.out.println(overlaps(rectangle, circle));
+/*
+        for(int f=0; f<30; f++) {
+            //System.out.println(rectangle);
+            //System.out.println(circle);
+            System.out.println(overlaps(rectangle, circle));
+            circle.setX(circle.getX()+0.5f);
+        }
+        */
         /*
         MyRectangle r1 = new MyRectangle(1, 1, 2, 2, 0,false);
         MyRectangle r2 = new MyRectangle(3.2f, 1, 2, 2, 0,false);

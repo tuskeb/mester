@@ -34,11 +34,11 @@ abstract public class MyActor extends Actor implements InitableInterface {
     }
 
     public void addBaseCollisionRectangleShape(){
-        addCollisionShape("BaseRectangle",new MyRectangle(getX(),getY(),getWidth(),getHeight(),getRotation(), 0, getOriginX(), getOriginY(),0,0, true));
+        addCollisionShape("BaseRectangle",new MyRectangle(getWidth(),getHeight(),0,0,getOriginX(), getOriginY(), getRotation(), 0, true));
     }
 
-    public void addBaseCollisionCircleShape(){
-        addCollisionShape("BaseCircle",new MyCircle(getX(),getY(),(float)Math.sqrt(getWidth()*getHeight())/2,getOriginX(), getOriginY(),0,0, true));
+    public void addBaseCollisionCircleShape() {
+        addCollisionShape("BaseCircle", new MyCircle((float) Math.sqrt(getWidth() * getHeight()) / 2, 0, 0, getOriginX(), getOriginY(), getX(), getY(), true));
     }
 
     public void removeBaseCollisionRectangleShape(){
@@ -170,6 +170,8 @@ abstract public class MyActor extends Actor implements InitableInterface {
     }
 
     public static boolean overlaps(MyActor actorA, MyActor actorB){
+        if (actorA.getCollisionShapeMap() == null) return false;
+        if (actorB.getCollisionShapeMap() == null) return false;
         for(MyShape shapeA : actorA.getCollisionShapeMap().values()){
             for(MyShape shapeB : actorB.getCollisionShapeMap().values()){
                 if(shapeA.overlaps(shapeB)){
