@@ -148,6 +148,19 @@ public abstract class MyShape {
         calculateCenterXY();
     }
 
+    public void setX(float X) {
+        this.centerX = X + width/2;
+        //this.centerY = Y + height/2;
+        calculateCenterXY();
+    }
+
+    public void setY(float Y) {
+        //this.centerX = X + width/2;
+        this.centerY = Y + height/2;
+        calculateCenterXY();
+    }
+
+
     public void setPositionFromCenter(float centerX, float centerY) {
         this.centerX = centerX;
         this.centerY = centerY;
@@ -324,7 +337,7 @@ public abstract class MyShape {
         if (vector2s != null) {
             int x = 1;
             for (Vector2 v : vector2s) {
-                corners += " X" + x + "=" + v.x + "Y" + x + "=" + v.y;
+                corners += "\n(X" + x + "=" + Math.round(v.x*100.0f)/100.0f + " Y" + x + "=" + Math.round(v.y*100.0f)/100.0f + ")";
             }
         }
         return "MyShape{" +
