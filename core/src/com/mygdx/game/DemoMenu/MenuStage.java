@@ -249,8 +249,11 @@ public class MenuStage extends MyStage {
         //badlActor.addBaseCollisionRectangleShape();
         //crossActor.addBaseCollisionCircleShape();
 
+        addActor(car = new CarActor());
     }
 
+
+    private MultiSpriteActor car;
 
     @Override
     public void act(float delta) {
@@ -264,6 +267,10 @@ public class MenuStage extends MyStage {
         else
         {
             utkozesMyLabel.setText("Nincs ütközés.");
+        }
+
+        if (car.overlaps(circle)){
+            System.out.println(car.getMyOverlappedShapeKeys(circle));
         }
     }
 
