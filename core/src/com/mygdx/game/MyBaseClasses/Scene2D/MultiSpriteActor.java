@@ -16,9 +16,15 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
     protected HashMap<String, OffsetSprite> spriteMap = new HashMap<String, OffsetSprite>();
     public static int debugLineNumbers = 16;
 
+    public MultiSpriteActor() {
+        super();
+        init();
+    }
+
     /*  OffsetSprite... olyam mint egy tömb de simán fel lehet sorolni a paramétereket. Nincs fix hossza.
-        https://docs.oracle.com/javase/tutorial/java/javaOO/arguments.html#varargs */
+            https://docs.oracle.com/javase/tutorial/java/javaOO/arguments.html#varargs */
     public MultiSpriteActor(OffsetSprite... offsetSprites) {
+        super();
         for (OffsetSprite spite: offsetSprites) {
             addSprite(spite);
         }
@@ -46,6 +52,40 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
             sprite.setOrigin(getOriginX() - sprite.getOffsetVector().x, getOriginY() - sprite.getOffsetVector().y);
         }
     }
+
+    @Override
+    public void setSize(float width, float height) {
+        float changedWidth = getWidth()/width;
+        float changedHeight = getHeight()/height;
+        setWidth2(width);
+        setHeight2(height);
+        float spriteWidth, spriteHeight;
+        for (OffsetSprite sprite : spriteMap.values()) {
+            spriteWidth = sprite.getWidth();
+            spriteHeight = sprite.getHeight();
+            sprite.setSize(spriteWidth/changedWidth,spriteHeight/changedHeight);
+        }
+
+    }
+
+    public void setWidth2(float width){
+        super.setWidth(width);
+    }
+
+    public void setHeight2(float height){
+        super.setHeight(height);
+    }
+
+    @Override
+    public void setHeight(float height) {
+        setSize(getWidth(),height);
+    }
+
+    @Override
+    public void setWidth(float width) {
+        setSize(width, getHeight());
+    }
+
 
     @Override
     protected void positionChanged() {
