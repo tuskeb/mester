@@ -251,10 +251,10 @@ abstract public class MyStage extends Stage implements InitableInterface {
         }
     }
 
-    public void updateFrustumActorVisible(float margin){
+    public void updateFrustumActorVisible(float zoom){
         OrthographicCamera c = (OrthographicCamera)getCamera();
         for (Actor a: getActors()) {
-            a.setVisible(isActorShowing(c,a, margin));
+            a.setVisible(isActorShowing(c,a, zoom));
         }
     }
 
@@ -272,11 +272,11 @@ abstract public class MyStage extends Stage implements InitableInterface {
         }
     }
 
-    public void updateFrustumActorRemove(float margin){
+    public void updateFrustumActorRemove(float zoom){
         OrthographicCamera c = (OrthographicCamera)getCamera();
         ArrayList<Actor> actors = new ArrayList<Actor>();
         for (Actor a: getActors()) {
-            if(isActorShowing(c,a,margin)) {
+            if(isActorShowing(c,a,zoom)) {
                 actors.add(a);
             }
         }
@@ -284,20 +284,22 @@ abstract public class MyStage extends Stage implements InitableInterface {
             getActors().removeValue(a,true);
         }
     }
+    public boolean isActorShowing(Actor a, float zoom) {
+        return isActorShowing((OrthographicCamera)getCamera(),a,zoom);
+    }
 
-
-    private boolean isActorShowing(Actor a){
+    public boolean isActorShowing(Actor a){
         Camera c = getCamera();
         return c.frustum.pointInFrustum(a.getX(), a.getY(), 0) || c.frustum.pointInFrustum(a.getX() + a.getWidth(), a.getY() + a.getHeight(), 0) ||
                 c.frustum.pointInFrustum(a.getX() + a.getWidth(), a.getY(), 0) || c.frustum.pointInFrustum(a.getX(), a.getY() + a.getHeight(), 0);
     }
 
-    private static boolean isActorShowing(Camera c, Actor a){
+    public static boolean isActorShowing(Camera c, Actor a){
         return c.frustum.pointInFrustum(a.getX(), a.getY(), 0) || c.frustum.pointInFrustum(a.getX() + a.getWidth(), a.getY() + a.getHeight(), 0) ||
                 c.frustum.pointInFrustum(a.getX() + a.getWidth(), a.getY(), 0) || c.frustum.pointInFrustum(a.getX(), a.getY() + a.getHeight(), 0);
     }
 
-    private static boolean isActorShowing(OrthographicCamera c, Actor a, float zoom){
+    public static boolean isActorShowing(OrthographicCamera c, Actor a, float zoom){
         float z = c.zoom;
         c.zoom *= zoom;
         c.update();
