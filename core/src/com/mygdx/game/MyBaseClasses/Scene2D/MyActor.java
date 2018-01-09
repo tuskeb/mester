@@ -339,4 +339,14 @@ abstract public class MyActor extends Actor implements InitableInterface {
     protected void originChanged(){
 
     }
+
+    public boolean isInFrustum(){
+        MyStage m = (MyStage)getStage();
+        return m.isActorShowing(this);
+    }
+    public boolean isInFrustum(float zoom){
+        MyStage m = (MyStage)getStage();
+        return m.isActorShowing(this, zoom);
+    }
+
 }
