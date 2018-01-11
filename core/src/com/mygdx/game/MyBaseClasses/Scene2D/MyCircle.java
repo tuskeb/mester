@@ -118,10 +118,17 @@ public class MyCircle extends MyShape {
                 (objA.radius + objB.radius) * (objA.radius + objB.radius);
     }
 
+    public static boolean overlaps(MyCircle objA, MyRectangle objB){
+        return MyRectangle.overlaps(objB, objA);
+    }
+
     @Override
     public boolean overlaps(MyShape other) {
         if (other instanceof MyCircle) {
             return overlaps(this, (MyCircle)other);
+        }
+        if (other instanceof MyRectangle){
+            return MyRectangle.overlaps((MyRectangle)other, this);
         }
         return false;
     }

@@ -153,10 +153,53 @@ public class MyRectangle extends MyShape{
         return vector2;
     }
 
+    public static boolean overlaps(MyRectangle rectangle, MyCircle objB) {
+        //x10, y10 is centre point of rect1. x20, y20 is centre point of rect2
+        //height1, width1 are half heights/widths of rect1, radrot is rotation of rect in radians
 
+        MyCircle circle = (MyCircle)objB;
+
+        float height1 = rectangle.height / 2;
+
+        float width1 = rectangle.width / 2;
+
+        float radrot1 = (float) Math.toRadians(rectangle.realRotation);
+        float radrot2 = (float) Math.toRadians(objB.realRotation);
+
+        float radius1 = (float) Math.sqrt(height1 * height1 + width1 * width1);
+
+        float angle1 = (float) Math.asin(height1 / radius1);
+
+        float x1[] = new float[4];
+        float y1[] = new float[4];
+
+        x1[0] = rectangle.realCenterX + radius1 * (float) Math.cos(radrot1 - angle1);
+        y1[0] = rectangle.realCenterY + radius1 * (float) Math.sin(radrot1 - angle1);
+        x1[1] = rectangle.realCenterX + radius1 * (float) Math.cos(radrot1 + angle1);
+        y1[1] = rectangle.realCenterY + radius1 * (float) Math.sin(radrot1 + angle1);
+        x1[2] = rectangle.realCenterX + radius1 * (float) Math.cos(radrot1 + PI - angle1);
+        y1[2] = rectangle.realCenterY + radius1 * (float) Math.sin(radrot1 + PI - angle1);
+        x1[3] = rectangle.realCenterX + radius1 * (float) Math.cos(radrot1 + PI + angle1);
+        y1[3] = rectangle.realCenterY + radius1 * (float) Math.sin(radrot1 + PI + angle1);
+
+        //Ha a téglalap bármely sarka a körön beül van
+        for (int i = 0; i < 4; i++) {
+            if ((x1[i] - circle.realCenterX) * (x1[i] - circle.realCenterX) +
+                    (y1[i] - circle.realCenterY) * (y1[i] - circle.realCenterY) <=
+                    (circle.radius) * (circle.radius)){
+                return true;
+            }
+        }
+
+        //Téglalap és kör transzformálása a 0,0 pontba, párhuzamostása a tengelyekkel
+
+        //Ha a kör bármelyik (bal, jobb, felső, alsó) pontja a téglalapon belül van
+
+        return false;
+    }
 
     //https://forums.coronalabs.com/topic/39094-code-for-rotated-rectangle-collision-detection/
-    static boolean overlaps(MyRectangle objA, MyRectangle objB) {
+    public static boolean overlaps(MyRectangle objA, MyRectangle objB) {
         //x10, y10 is centre point of rect1. x20, y20 is centre point of rect2
         //height1, width1 are half heights/widths of rect1, radrot is rotation of rect in radians
 
@@ -252,11 +295,23 @@ public class MyRectangle extends MyShape{
         if (other instanceof MyRectangle){
             return overlaps(this, (MyRectangle)other);
         }
+        if (other instanceof MyCircle){
+            return overlaps(this, (MyCircle)other);
+        }
         return false;
     }
 
     public static void main(String[] args) {
-        /*
+        MyRectangle rectangle = new MyRectangle(10,20);
+        MyCircle circle = new MyCircle(0,-7,4);
+        circle.setOriginToCenter();
+
+        for(int f=0; f<30; f++) {
+            //System.out.println(rectangle);
+            //System.out.println(circle);
+            System.out.println(overlaps(rectangle, circle));
+            circle.setX(circle.getX()+0.5f);
+        }/*
         MyRectangle r1 = new MyRectangle(1, 1, 2, 2, 0,false);
         MyRectangle r2 = new MyRectangle(3.2f, 1, 2, 2, 0,false);
         for (float f = 0; f < 360; f += 10) {

@@ -1,11 +1,8 @@
 package com.mygdx.game.MyBaseClasses.Scene2D;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
 
 /**
  * Created by M on 12/14/2017.
@@ -14,11 +11,50 @@ import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
 public class OffsetSprite extends Sprite {
     private Vector2 offsetVector;
     static protected float PI = (float) Math.PI;
+    int azonosito;
+    float originalWidth, originalHeight;
+    float originalY, Ychange;
 
-
-    public OffsetSprite(Texture texture, float xOffset, float yOffset) {
+    public OffsetSprite(Texture texture, float xOffset, float yOffset, int azonosito) {
         super(texture);
         offsetVector = new Vector2(xOffset, yOffset);
+        this.azonosito=azonosito;
+    }
+
+    public int getAzonosito() {
+        return azonosito;
+    }
+
+    public float getYchange() {
+        return Ychange;
+    }
+
+    public void setYchange(float ychange) {
+        Ychange = ychange;
+    }
+
+    public float getOriginalWidth() {
+        return originalWidth;
+    }
+
+    public float getOriginalY() {
+        return originalY;
+    }
+
+    public void setOriginalY(float originalY) {
+        this.originalY = originalY;
+    }
+
+    public void setOriginalWidth(float originalWidth) {
+        this.originalWidth = originalWidth;
+    }
+
+    public float getOriginalHeight() {
+        return originalHeight;
+    }
+
+    public void setOriginalHeight(float originalHeight) {
+        this.originalHeight = originalHeight;
     }
 
     public Vector2 getOffsetVector() {
