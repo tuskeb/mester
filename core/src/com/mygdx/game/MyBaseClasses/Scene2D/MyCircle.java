@@ -11,6 +11,41 @@ public class MyCircle extends MyShape {
     protected float radius = 0;
     public static int debugLineNumbers = 16;
 
+
+
+
+
+    /**
+     * @param radius A kör sugara
+     */
+    public MyCircle(float radius) {
+        super(0, 0, radius, radius, 0, 0, 0, 0, 0, 0, true);
+        setRadius(radius);
+    }
+
+
+    /**
+     * @param offsetX Eltolás az X koordinátától
+     * @param offsetY Eltolás az Y koordinátától
+     * @param radius A kör sugara
+     */
+    public MyCircle(float radius, float offsetX, float offsetY) {
+        super(0, 0, radius*2, radius*2, 0, 0,0, 0, offsetX, offsetY, true);
+        setRadius(radius);
+    }
+
+
+    /**
+     * @param originX A forgatás középpontja
+     * @param originY A forgatás középpontja
+     * @param offsetX Eltolás az X koordinátától
+     * @param offsetY Eltolás az Y koordinátától
+     */
+    public MyCircle(float radius, float offsetX, float offsetY, float originX, float originY) {
+        super(0, 0, radius*2, radius*2, 0, 0, originX, originY, offsetX, offsetY, true);
+        setRadius(radius);
+    }
+
     /**
      * @param x Az alakzat helye
      * @param y Az alakzat helye
@@ -18,35 +53,13 @@ public class MyCircle extends MyShape {
      * @param originY A forgatás középpontja
      * @param offsetX Eltolás az X koordinátától
      * @param offsetY Eltolás az Y koordinátától
-     * @param alignToLeftBottom Igaz esetén az alakzatot a bal alsó sarkától számított X és Y koordinátákkal hozza létre, ellenkező esetben a küzepétől.
      * @param radius A kör sugara
      */
-    public MyCircle(float x, float y, float radius, float originX, float originY, float offsetX, float offsetY, boolean alignToLeftBottom) {
-        super(x, y, radius*2, radius*2, 0, 0, originX, originY, offsetX, offsetY, alignToLeftBottom);
+    public MyCircle(float radius, float offsetX, float offsetY, float originX, float originY, float x, float y) {
+        super(x, y, radius*2, radius*2, 0, 0, originX, originY, offsetX, offsetY, true);
         setRadius(radius);
     }
-    /**
-     * @param originX A forgatás középpontja
-     * @param originY A forgatás középpontja
-     * @param offsetX Eltolás az X koordinátától
-     * @param offsetY Eltolás az Y koordinátától
-     * @param alignToLeftBottom Igaz esetén az alakzatot a bal alsó sarkától számított X és Y koordinátákkal hozza létre, ellenkező esetben a küzepétől.
-     * @param radius A kör sugara
-     */
-    public MyCircle(float offsetX, float offsetY, float radius, float originX, float originY,  boolean alignToLeftBottom) {
-        super(0, 0, radius*2, radius*2, 0, 0, originX, originY, offsetX, offsetY, alignToLeftBottom);
-        setRadius(radius);
-    }
-    /**
-     * @param offsetX Eltolás az X koordinátától
-     * @param offsetY Eltolás az Y koordinátától
-     * @param alignToLeftBottom Igaz esetén az alakzatot a bal alsó sarkától számított X és Y koordinátákkal hozza létre, ellenkező esetben a küzepétől.
-     * @param radius A kör sugara
-     */
-    public MyCircle(float offsetX, float offsetY, float radius,  boolean alignToLeftBottom) {
-        super(0, 0, radius*2, radius*2, 0, 0,0, 0, offsetX, offsetY, alignToLeftBottom);
-        setRadius(radius);
-    }
+
 
     /**
      * @param alignToLeftBottom Igaz esetén az alakzatot a bal alsó sarkától számított X és Y koordinátákkal hozza létre, ellenkező esetben a küzepétől.
@@ -56,6 +69,29 @@ public class MyCircle extends MyShape {
         super(0, 0, radius*2, radius*2, 0, 0, 0, 0, 0, 0, alignToLeftBottom);
         setRadius(radius);
     }
+    /**
+     * @param offsetX Eltolás az X koordinátától
+     * @param offsetY Eltolás az Y koordinátától
+     * @param alignToLeftBottom Igaz esetén az alakzatot a bal alsó sarkától számított X és Y koordinátákkal hozza létre, ellenkező esetben a küzepétől.
+     * @param radius A kör sugara
+     */
+    public MyCircle( float radius, float offsetX, float offsetY, boolean alignToLeftBottom) {
+        super(0, 0, radius*2, radius*2, 0, 0,0, 0, offsetX, offsetY, alignToLeftBottom);
+        setRadius(radius);
+    }
+
+    /**
+     * @param originX A forgatás középpontja
+     * @param originY A forgatás középpontja
+     * @param offsetX Eltolás az X koordinátától
+     * @param offsetY Eltolás az Y koordinátától
+     * @param alignToLeftBottom Igaz esetén az alakzatot a bal alsó sarkától számított X és Y koordinátákkal hozza létre, ellenkező esetben a küzepétől.
+     * @param radius A kör sugara
+     */
+    public MyCircle( float radius, float offsetX, float offsetY, float originX, float originY,  boolean alignToLeftBottom) {
+        super(0, 0, radius*2, radius*2, 0, 0, originX, originY, offsetX, offsetY, alignToLeftBottom);
+        setRadius(radius);
+    }
 
     /**
      * @param x Az alakzat helye
@@ -64,41 +100,15 @@ public class MyCircle extends MyShape {
      * @param originY A forgatás középpontja
      * @param offsetX Eltolás az X koordinátától
      * @param offsetY Eltolás az Y koordinátától
+     * @param alignToLeftBottom Igaz esetén az alakzatot a bal alsó sarkától számított X és Y koordinátákkal hozza létre, ellenkező esetben a küzepétől.
      * @param radius A kör sugara
      */
-    public MyCircle(float x, float y, float radius, float originX, float originY, float offsetX, float offsetY) {
-        super(x, y, radius*2, radius*2, 0, 0, originX, originY, offsetX, offsetY, true);
+    public MyCircle(float radius, float offsetX, float offsetY, float originX, float originY, float x, float y,  boolean alignToLeftBottom) {
+        super(x, y, radius*2, radius*2, 0, 0, originX, originY, offsetX, offsetY, alignToLeftBottom);
         setRadius(radius);
     }
 
-    /**
-     * @param originX A forgatás középpontja
-     * @param originY A forgatás középpontja
-     * @param offsetX Eltolás az X koordinátától
-     * @param offsetY Eltolás az Y koordinátától
-     */
-    public MyCircle(float offsetX, float offsetY, float radius, float originX, float originY) {
-        super(0, 0, radius*2, radius*2, 0, 0, originX, originY, offsetX, offsetY, true);
-        setRadius(radius);
-    }
 
-    /**
-     * @param offsetX Eltolás az X koordinátától
-     * @param offsetY Eltolás az Y koordinátától
-     * @param radius A kör sugara
-     */
-    public MyCircle(float offsetX, float offsetY, float radius) {
-        super(0, 0, radius*2, radius*2, 0, 0,0, 0, offsetX, offsetY, true);
-        setRadius(radius);
-    }
-
-    /**
-     * @param radius A kör sugara
-     */
-    public MyCircle(float radius) {
-        super(0, 0, radius, radius, 0, 0, 0, 0, 0, 0, true);
-        setRadius(radius);
-    }
 
     @Override
     public Vector2[] getCorners() {

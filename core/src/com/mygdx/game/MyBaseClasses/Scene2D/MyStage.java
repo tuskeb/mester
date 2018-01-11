@@ -1,6 +1,7 @@
 package com.mygdx.game.MyBaseClasses.Scene2D;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -11,6 +12,8 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
 import com.mygdx.game.MyGdxGame;
+
+import java.util.ArrayList;
 
 
 /**
@@ -239,5 +242,70 @@ abstract public class MyStage extends Stage implements InitableInterface {
 
     public void setElapsedTime(float elapsedTime) {
         this.elapsedTime = elapsedTime;
+    }
+
+    public void updateFrustumActorVisible(){
+        Camera c = getCamera();
+        for (Actor a: getActors()) {
+            a.setVisible(isActorShowing(c,a));
+        }
+    }
+
+    public void updateFrustumActorVisible(float zoom){
+        OrthographicCamera c = (OrthographicCamera)getCamera();
+        for (Actor a: getActors()) {
+            a.setVisible(isActorShowing(c,a, zoom));
+        }
+    }
+
+
+    public void updateFrustumActorRemove(){
+        Camera c = getCamera();
+        ArrayList<Actor> actors = new ArrayList<Actor>();
+        for (Actor a: getActors()) {
+            if(isActorShowing(c,a)) {
+                actors.add(a);
+            }
+        }
+        for (Actor a: getActors()){
+            getActors().removeValue(a,true);
+        }
+    }
+
+    public void updateFrustumActorRemove(float zoom){
+        OrthographicCamera c = (OrthographicCamera)getCamera();
+        ArrayList<Actor> actors = new ArrayList<Actor>();
+        for (Actor a: getActors()) {
+            if(isActorShowing(c,a,zoom)) {
+                actors.add(a);
+            }
+        }
+        for (Actor a: getActors()){
+            getActors().removeValue(a,true);
+        }
+    }
+    public boolean isActorShowing(Actor a, float zoom) {
+        return isActorShowing((OrthographicCamera)getCamera(),a,zoom);
+    }
+
+    public boolean isActorShowing(Actor a){
+        Camera c = getCamera();
+        return c.frustum.pointInFrustum(a.getX(), a.getY(), 0) || c.frustum.pointInFrustum(a.getX() + a.getWidth(), a.getY() + a.getHeight(), 0) ||
+                c.frustum.pointInFrustum(a.getX() + a.getWidth(), a.getY(), 0) || c.frustum.pointInFrustum(a.getX(), a.getY() + a.getHeight(), 0);
+    }
+
+    public static boolean isActorShowing(Camera c, Actor a){
+        return c.frustum.pointInFrustum(a.getX(), a.getY(), 0) || c.frustum.pointInFrustum(a.getX() + a.getWidth(), a.getY() + a.getHeight(), 0) ||
+                c.frustum.pointInFrustum(a.getX() + a.getWidth(), a.getY(), 0) || c.frustum.pointInFrustum(a.getX(), a.getY() + a.getHeight(), 0);
+    }
+
+    public static boolean isActorShowing(OrthographicCamera c, Actor a, float zoom){
+        float z = c.zoom;
+        c.zoom *= zoom;
+        c.update();
+        boolean b = isActorShowing(c,a);
+        c.zoom = z;
+        c.update();
+        return b;
     }
 }

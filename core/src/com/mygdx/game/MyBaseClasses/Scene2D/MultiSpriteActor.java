@@ -189,6 +189,40 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
     }
 
     @Override
+    public void setSize(float width, float height) {
+        float changedWidth = getWidth()/width;
+        float changedHeight = getHeight()/height;
+        setWidth2(width);
+        setHeight2(height);
+        float spriteWidth, spriteHeight;
+        for (OffsetSprite sprite : spriteMap.values()) {
+            spriteWidth = sprite.getWidth();
+            spriteHeight = sprite.getHeight();
+            sprite.setSize(spriteWidth/changedWidth,spriteHeight/changedHeight);
+        }
+
+    }
+
+    public void setWidth2(float width){
+        super.setWidth(width);
+    }
+
+    public void setHeight2(float height){
+        super.setHeight(height);
+    }
+
+    @Override
+    public void setHeight(float height) {
+        setSize(getWidth(),height);
+    }
+
+    @Override
+    public void setWidth(float width) {
+        setSize(width, getHeight());
+    }
+
+
+    @Override
     protected void positionChanged() {
         super.positionChanged();
         for (OffsetSprite sprite: spriteMap.values()) {

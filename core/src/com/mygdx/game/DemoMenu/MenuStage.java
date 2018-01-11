@@ -1,5 +1,6 @@
 package com.mygdx.game.DemoMenu;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -16,6 +17,7 @@ import com.mygdx.game.MyBaseClasses.Scene2D.MultiSpriteActor;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyCircle;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyRectangle;
 import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
+import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import com.mygdx.game.MyBaseClasses.UI.MyButton;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
 import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
@@ -33,7 +35,8 @@ public class MenuStage extends MyStage {
     private ExplosionActor explosionActor;
     private Label utkozesMyLabel;
     private DemoMultiSpriteActor multiSpriteActor;
-
+    private OneSpriteStaticActor circle;
+    private OneSpriteStaticActor rectangle;
 
     private boolean clck = false;
 
@@ -181,23 +184,82 @@ public class MenuStage extends MyStage {
                 setX(getX()+delta*70);
             }
         };
-        a.addCollisionShape("Fej",new MyCircle(20,80,60));
+        //a.addCollisionShape("Fej",new MyCircle(20,80,60));
 
         a.setFps(5);
         addActor(a);
         addActor(new OneSpriteAnimatedActor("walk.atlas"));
 
+        addActor(rectangle = new OneSpriteStaticActor(Assets.manager.get(Assets.GREEN_TEXTURE)){
+            @Override
+            public void init() {
+                super.init();
+                setSize(100,50);
+                addBaseCollisionRectangleShape();
+                addCollisionShape("rect", new MyRectangle(150,25,0,0,getOriginX(),getOriginY(),0,20));
+                addCollisionShape("circle1", new MyCircle(10,-30,-30,getOriginX(), getOriginY()));
+                setPosition(600,400);
+                setRotation(20);
+            }
+
+            @Override
+            public void act(float delta) {
+                super.act(delta);
+                getCollisionShape("rect").offsetRotateBy(delta*10);
+                rotateBy(delta*10);
+            }
+        });
+
+
+
+        addActor(circle = new OneSpriteStaticActor(Assets.manager.get(Assets.BLUE_TEXTURE)){
+            @Override
+            public void init() {
+                super.init();
+                setSize(50,50);
+                addBaseCollisionCircleShape();
+                addCollisionShape("circle1", new MyCircle(10,-30,-30,getOriginX(), getOriginY()));
+                addCollisionShape("rect1", new MyRectangle(10, 20,80,80,getOriginX(), getOriginY()));
+                setPosition(800,400);
+            }
+
+            @Override
+            public void act(float delta) {
+                super.act(delta);
+                getCollisionShape("rect1").offsetRotateBy(delta*10);
+                rotateBy(delta*2);
+            }
+        });
+
+        addListener(new ClickListener(){
+            @Override
+            public boolean mouseMoved(InputEvent event, float x, float y) {
+                circle.setPosition(x,y);
+                return super.mouseMoved(event, x, y);
+            }
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                circle.setPosition(x,y);
+            }
+        });
+
+
         //badlActor.addBaseCollisionRectangleShape();
         //crossActor.addBaseCollisionCircleShape();
 
+        addActor(car = new CarActor());
     }
 
+
+    private MultiSpriteActor car;
 
     @Override
     public void act(float delta) {
         super.act(delta);
         //if (badlActor.overlaps(ShapeType.Rectangle, crossActor))
-        if (badlActor.overlaps(crossActor))
+        if (circle.overlaps(rectangle))
         {
             utkozesMyLabel.setText("Ütközés!");
             //System.out.println(crossActor.getMyOverlappedShapeKeys(badlActor));
@@ -205,6 +267,10 @@ public class MenuStage extends MyStage {
         else
         {
             utkozesMyLabel.setText("Nincs ütközés.");
+        }
+
+        if (car.overlaps(circle)){
+            System.out.println(car.getMyOverlappedShapeKeys(circle));
         }
     }
 
