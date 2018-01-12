@@ -201,12 +201,16 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
         super.drawDebugBounds(shapes);
         if (spriteMap != null) {
             for (OffsetSprite sprite: spriteMap.values()) {
-                float w = (int)(0.8f + (float)Math.sin(elapsedTime * 10f)/5f+0.2f);
-                Color c = new Color(w, w, w, 0.2f);
-                shapes.setColor(c);
-                drawDebugLines(sprite.getCorners(),shapes);
-                shapes.setColor(Color.YELLOW);
-                shapes.circle(sprite.getOriginX() + sprite.getX(),sprite.getOriginY() + sprite.getY(), getWidth()/15,5);
+                //float w = (int)(0.8f + (float)Math.sin(elapsedTime * 10f)/5f+0.2f);
+                System.out.println(elapsedTime);
+                if (((int)((elapsedTime)*10))%2 ==0)
+                {
+                    Color c = new Color(Color.MAGENTA);
+                    shapes.setColor(c);
+                    drawDebugLines(sprite.getCorners(), shapes);
+                }
+                shapes.setColor(Color.ORANGE);
+                shapes.circle(sprite.getOriginX() + sprite.getX(), sprite.getOriginY() + sprite.getY(), getWidth() / 15, 5);
             }
         }
     }

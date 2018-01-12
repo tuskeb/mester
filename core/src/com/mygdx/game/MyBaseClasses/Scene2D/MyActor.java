@@ -88,19 +88,24 @@ abstract public class MyActor extends Actor implements InitableInterface {
     @Override
     protected void drawDebugBounds(ShapeRenderer shapes) {
         super.drawDebugBounds(shapes);
-        if (shapeMap!=null) {
-            for (MyShape shape:shapeMap.values()) {
-                float w = (int)(0.8f + (float)Math.cos(elapsedTime * 10f)/5f+0.3f);
-                shapes.setColor(new Color(w, w,w, w));
-                drawDebugLines(shape.getCorners(), shapes);
-                shapes.setColor(Color.CYAN);
-                shapes.circle(shape.originX + shape.centerX + shape.offsetX, shape.originY + shape.centerY + shape.offsetY, getWidth()/20,5);
-                shapes.setColor(Color.LIME);
-                shapes.circle(shape.realCenterX, shape.realCenterY, getWidth()/30,3);
+
+        if (shapeMap != null) {
+            for (MyShape shape : shapeMap.values()) {
+                //float w = (int)(0.8f + (float)Math.cos(elapsedTime * 10f)/5f+0.3f);
+                //shapes.setColor(new Color(w, w,w, 1));
+                if (((int) ((elapsedTime) * 10)) % 2 == 1) {
+                    shapes.setColor(Color.WHITE);
+                    drawDebugLines(shape.getCorners(), shapes);
+                }
+                shapes.setColor(Color.MAGENTA);
+                shapes.circle(shape.originX + shape.centerX + shape.offsetX, shape.originY + shape.centerY + shape.offsetY, getWidth() / 20, 5);
+                shapes.setColor(Color.YELLOW);
+                shapes.circle(shape.realCenterX, shape.realCenterY, getWidth() / 30, 3);
+
             }
         }
-        shapes.setColor(Color.MAGENTA);
-        shapes.circle(getOriginX() + getX(), getOriginY()+getY(), getWidth()/30,6);
+        shapes.setColor(Color.GREEN);
+        shapes.circle(getOriginX() + getX(), getOriginY() + getY(), getWidth() / 30, 6);
     }
 
 
@@ -144,36 +149,15 @@ abstract public class MyActor extends Actor implements InitableInterface {
     public void setSize(float width, float height) {
         float w = width / getWidth();
         float h = height / getHeight();
-        /*float wd = getWidth() - width;
-        float hd = getHeight() - height;*/
-        //setOrigin(getOriginX() *w, getOriginY() *h);
-        //setOrigin(getWidth()/2, getHeight()/2);
         if (shapeMap!=null) {
             for (MyShape shape : shapeMap.values()) {
-                //shape.originX = shape.originX - (width - getWidth());
-                //shape.originY = shape.originY - (height - getHeight());
-                //shape.originX *= w;
-                //shape.originY *= h;
                 shape.setSize(shape.getWidth() * w, shape.getHeight() * h);
                 shape.offsetX *= w;
                 shape.offsetY *= h;
                 shape.originX *= w;
                 shape.originY *= h;
-                //shape.originX -= getOriginX();
-                //shape.originY -= getOriginY();
-                //shape.originX -= (width-getWidth())/2;
-                //shape.originY -= (height-getHeight())/2;
-                //shape.calculateCenterXY();
-                //shape.setOriginFromCenter(shape.originX +  shape.offsetX, -shape.originY + shape.offsetY);
-                //shape.setOrigin(shape.originX*w - shape.offsetX + shape.width/2, shape.originY*h - shape.offsetY +  shape.height/2);
-
-                //shape.originX -= shape.width / 2;
-                //shape.originY -= height - getHeight();
-
             }
-            //setOrigin(getOriginX(), getOriginY());
         }
-        //setOrigin(getOriginX() - wd / 2, getOriginY() - hd / 2);
         setOrigin(getOriginX() *w, getOriginY() *h);
         super.setSize(width, height);
 
@@ -425,4 +409,30 @@ abstract public class MyActor extends Actor implements InitableInterface {
     public void magnify(float mul){
         setSize(getWidth()*mul, getHeight()*mul);
     }
+
+    public void setSizeByOrigin(float width, float height) {
+        setPosition(getX() + (getWidth() - width) / (getWidth() / getOriginX()), getY() + (getHeight() - height) / (getHeight() / getOriginY()));
+        setSize(width, height);
+    }
+
+    public void magnifyByOrigin(float mul){
+        setSizeByOrigin(getWidth()*mul, getHeight()*mul);
+    }
+
+    public void setWidthWhithAspectRatioByOrigin(float width){
+        setSizeByOrigin(width, getHeight()*(width/getWidth()));
+    }
+
+    public void seHeightWhithAspectRatioByOrigin(float height){
+        setSizeByOrigin(getWidth()*(height/getHeight()), height);
+    }
+
+    public void setWidthByOrigin(float width) {
+        setSizeByOrigin(width, getHeight());
+    }
+
+    public void setHeightByOrigin(float height) {
+        setSizeByOrigin(getWidth(), getHeight());
+    }
+
 }
