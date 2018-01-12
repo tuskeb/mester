@@ -83,7 +83,7 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
             sprite.getOffsetVector().y *= h;
             //sprite.setOrigin(sprite.getOriginX()*w, sprite.getOriginY()*h);
         }
-        setOrigin(getOriginX()*w, getOriginY()*h);
+        //setOrigin(getOriginX()*w, getOriginY()*h);
         positionChanged();
         super.setSize(width, height);
     }

@@ -13,7 +13,6 @@ abstract public class OneSpriteActor extends MyActor implements InitableInterfac
     public OneSpriteActor(Sprite sprite) {
         if (sprite!=null) {
             this.sprite = sprite;
-            setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
             init();
         }
     }
