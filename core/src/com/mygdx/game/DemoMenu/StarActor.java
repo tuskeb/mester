@@ -22,11 +22,18 @@ public class StarActor extends OneSpriteAnimatedActor {
                 PlaySound();
             }
         });
+        //setOrigin(128,128);
     }
 
     public void PlaySound()
     {
         sound.play();
         getStage().getActors().removeValue(this, true);
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        rotateBy(0.1f);
     }
 }

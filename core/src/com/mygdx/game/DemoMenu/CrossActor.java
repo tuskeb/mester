@@ -38,7 +38,7 @@ public class CrossActor extends OneSpriteStaticActor {
         //setPosition(getX()+1f, getY()+1f);
         //getCollisionShape("LeftBottom1").offsetRotateBy(2);
         //getCollisionShape("LeftBottom2").offsetRotateBy(-1);
-        rotateBy(1);
-        setWidthWhithAspectRatio(getWidth()+0.5f);
+        //rotateBy(1);
+        //setWidthWhithAspectRatio(getWidth()+0.5f);
     }
 }

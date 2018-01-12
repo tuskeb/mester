@@ -30,6 +30,8 @@ abstract public class MyActor extends Actor implements InitableInterface {
     protected Circle circle = new Circle();
     protected HashMap<String, MyShape> shapeMap;
 
+    protected static float debugPointSize = 30f;
+
     public HashMap<String, MyShape> getCollisionShapeMap(){
         return shapeMap;
     }
@@ -78,6 +80,16 @@ abstract public class MyActor extends Actor implements InitableInterface {
         return null;
     }
 
+
+    public static float getDebugPointSize() {
+        return debugPointSize;
+    }
+
+    public static void setDebugPointSize(float debugPointSize) {
+        MyActor.debugPointSize = debugPointSize;
+    }
+
+
     public static void drawDebugLines(Vector2[] v, ShapeRenderer shapes){
         for (int i = 0; i < v.length - 1; i++) {
             shapes.line(v[i].x, v[i].y, v[i + 1].x, v[i + 1].y);
@@ -90,22 +102,27 @@ abstract public class MyActor extends Actor implements InitableInterface {
         super.drawDebugBounds(shapes);
 
         if (shapeMap != null) {
-            for (MyShape shape : shapeMap.values()) {
-                //float w = (int)(0.8f + (float)Math.cos(elapsedTime * 10f)/5f+0.3f);
-                //shapes.setColor(new Color(w, w,w, 1));
-                if (((int) ((elapsedTime) * 10)) % 2 == 1) {
+            switch ((((int) ((elapsedTime) * 4)) % 4)) {
+                case 0:
                     shapes.setColor(Color.WHITE);
+                    break;
+                case 1:
+                    shapes.setColor(Color.GRAY);
+                    break;
+                case 2:
+                    shapes.setColor(Color.DARK_GRAY);
+                    break;
+            }
+            if (((((int) ((elapsedTime) * 4)) % 4)) < 3) {
+                for (MyShape shape : shapeMap.values()) {
                     drawDebugLines(shape.getCorners(), shapes);
+                    shapes.circle(shape.originX + shape.centerX + shape.offsetX, shape.originY + shape.centerY + shape.offsetY, getWidth() / debugPointSize, 7);
+                    shapes.circle(shape.realCenterX, shape.realCenterY, getWidth() / debugPointSize, 3);
                 }
-                shapes.setColor(Color.MAGENTA);
-                shapes.circle(shape.originX + shape.centerX + shape.offsetX, shape.originY + shape.centerY + shape.offsetY, getWidth() / 20, 5);
-                shapes.setColor(Color.YELLOW);
-                shapes.circle(shape.realCenterX, shape.realCenterY, getWidth() / 30, 3);
-
             }
         }
         shapes.setColor(Color.GREEN);
-        shapes.circle(getOriginX() + getX(), getOriginY() + getY(), getWidth() / 30, 6);
+        shapes.circle(getOriginX() + getX(), getOriginY() + getY(), getWidth() / debugPointSize, 3);
     }
 
 
@@ -116,7 +133,8 @@ abstract public class MyActor extends Actor implements InitableInterface {
 
     @Override
     public void init() {
-        setSize(1,1);
+        //setSize(1,1);
+        //System.out.println(getWidth());
         setOrigintoCenter();
     }
 
@@ -160,7 +178,6 @@ abstract public class MyActor extends Actor implements InitableInterface {
         }
         setOrigin(getOriginX() *w, getOriginY() *h);
         super.setSize(width, height);
-
     }
 
     @Override
