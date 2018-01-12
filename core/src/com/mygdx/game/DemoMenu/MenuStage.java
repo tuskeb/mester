@@ -182,7 +182,7 @@ public class MenuStage extends MyStage {
             public void act(float delta) {
                 super.act(delta);
                 rotateBy(0.5f);
-                //magnify((float)(Math.sin(elapsedTime)/100)+1);
+                magnifyByOrigin((float)(Math.sin(elapsedTime)/100)+1);
             }
         });
 
