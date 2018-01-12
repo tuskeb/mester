@@ -1,5 +1,6 @@
 package com.mygdx.game.MyBaseClasses.Scene2D;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
@@ -89,9 +90,13 @@ abstract public class MyActor extends Actor implements InitableInterface {
         super.drawDebugBounds(shapes);
         if (shapeMap!=null) {
             for (MyShape shape:shapeMap.values()) {
-                float w = 0.8f + (float)Math.cos(elapsedTime * 10f)/5f;
-                shapes.setColor(new Color(w, w, w, w));
+                float w = (int)(0.8f + (float)Math.cos(elapsedTime * 10f)/5f+0.3f);
+                shapes.setColor(new Color(w, w,w, w));
                 drawDebugLines(shape.getCorners(), shapes);
+                shapes.setColor(Color.CYAN);
+                shapes.circle(shape.originX + shape.centerX + shape.offsetX, shape.originY + shape.centerY + shape.offsetY, getWidth()/20,5);
+                shapes.setColor(Color.RED);
+                shapes.circle(shape.realCenterX, shape.realCenterY, getWidth()/30,3);
             }
         }
     }
@@ -103,6 +108,12 @@ abstract public class MyActor extends Actor implements InitableInterface {
     }
 
     @Override
+    public void init() {
+        setSize(1,1);
+        setOrigin(0.5f, 0.5f);
+    }
+
+    @Override
     public void act(float delta) {
         super.act(delta);
         elapsedTime += delta;
@@ -111,14 +122,51 @@ abstract public class MyActor extends Actor implements InitableInterface {
     @Override
     protected void sizeChanged() {
         super.sizeChanged();
-        setOrigin(getWidth() / 2, getHeight() / 2);
+        //setOrigin(getWidth() / 2, getHeight() / 2);
         rectangle.setSize(getWidth(), getHeight());
         circle.setRadius((getWidth() + getHeight()) / 2f);
+        /*
         if (shapeMap!=null) {
             for (MyShape shape:shapeMap.values()) {
                 shape.setSize(getWidth(),getHeight());
             }
         }
+        */
+    }
+
+
+    @Override
+    public void setSize(float width, float height) {
+        float w = width / getWidth();
+        float h = height / getHeight();
+
+        if (shapeMap!=null) {
+            for (MyShape shape : shapeMap.values()) {
+                //shape.originX = shape.originX - (width - getWidth());
+                //shape.originY = shape.originY - (height - getHeight());
+                //shape.originX *= w;
+                //shape.originY *= h;
+                shape.setSize(shape.getWidth() * w, shape.getHeight() * h);
+                shape.offsetX *= w;
+                shape.offsetY *= h;
+                shape.originX *= w;
+                shape.originY *= h;
+                //shape.originX -= getOriginX();
+                //shape.originY -= getOriginY();
+                //shape.originX -= (width-getWidth())/2;
+                //shape.originY -= (height-getHeight())/2;
+                //shape.calculateCenterXY();
+                //shape.setOriginFromCenter(shape.originX +  shape.offsetX, -shape.originY + shape.offsetY);
+                //shape.setOrigin(shape.originX*w - shape.offsetX + shape.width/2, shape.originY*h - shape.offsetY +  shape.height/2);
+
+                //shape.originX -= shape.width / 2;
+                //shape.originY -= height - getHeight();
+
+            }
+
+        }
+        setOrigin(getOriginX(), getOriginY());
+        super.setSize(width, height);
     }
 
     @Override
@@ -326,6 +374,13 @@ abstract public class MyActor extends Actor implements InitableInterface {
 
     @Override
     public void setOrigin(float originX, float originY) {
+        if (shapeMap != null) {
+            for (MyShape shape : getCollisionShapeMap().values()) {
+                //shape.setOriginFromCenter(shape.originX + (originX-getOriginX()) + shape.offsetX, shape.originY + (originY-getOriginY())+shape.offsetY);
+                //shape.setOriginFromCenter(shape.originX + (originX-getOriginX()) + shape.offsetX, shape.originY + (originY-getOriginY())+shape.offsetY);
+                shape.setOrigin(originX, originY);
+            }
+        }
         super.setOrigin(originX, originY);
         originChanged();
     }
@@ -349,4 +404,15 @@ abstract public class MyActor extends Actor implements InitableInterface {
         return m.isActorShowing(this, zoom);
     }
 
+    public void setWidthWhithAspectRatio(float width){
+        setSize(width, getHeight()*(width/getWidth()));
+    }
+
+    public void seHeightWhithAspectRatio(float height){
+        setSize(getWidth()*(height/getHeight()), height);
+    }
+
+    public void magnify(float mul){
+        setSize(getWidth()*mul, getHeight()*mul);
+    }
 }

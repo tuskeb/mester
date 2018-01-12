@@ -34,7 +34,6 @@ public class MenuStage extends MyStage {
     private TextButton textButton, textButton2, textButton3, textButton4, textButton5, textButton6, textButton7;
     private ExplosionActor explosionActor;
     private Label utkozesMyLabel;
-    private DemoMultiSpriteActor multiSpriteActor;
     private OneSpriteStaticActor circle;
     private OneSpriteStaticActor rectangle;
 
@@ -148,15 +147,20 @@ public class MenuStage extends MyStage {
         addActor(utkozesMyLabel);
 
 
-        addActor(multiSpriteActor = new DemoMultiSpriteActor(new OffsetSprite(Assets.manager.get(Assets.BLUE_TEXTURE),0,0), new OffsetSprite(Assets.manager.get(Assets.BADLOGIC_TEXTURE),0,50)) {
+        addActor(new MultiSpriteActor(50,100, ShapeType.Rectangle, new OffsetSprite(Assets.manager.get(Assets.BLUE_TEXTURE),0,0,50,50), new OffsetSprite(Assets.manager.get(Assets.GREEN_TEXTURE),0,50,50,50), new OffsetSprite(Assets.manager.get(Assets.BADLOGIC_TEXTURE),30,20,30,40)) {
             @Override
             public void init() {
-                this.setPosition(900,600);
-                this.setSize(50,100);
-                this.setSize(getWidth(), getHeight() + 50);
-                OffsetSprite sprite = getSprite("Sprite1");
-                sprite.setSize(50,sprite.getHeight() * 2);
-                this.setOrigin(20,20);
+                this.setPosition(700,300);
+                addCollisionShape("rrr", new MyRectangle(30,70,40,20,getOriginX(), getOriginY(),0,33));
+                addCollisionShape("ccc", new MyCircle(10,40,20,getOriginX(), getOriginY(),0,33));
+                //this.setSize(50,100);
+                //this.setSize(getWidth(), getHeight() + 50);
+                //OffsetSprite sprite = getSprite("Sprite1");
+                //sprite.setSize(50,sprite.getHeight() * 2);
+                //setOrigin(0,0);
+
+                //setWidthWhithAspectRatio(250);
+                setOrigin((float)Math.random()*getWidth(),(float)Math.random()*getHeight());
                 addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
@@ -164,14 +168,21 @@ public class MenuStage extends MyStage {
                         if(clck){
                             OffsetSprite sprite = new OffsetSprite(Assets.manager.get(Assets.BADLOGIC_TEXTURE),0,50);
                             sprite.setSize(50, 100);
-                            multiSpriteActor.addSprite(sprite);
+                            addSprite(sprite);
                             clck = false;
                         }else{
                             clck = true;
-                            multiSpriteActor.removeSprite("Sprite1");
+                            removeSprite("Sprite1");
                         }
                     }
                 });
+            }
+
+            @Override
+            public void act(float delta) {
+                super.act(delta);
+                rotateBy(0.5f);
+                magnify((float)(Math.sin(elapsedTime)/100)+1);
             }
         });
 
@@ -186,11 +197,12 @@ public class MenuStage extends MyStage {
         };
         //a.addCollisionShape("Fej",new MyCircle(20,80,60));
 
+        crossActor.setSize(50,50);
         a.setFps(5);
-        addActor(a);
-        addActor(new OneSpriteAnimatedActor("walk.atlas"));
-
-        addActor(rectangle = new OneSpriteStaticActor(Assets.manager.get(Assets.GREEN_TEXTURE)){
+       // addActor(a);
+       // addActor(new OneSpriteAnimatedActor("walk.atlas"));
+/*
+        addActor(rectangle = new OneSpriteStaticActor(Assets.manager.get(Assets.YELLOW_TEXTURE)){
             @Override
             public void init() {
                 super.init();
@@ -198,21 +210,32 @@ public class MenuStage extends MyStage {
                 addBaseCollisionRectangleShape();
                 addCollisionShape("rect", new MyRectangle(150,25,0,0,getOriginX(),getOriginY(),0,20));
                 addCollisionShape("circle1", new MyCircle(10,-30,-30,getOriginX(), getOriginY()));
+                addCollisionShape("rect2", new MyRectangle(10, 10,-30,-30,getOriginX(), getOriginY()));
                 setPosition(600,400);
-                setRotation(20);
+                setRotation(0);
+                setOrigin(50,50);
+                //setSize(200,100);
+
+                //setWidthWhithAspectRatio(300);
+                //setWidthWhithAspectRatio(500);
+                setWidthWhithAspectRatio(150);
+
             }
 
             @Override
             public void act(float delta) {
                 super.act(delta);
-                getCollisionShape("rect").offsetRotateBy(delta*10);
+                //setOrigin(100,100);
+
+                //getCollisionShape("rect").offsetRotateBy(delta*10);
                 rotateBy(delta*10);
+                //setWidthWhithAspectRatio(256 + (float)Math.sin(elapsedTime)*128);
             }
         });
 
-
-
-        addActor(circle = new OneSpriteStaticActor(Assets.manager.get(Assets.BLUE_TEXTURE)){
+*/
+/*
+        addActor(circle = new OneSpriteStaticActor(Assets.manager.get(Assets.BADLOGIC_TEXTURE)){
             @Override
             public void init() {
                 super.init();
@@ -221,16 +244,20 @@ public class MenuStage extends MyStage {
                 addCollisionShape("circle1", new MyCircle(10,-30,-30,getOriginX(), getOriginY()));
                 addCollisionShape("rect1", new MyRectangle(10, 20,80,80,getOriginX(), getOriginY()));
                 setPosition(800,400);
+                setWidthWhithAspectRatio(200);
             }
 
             @Override
             public void act(float delta) {
                 super.act(delta);
+                setOrigin(getOriginX(),getOriginY());
                 getCollisionShape("rect1").offsetRotateBy(delta*10);
                 rotateBy(delta*2);
             }
         });
+*/
 
+/*
         addListener(new ClickListener(){
             @Override
             public boolean mouseMoved(InputEvent event, float x, float y) {
@@ -244,12 +271,12 @@ public class MenuStage extends MyStage {
                 circle.setPosition(x,y);
             }
         });
-
+*/
 
         //badlActor.addBaseCollisionRectangleShape();
         //crossActor.addBaseCollisionCircleShape();
 
-        addActor(car = new CarActor());
+        //addActor(car = new CarActor());
     }
 
 
@@ -258,8 +285,9 @@ public class MenuStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
+       // System.out.println();
         //if (badlActor.overlaps(ShapeType.Rectangle, crossActor))
-        if (circle.overlaps(rectangle))
+/*        if (circle.overlaps(rectangle))
         {
             utkozesMyLabel.setText("Ütközés!");
             //System.out.println(crossActor.getMyOverlappedShapeKeys(badlActor));
@@ -268,10 +296,7 @@ public class MenuStage extends MyStage {
         {
             utkozesMyLabel.setText("Nincs ütközés.");
         }
-
-        if (car.overlaps(circle)){
-            System.out.println(car.getMyOverlappedShapeKeys(circle));
-        }
+*/
     }
 
     @Override

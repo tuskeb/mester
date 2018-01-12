@@ -161,6 +161,10 @@ public class MyRectangle extends MyShape{
         vector2[1] = new Vector2(realCenterX + radius * (float) Math.cos(radrot + angle),  realCenterY + radius * (float) Math.sin(radrot + angle));
         vector2[2] = new Vector2( realCenterX + radius * (float) Math.cos(radrot + PI - angle),  realCenterY + radius * (float) Math.sin(radrot + PI - angle));
         vector2[3] = new Vector2( realCenterX + radius * (float) Math.cos(radrot + PI + angle),  realCenterY + radius * (float) Math.sin(radrot + PI + angle));
+        /*vector2[4] = new Vector2(realCenterX, realCenterY);
+        vector2[5] = vector2[3].cpy();
+        vector2[6] = new Vector2(originX + centerX + offsetX, originY+centerY + offsetY);
+        vector2[7] = vector2[3].cpy();*/
         return vector2;
     }
 
