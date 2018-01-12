@@ -1,7 +1,9 @@
 package com.mygdx.game.MyBaseClasses.Scene2D;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -10,57 +12,36 @@ import com.badlogic.gdx.math.Vector2;
 
 public class OffsetSprite extends Sprite {
     private Vector2 offsetVector;
-    static protected float PI = (float) Math.PI;
-    int azonosito;
-    float originalWidth, originalHeight;
-    float originalY, Ychange;
 
-    public OffsetSprite(Texture texture, float xOffset, float yOffset, int azonosito) {
+    static protected float PI = (float) Math.PI;
+
+    public OffsetSprite(Texture texture, float xOffset, float yOffset) {
         super(texture);
         offsetVector = new Vector2(xOffset, yOffset);
-        this.azonosito=azonosito;
     }
 
-    public int getAzonosito() {
-        return azonosito;
+    public OffsetSprite(TextureRegion texture, float xOffset, float yOffset) {
+        super(texture);
+        offsetVector = new Vector2(xOffset, yOffset);
     }
 
-    public float getYchange() {
-        return Ychange;
+
+    public OffsetSprite(Texture texture, float xOffset, float yOffset, float width, float height) {
+        super(texture);
+        offsetVector = new Vector2(xOffset, yOffset);
+        setSize(width, height);
     }
 
-    public void setYchange(float ychange) {
-        Ychange = ychange;
+    public OffsetSprite(TextureRegion texture, float xOffset, float yOffset, float width, float height) {
+        super(texture);
+        offsetVector = new Vector2(xOffset, yOffset);
+        setSize(width, height);
     }
 
-    public float getOriginalWidth() {
-        return originalWidth;
-    }
-
-    public float getOriginalY() {
-        return originalY;
-    }
-
-    public void setOriginalY(float originalY) {
-        this.originalY = originalY;
-    }
-
-    public void setOriginalWidth(float originalWidth) {
-        this.originalWidth = originalWidth;
-    }
-
-    public float getOriginalHeight() {
-        return originalHeight;
-    }
-
-    public void setOriginalHeight(float originalHeight) {
-        this.originalHeight = originalHeight;
-    }
 
     public Vector2 getOffsetVector() {
         return offsetVector;
     }
-
 
     public Vector2[] getCorners() {
 
@@ -84,6 +65,5 @@ public class OffsetSprite extends Sprite {
         vector2[3] = new Vector2( rotCenter.x + radius * (float) Math.cos(radrot + PI + angle),  rotCenter.y + radius * (float) Math.sin(radrot + PI + angle));
         return vector2;
     }
-
 
 }
