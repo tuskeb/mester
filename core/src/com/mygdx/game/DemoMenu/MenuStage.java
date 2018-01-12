@@ -157,10 +157,10 @@ public class MenuStage extends MyStage {
                 //this.setSize(getWidth(), getHeight() + 50);
                 //OffsetSprite sprite = getSprite("Sprite1");
                 //sprite.setSize(50,sprite.getHeight() * 2);
-                //setOrigin(0,0);
+                setOrigin(20,20);
 
-                //setWidthWhithAspectRatio(250);
-                setOrigin((float)Math.random()*getWidth(),(float)Math.random()*getHeight());
+                setWidthWhithAspectRatio(250);
+                //setOrigin((float)Math.random()*getWidth(),(float)Math.random()*getHeight());
                 addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
@@ -182,7 +182,7 @@ public class MenuStage extends MyStage {
             public void act(float delta) {
                 super.act(delta);
                 rotateBy(0.5f);
-                magnify((float)(Math.sin(elapsedTime)/100)+1);
+                //magnify((float)(Math.sin(elapsedTime)/100)+1);
             }
         });
 
@@ -197,7 +197,7 @@ public class MenuStage extends MyStage {
         };
         //a.addCollisionShape("Fej",new MyCircle(20,80,60));
 
-        crossActor.setSize(50,50);
+        //crossActor.seHeightWhithAspectRatio(200);
         a.setFps(5);
        // addActor(a);
        // addActor(new OneSpriteAnimatedActor("walk.atlas"));

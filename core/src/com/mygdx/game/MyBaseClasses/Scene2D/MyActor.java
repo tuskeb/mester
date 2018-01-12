@@ -95,10 +95,12 @@ abstract public class MyActor extends Actor implements InitableInterface {
                 drawDebugLines(shape.getCorners(), shapes);
                 shapes.setColor(Color.CYAN);
                 shapes.circle(shape.originX + shape.centerX + shape.offsetX, shape.originY + shape.centerY + shape.offsetY, getWidth()/20,5);
-                shapes.setColor(Color.RED);
+                shapes.setColor(Color.LIME);
                 shapes.circle(shape.realCenterX, shape.realCenterY, getWidth()/30,3);
             }
         }
+        shapes.setColor(Color.MAGENTA);
+        shapes.circle(getOriginX() + getX(), getOriginY()+getY(), getWidth()/30,6);
     }
 
 
@@ -110,7 +112,7 @@ abstract public class MyActor extends Actor implements InitableInterface {
     @Override
     public void init() {
         setSize(1,1);
-        setOrigin(0.5f, 0.5f);
+        setOrigintoCenter();
     }
 
     @Override
@@ -134,12 +136,18 @@ abstract public class MyActor extends Actor implements InitableInterface {
         */
     }
 
+    public void setOrigintoCenter(){
+        setOrigin(getWidth()/2, getHeight()/2);
+    }
 
     @Override
     public void setSize(float width, float height) {
         float w = width / getWidth();
         float h = height / getHeight();
-
+        /*float wd = getWidth() - width;
+        float hd = getHeight() - height;*/
+        //setOrigin(getOriginX() *w, getOriginY() *h);
+        //setOrigin(getWidth()/2, getHeight()/2);
         if (shapeMap!=null) {
             for (MyShape shape : shapeMap.values()) {
                 //shape.originX = shape.originX - (width - getWidth());
@@ -163,10 +171,12 @@ abstract public class MyActor extends Actor implements InitableInterface {
                 //shape.originY -= height - getHeight();
 
             }
-
+            //setOrigin(getOriginX(), getOriginY());
         }
-        setOrigin(getOriginX(), getOriginY());
+        //setOrigin(getOriginX() - wd / 2, getOriginY() - hd / 2);
+        setOrigin(getOriginX() *w, getOriginY() *h);
         super.setSize(width, height);
+
     }
 
     @Override
@@ -362,13 +372,13 @@ abstract public class MyActor extends Actor implements InitableInterface {
 
     @Override
     public void setOriginX(float originX) {
-        super.setOriginX(originX);
+        setOrigin(originX, getOriginY());
         originChanged();
     }
 
     @Override
     public void setOriginY(float originY) {
-        super.setOriginY(originY);
+        setOrigin(getOriginX(),originY);
         originChanged();
     }
 

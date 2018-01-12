@@ -25,6 +25,8 @@ public class CrossActor extends OneSpriteStaticActor {
         addCollisionShape("Circle2", new MyCircle(0,0,60,getOriginX(), getOriginY()));*/
 
         setPosition(300,100);
+        //setOrigintoCenter();
+        setOrigin(64,64);
         //System.out.println(getCollisionShape("BaseCircle"));
         //System.out.println(getCollisionShape("BaseRectangle"));
     }
@@ -37,5 +39,6 @@ public class CrossActor extends OneSpriteStaticActor {
         //getCollisionShape("LeftBottom1").offsetRotateBy(2);
         //getCollisionShape("LeftBottom2").offsetRotateBy(-1);
         rotateBy(1);
+        setWidthWhithAspectRatio(getWidth()+0.5f);
     }
 }
