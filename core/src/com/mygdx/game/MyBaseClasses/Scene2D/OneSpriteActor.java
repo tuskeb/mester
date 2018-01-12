@@ -21,12 +21,15 @@ abstract public class OneSpriteActor extends MyActor implements InitableInterfac
     public void init()
     {
         setSize(sprite.getWidth(), sprite.getHeight());
+        sprite.setOrigin(getOriginX(), getOriginY());
+        super.init();
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         sprite.draw(batch);
+        //System.out.println("Sprite "  + getOriginX());
     }
 
 
@@ -59,6 +62,6 @@ abstract public class OneSpriteActor extends MyActor implements InitableInterfac
     @Override
     protected void originChanged() {
         super.originChanged();
-        //sprite.setOrigin(getOriginX(), getOriginY());
+        sprite.setOrigin(getOriginX(), getOriginY());
     }
 }

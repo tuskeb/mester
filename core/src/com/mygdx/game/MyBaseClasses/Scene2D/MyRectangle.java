@@ -369,7 +369,7 @@ public class MyRectangle extends MyShape{
         MyCircle circle = new MyCircle(10);
         circle.setPositionFromCenter(80,40);
         circle.setOriginToCenter();
-        System.out.println(overlaps(rectangle, circle));
+        //System.out.println(overlaps(rectangle, circle));
 /*
         for(int f=0; f<30; f++) {
             //System.out.println(rectangle);
