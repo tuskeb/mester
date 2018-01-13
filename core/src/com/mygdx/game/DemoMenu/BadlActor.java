@@ -24,6 +24,6 @@ public class BadlActor extends OneSpriteStaticActor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        setPosition(getX()+1, getY());
+        //setPosition(getX()+1, getY());
     }
 }

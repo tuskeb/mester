@@ -333,32 +333,247 @@ abstract public class MyActor extends Actor implements InitableInterface {
 
 
 
-    public void fitToViewportRealWorldSize(){
-        throw new NotImplementedException();
-    }
-    public void fitToViewportMinWorldSize(){
-        throw new NotImplementedException();
-    }
-    public void stretchToViewportRealWorldSizeWithoutBlackBars(){
-        throw new NotImplementedException();
-    }
-    public void stretchToViewportMinWorldSizeWithoutBlackBars(){
-        throw new NotImplementedException();
-    }
-    public void fitToViewportRealWorldSizeWithoutBlackBars(){
+    public void fitToViewportRealWorldSizeWithBlackBars() {
         Stage s;
-        ExtendViewport ev;
-        if ((s = getStage()) != null){
-            ev = (ExtendViewport)s.getViewport();
-            setSize(ev.getWorldHeight()*getWidth()/getHeight(), ev.getWorldHeight());
-            if (getWidth() < ev.getWorldWidth()){
-                float mul = ev.getWorldWidth()/getWidth();
-                setSize(getWidth()*mul, getHeight()*mul);
+        Viewport ev;
+        if ((s = getStage()) != null) {
+            ev = s.getViewport();
+            float mulw = ev.getWorldWidth() / getWidth();
+            float mulh = ev.getWorldHeight() / getHeight();
+            if (mulw < mulh) {
+                setSize(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSize(getWidth() * mulh, getHeight() * mulh);
             }
         }
     }
+
+    public void fitToViewportMinWorldSizeWithBlackBars(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            float mulw = ev.getMinWorldWidth() / getWidth();
+            float mulh = ev.getMinWorldHeight() / getHeight();
+            if (mulw < mulh) {
+                setSize(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSize(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+
+    public void fitToViewportMaxWorldSizeWithBlackBars(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            float mulw = ev.getMaxWorldWidth() / getWidth();
+            float mulh = ev.getMaxWorldHeight() / getHeight();
+            if (mulw < mulh) {
+                setSize(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSize(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+    public void stretchToViewportRealWorldSizeWithoutBlackBars(){
+        Stage s;
+        Viewport ev;
+        if ((s = getStage()) != null) {
+            ev = s.getViewport();
+            setSize(ev.getWorldWidth(), ev.getWorldHeight());
+        }
+    }
+
+    public void stretchToViewportMinWorldSizeWithoutBlackBars(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            setSize(ev.getMinWorldWidth(), ev.getMinWorldHeight());
+        }
+    }
+
+
+    public void stretchToViewportMaxWorldSizeWithoutBlackBars(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            setSize(ev.getMaxWorldWidth(), ev.getMaxWorldHeight());
+        }
+    }
+
+    public void fitToViewportRealWorldSizeWithoutBlackBars(){
+        Stage s;
+        Viewport ev;
+        if ((s = getStage()) != null) {
+            ev = s.getViewport();
+            float mulw = ev.getWorldWidth() / getWidth();
+            float mulh = ev.getWorldHeight() / getHeight();
+            if (mulw > mulh) {
+                setSize(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSize(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
     public void fitToViewportMinWorldSizeWithoutBlackBars(){
-        throw new NotImplementedException();
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            float mulw = ev.getMinWorldWidth() / getWidth();
+            float mulh = ev.getMinWorldHeight() / getHeight();
+            if (mulw > mulh) {
+                setSize(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSize(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+
+    public void fitToViewportMaxWorldSizeWithoutBlackBars(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            float mulw = ev.getMaxWorldWidth() / getWidth();
+            float mulh = ev.getMaxWorldHeight() / getHeight();
+            if (mulw > mulh) {
+                setSize(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSize(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+
+
+
+    public void fitToViewportRealWorldSizeWithBlackBarsByOrigin() {
+        Stage s;
+        Viewport ev;
+        if ((s = getStage()) != null) {
+            ev = s.getViewport();
+            float mulw = ev.getWorldWidth() / getWidth();
+            float mulh = ev.getWorldHeight() / getHeight();
+            if (mulw < mulh) {
+                setSizeByOrigin(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSizeByOrigin(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+    public void fitToViewportMinWorldSizeWithBlackBarsByOrigin(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            float mulw = ev.getMinWorldWidth() / getWidth();
+            float mulh = ev.getMinWorldHeight() / getHeight();
+            if (mulw < mulh) {
+                setSizeByOrigin(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSizeByOrigin(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+
+    public void fitToViewportMaxWorldSizeWithBlackBarsByOrigin(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            float mulw = ev.getMaxWorldWidth() / getWidth();
+            float mulh = ev.getMaxWorldHeight() / getHeight();
+            if (mulw < mulh) {
+                setSizeByOrigin(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSizeByOrigin(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+    public void stretchToViewportRealWorldSizeWithoutBlackBarsByOrigin(){
+        Stage s;
+        Viewport ev;
+        if ((s = getStage()) != null) {
+            ev = s.getViewport();
+            setSizeByOrigin(ev.getWorldWidth(), ev.getWorldHeight());
+        }
+    }
+
+    public void stretchToViewportMinWorldSizeWithoutBlackBarsByOrigin(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            setSizeByOrigin(ev.getMinWorldWidth(), ev.getMinWorldHeight());
+        }
+    }
+
+
+    public void stretchToViewportMaxWorldSizeWithoutBlackBarsByOrigin(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            setSizeByOrigin(ev.getMaxWorldWidth(), ev.getMaxWorldHeight());
+        }
+    }
+
+    public void fitToViewportRealWorldSizeWithoutBlackBarsByOrigin(){
+        Stage s;
+        Viewport ev;
+        if ((s = getStage()) != null) {
+            ev = s.getViewport();
+            float mulw = ev.getWorldWidth() / getWidth();
+            float mulh = ev.getWorldHeight() / getHeight();
+            if (mulw > mulh) {
+                setSizeByOrigin(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSizeByOrigin(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+    public void fitToViewportMinWorldSizeWithoutBlackBarsByOrigin(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            float mulw = ev.getMinWorldWidth() / getWidth();
+            float mulh = ev.getMinWorldHeight() / getHeight();
+            if (mulw > mulh) {
+                setSizeByOrigin(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSizeByOrigin(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+
+    public void fitToViewportMaxWorldSizeWithoutBlackBarsByOrigin(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            float mulw = ev.getMaxWorldWidth() / getWidth();
+            float mulh = ev.getMaxWorldHeight() / getHeight();
+            if (mulw > mulh) {
+                setSizeByOrigin(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSizeByOrigin(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
     }
 
     public void setPositionCenterOfActorToCenterOfViewport(){
