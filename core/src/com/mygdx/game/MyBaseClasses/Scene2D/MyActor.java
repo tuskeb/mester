@@ -115,9 +115,11 @@ abstract public class MyActor extends Actor implements InitableInterface {
             }
             if (((((int) ((elapsedTime) * 4)) % 4)) < 3) {
                 for (MyShape shape : shapeMap.values()) {
-                    drawDebugLines(shape.getCorners(), shapes);
-                    shapes.circle(shape.originX + shape.centerX + shape.offsetX, shape.originY + shape.centerY + shape.offsetY, getWidth() / debugPointSize, 7);
-                    shapes.circle(shape.realCenterX, shape.realCenterY, getWidth() / debugPointSize, 3);
+                    if (shape.active) {
+                        drawDebugLines(shape.getCorners(), shapes);
+                        shapes.circle(shape.originX + shape.centerX + shape.offsetX, shape.originY + shape.centerY + shape.offsetY, getWidth() / debugPointSize, 7);
+                        shapes.circle(shape.realCenterX, shape.realCenterY, getWidth() / debugPointSize, 3);
+                    }
                 }
             }
         }
@@ -233,8 +235,10 @@ abstract public class MyActor extends Actor implements InitableInterface {
         if (actorB.getCollisionShapeMap() == null) return false;
         for(MyShape shapeA : actorA.getCollisionShapeMap().values()){
             for(MyShape shapeB : actorB.getCollisionShapeMap().values()){
-                if(shapeA.overlaps(shapeB)){
-                    return true;
+                if (shapeA.active && shapeB.active) {
+                    if (shapeA.overlaps(shapeB)) {
+                        return true;
+                    }
                 }
             }
         }
@@ -245,8 +249,10 @@ abstract public class MyActor extends Actor implements InitableInterface {
         ArrayList<String> strings = new ArrayList<String>();
         for(Map.Entry shapeA : actorA.getCollisionShapeMap().entrySet()){
             for(Map.Entry shapeB : actorB.getCollisionShapeMap().entrySet()){
-                if(((MyShape)shapeA.getValue()).overlaps((MyShape)shapeB.getValue())){
-                    strings.add((String)(shapeA.getKey()));
+                if (((MyShape) shapeA.getValue()).active && ((MyShape) shapeB.getValue()).active) {
+                    if (((MyShape) shapeA.getValue()).overlaps((MyShape) shapeB.getValue())) {
+                        strings.add((String) (shapeA.getKey()));
+                    }
                 }
             }
         }
@@ -269,8 +275,10 @@ abstract public class MyActor extends Actor implements InitableInterface {
         ArrayList<MyShape> strings = new ArrayList<MyShape>();
         for(Map.Entry shapeA : actorA.getCollisionShapeMap().entrySet()){
             for(Map.Entry shapeB : actorB.getCollisionShapeMap().entrySet()){
-                if(((MyShape)shapeA.getValue()).overlaps((MyShape)shapeB.getValue())){
-                    strings.add((MyShape)(shapeA.getValue()));
+                if (((MyShape) shapeA.getValue()).active && ((MyShape) shapeB.getValue()).active) {
+                    if (((MyShape) shapeA.getValue()).overlaps((MyShape) shapeB.getValue())) {
+                        strings.add((MyShape) (shapeA.getValue()));
+                    }
                 }
             }
         }
@@ -293,8 +301,10 @@ abstract public class MyActor extends Actor implements InitableInterface {
         ArrayList<Map.Entry<String, MyShape>> strings = new ArrayList<Map.Entry<String, MyShape>>();
         for(Map.Entry shapeA : actorA.getCollisionShapeMap().entrySet()){
             for(Map.Entry shapeB : actorB.getCollisionShapeMap().entrySet()){
-                if(((MyShape)shapeA.getValue()).overlaps((MyShape)shapeB.getValue())){
-                    strings.add((Map.Entry<String, MyShape>)(shapeA));
+                if (((MyShape) shapeA.getValue()).active && ((MyShape) shapeB.getValue()).active) {
+                    if (((MyShape) shapeA.getValue()).overlaps((MyShape) shapeB.getValue())) {
+                        strings.add((Map.Entry<String, MyShape>) (shapeA));
+                    }
                 }
             }
         }

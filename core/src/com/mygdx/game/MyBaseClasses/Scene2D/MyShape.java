@@ -76,6 +76,8 @@ public abstract class MyShape {
 
     static protected float PI = (float) Math.PI;
 
+    public boolean active = true;
+
     /**
      * Az alakzathoz hozzácsatolható objektum, például egy Actor
      */
@@ -365,5 +367,14 @@ public abstract class MyShape {
     public void setExtraData(Object extraData) {
         this.extraData = extraData;
     }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
 
 }
