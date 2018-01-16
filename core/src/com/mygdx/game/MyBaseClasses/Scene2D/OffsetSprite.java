@@ -11,7 +11,9 @@ import com.badlogic.gdx.math.Vector2;
  */
 
 public class OffsetSprite extends Sprite {
-    private Vector2 offsetVector;
+    protected Vector2 offsetVector;
+
+    public boolean visible = true;
 
     static protected float PI = (float) Math.PI;
 
@@ -65,5 +67,14 @@ public class OffsetSprite extends Sprite {
         vector2[3] = new Vector2( rotCenter.x + radius * (float) Math.cos(radrot + PI + angle),  rotCenter.y + radius * (float) Math.sin(radrot + PI + angle));
         return vector2;
     }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
 
 }

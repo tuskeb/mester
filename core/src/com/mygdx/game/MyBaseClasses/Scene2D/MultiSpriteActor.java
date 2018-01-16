@@ -57,7 +57,9 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         for (OffsetSprite sprite: spriteMap.values()) {
-            sprite.draw(batch);
+            if (sprite.visible) {
+                sprite.draw(batch);
+            }
         }
     }
 
@@ -203,7 +205,7 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
             for (OffsetSprite sprite: spriteMap.values()) {
                 //float w = (int)(0.8f + (float)Math.sin(elapsedTime * 10f)/5f+0.2f);
                 //System.out.println(elapsedTime);
-                if (((int)((elapsedTime)*5))%2 ==0)
+                if (((int)((elapsedTime)*5))%2 ==0 && sprite.visible)
                 {
                     Color c = new Color(Color.MAGENTA);
                     shapes.setColor(c);
