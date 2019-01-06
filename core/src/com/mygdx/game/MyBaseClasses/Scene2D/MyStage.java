@@ -10,11 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
-import com.mygdx.game.MyBaseClasses.Game.MyLevel;
 import com.mygdx.game.MyGdxGame;
 
 import java.util.ArrayList;
+
+import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
+import com.mygdx.game.MyBaseClasses.Game.MyLevel;
 
 
 /**
@@ -24,6 +25,7 @@ abstract public class MyStage extends Stage implements InitableInterface {
     public final MyGdxGame game;
     protected float elapsedTime = 0;
     protected ArrayList<MyLevel> levels = new ArrayList();
+    protected short currentLevel = 0;
 
     public MyStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch);
@@ -311,14 +313,30 @@ abstract public class MyStage extends Stage implements InitableInterface {
         return b;
     }
 
+
     public void addLevel(MyLevel level) {
         levels.add(level);
     }
 
     public void removeLevel(MyLevel level) {
         if(levels.contains(level)) {
-            levels.remove(level);
+            //levels.remove(level);
+            level.deleteLevel();
         }
         else System.out.println("Nincs ilyen level!");
+    }
+
+    public void nextLevel() {
+        removeLevel(levels.get(currentLevel++));
+        if(currentLevel >= levels.size()) System.out.println("Nincs tobb level");
+        else levels.get(currentLevel).showActors(true);
+    }
+
+    public ArrayList<MyLevel> getLevels() {
+        return levels;
+    }
+
+    public MyLevel getCurrentLevel() {
+        return levels.get(currentLevel);
     }
 }

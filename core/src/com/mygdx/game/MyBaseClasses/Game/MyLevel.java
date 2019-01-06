@@ -13,13 +13,14 @@ import java.util.ArrayList;
 import jdk.nashorn.internal.objects.annotations.Getter;
 import jdk.nashorn.internal.objects.annotations.Setter;
 
-abstract public class MyLevel {
+public class MyLevel {
 
     public final OneSpriteStaticActor backgroundActor;
     private ArrayList<MyActor> actors;
     public static int ALL = -1;
     private MyStage stage;
     private int ID;
+    private boolean showingActors = false;
 
     public MyLevel(final Texture background, MyStage stage) {
         actors = new ArrayList<MyActor>();
@@ -37,6 +38,7 @@ abstract public class MyLevel {
         };
         actors.add(backgroundActor);
         stage.addActor(backgroundActor);
+        backgroundActor.setVisible(false);
     }
 
     @Getter
@@ -133,7 +135,27 @@ abstract public class MyLevel {
         for (MyActor actor : actorGroup) {
             stage.addActor(actor);
             actors.add(actor);
+            actor.setVisible(false);
         }
+    }
+
+    public void deleteLevel() {
+        for (MyActor a : actors) {
+            stage.getActors().removeValue(a, true);
+        }
+        actors.clear();
+        ID = -1;
+    }
+
+    public void showActors(boolean show) {
+        showingActors = show;
+        for (MyActor a : actors) {
+            a.setVisible(show);
+        }
+    }
+
+    public boolean isShowingActors() {
+        return showingActors;
     }
 
     public boolean isActorOnLevel(MyActor actor) {
