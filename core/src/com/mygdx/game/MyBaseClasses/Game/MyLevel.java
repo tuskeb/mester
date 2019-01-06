@@ -7,14 +7,13 @@ import com.mygdx.game.MyBaseClasses.Scene2D.MyActor;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyScreen;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
 import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
-import com.sun.istack.internal.*;
 
 import java.util.ArrayList;
 
 import jdk.nashorn.internal.objects.annotations.Getter;
 import jdk.nashorn.internal.objects.annotations.Setter;
 
-public class MyLevel {
+abstract public class MyLevel {
 
     public final OneSpriteStaticActor backgroundActor;
     private ArrayList<MyActor> actors;
@@ -22,7 +21,7 @@ public class MyLevel {
     private MyStage stage;
     private int ID;
 
-    public MyLevel(final Texture background, MyStage stage, MyScreen screen) {
+    public MyLevel(final Texture background, MyStage stage) {
         actors = new ArrayList<MyActor>();
         this.stage = stage;
         backgroundActor = new OneSpriteStaticActor(background) {
@@ -55,7 +54,7 @@ public class MyLevel {
         return actors;
     }
 
-    public void removeActorFromLevel(MyActor actor, @Nullable boolean all) {
+    public void removeActorFromLevel(MyActor actor, boolean all) {
         try {
             if (!all){
                 if(!isActorOnLevel(actor)) throw new ActorIsNotOnLevelException("Ilyen actor nincs a pályán!");
