@@ -17,6 +17,7 @@ import com.mygdx.game.DemoMenu.CrossActor;
 import com.mygdx.game.DemoMenu.ExplosionActor;
 import com.mygdx.game.DemoMenu.StarActor;
 import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.MyBaseClasses.Scene2D.AnimatedOffsetSprite;
 import com.mygdx.game.MyBaseClasses.Scene2D.MultiSpriteActor;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyCircle;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyRectangle;
@@ -153,7 +154,7 @@ public class MenuStage extends MyStage {
         addActor(utkozesMyLabel);
 
 
-        addActor(asd = new MultiSpriteActor(50,100, ShapeType.Rectangle, new OffsetSprite(Assets.manager.get(Assets.BLUE_TEXTURE),0,0,50,50), new OffsetSprite(Assets.manager.get(Assets.GREEN_TEXTURE),0,50,50,50), new OffsetSprite(Assets.manager.get(Assets.BADLOGIC_TEXTURE),30,20,30,40)) {
+        addActor(asd = new MultiSpriteActor(50,100, ShapeType.Rectangle, new OffsetSprite(Assets.manager.get(Assets.BLUE_TEXTURE),0,0,50,50), new OffsetSprite(Assets.manager.get(Assets.GREEN_TEXTURE),0,50,50,50), new OffsetSprite(Assets.manager.get(Assets.BADLOGIC_TEXTURE),30,20,30,40),new AnimatedOffsetSprite(Assets.manager.get(Assets.EXPLOSION_TEXTUREATLAS),60,60,30,40)) {
             @Override
             public void init() {
                 this.setPosition(700,300);
