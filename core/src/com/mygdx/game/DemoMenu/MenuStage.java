@@ -12,6 +12,10 @@ import com.mygdx.game.DemoHttp.HttpDemoScreen;
 import com.mygdx.game.DemoGame.GameScreen;
 import com.mygdx.game.DemoInput.InputScreen;
 import com.mygdx.game.DemoLion.DemoLionScreen;
+import com.mygdx.game.DemoMenu.BadlActor;
+import com.mygdx.game.DemoMenu.CrossActor;
+import com.mygdx.game.DemoMenu.ExplosionActor;
+import com.mygdx.game.DemoMenu.StarActor;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.Scene2D.MultiSpriteActor;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyCircle;
@@ -37,6 +41,7 @@ public class MenuStage extends MyStage {
     private OneSpriteStaticActor circle;
     private OneSpriteStaticActor rectangle;
     private MultiSpriteActor asd;
+    private OneSpriteStaticActor asd0;
 
     private boolean clck = false;
 
@@ -259,6 +264,19 @@ public class MenuStage extends MyStage {
 
 
 
+        asd0 = new OneSpriteStaticActor(Assets.manager.get(Assets.BADLOGIC_TEXTURE)){
+            @Override
+            public void act(float delta) {
+                super.act(delta);
+                setRotation(getRotation() + delta * 5);
+            }
+        };
+        asd0.addCollisionShape("balalul", new MyRectangle(30,30, 0,0,asd0.getOriginX(),asd0.getOriginY(), 0, 45));
+        asd0.addCollisionShape("feljebb", new MyRectangle(30,30, 0,30,asd0.getOriginX(),asd0.getOriginY(), 0, 10));
+        asd0.setPosition(300,300);
+
+        addActor(asd0);
+
         addListener(new ClickListener(){
             @Override
             public boolean mouseMoved(InputEvent event, float x, float y) {
@@ -296,6 +314,9 @@ public class MenuStage extends MyStage {
         else
         {
             utkozesMyLabel.setText("Nincs ütközés.");
+        }
+        if (asd0.overlaps(circle)){
+            utkozesMyLabel.setText(asd0.getMyOverlappedShapeKeys(circle).toString());
         }
 
     }
