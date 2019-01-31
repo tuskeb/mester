@@ -30,7 +30,6 @@ abstract public class MyActor extends Actor implements InitableInterface {
 
     @Override
     public void setZIndex(int index) {
-        if (index < 0) throw new IllegalArgumentException("ZIndex cannot be < 0.");
         this.zIndex = index;
         Group parent = this.getParent();
         if (parent == null) return;
