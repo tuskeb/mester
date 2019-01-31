@@ -7,12 +7,15 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +25,28 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * Created by tuskeb on 2016. 09. 30..
  */
 abstract public class MyActor extends Actor implements InitableInterface {
+
+    protected int zIndex = 0;
+
+    @Override
+    public void setZIndex(int index) {
+        if (index < 0) throw new IllegalArgumentException("ZIndex cannot be < 0.");
+        this.zIndex = index;
+        Group parent = this.getParent();
+        if (parent == null) return;
+        Array<Actor> children = parent.getChildren();
+        if (children.size == 1) return;
+        if (getStage() != null){
+            if (getStage() instanceof MyStage){
+                ((MyStage)getStage()).sortActorsByZindex();
+            }
+        }
+    }
+
+    @Override
+    public int getZIndex() {
+        return zIndex;
+    }
 
     protected float elapsedTime = 0;
     @Deprecated

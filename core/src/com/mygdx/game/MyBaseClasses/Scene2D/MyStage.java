@@ -14,6 +14,7 @@ import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
 import com.mygdx.game.MyGdxGame;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 
 /**
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 abstract public class MyStage extends Stage implements InitableInterface {
     public final MyGdxGame game;
     protected float elapsedTime = 0;
+    protected static int ZIndexAutoInc = 1;
 
     public MyStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch);
@@ -307,5 +309,40 @@ abstract public class MyStage extends Stage implements InitableInterface {
         c.zoom = z;
         c.update();
         return b;
+    }
+
+    @Override
+    /**
+     * Automatikusan növekvő Z index 1-től.
+     * @param actor
+     */
+    public void addActor(Actor actor) {
+        addActor(actor, ZIndexAutoInc);
+        ZIndexAutoInc++;
+    }
+
+
+    /**
+     * A nagy érték van elől!
+     * @param actor
+     * @param ZIndex A nagy érték van elől!
+     */
+    public void addActor(Actor actor, int ZIndex) {
+        super.addActor(actor);
+        actor.setZIndex(ZIndex);
+    }
+
+
+    public void sortActorsByZindex(){
+        getActors().sort(new Comparator<Actor>() {
+            @Override
+            public int compare(Actor actor, Actor t1) {
+                if (actor instanceof MyActor && t1 instanceof MyActor){
+                    return ((MyActor) actor).zIndex - ((MyActor) t1).zIndex;
+                }else {
+                    return 0;
+                }
+            }
+        });
     }
 }

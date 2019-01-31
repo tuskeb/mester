@@ -15,7 +15,7 @@ public class BadlActor extends OneSpriteStaticActor {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                event.getStage().addActor(new BadlActor());
+                //event.getStage().addActor(new BadlActor());
             }
         });
         addBaseCollisionCircleShape();
