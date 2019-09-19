@@ -12,12 +12,12 @@ android {
             jniLibs.srcDirs = ['libs']
         }
 
-        instrumentTest.setRoot('tests')
+
     }
     defaultConfig {
         applicationId "com.mygdx.game"
         minSdkVersion 8
-        targetSdkVersion 25
+
     }
 }
 
