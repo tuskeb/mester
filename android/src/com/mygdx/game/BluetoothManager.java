@@ -22,7 +22,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.badlogic.gdx.utils.Queue;
-import com.mygdx.game.MyBaseClasses.Bluetooth.iBluetooth;
+import hu.csanyzeg.master.MyBaseClasses.Bluetooth.iBluetooth;
 
 public class BluetoothManager implements iBluetooth {
 
