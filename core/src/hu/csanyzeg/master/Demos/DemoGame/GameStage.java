@@ -26,8 +26,8 @@ public class GameStage extends MyStage {
     private WorldBodyEditorLoader worldBodyEditorLoader;
     public static final String DEAD_UFO_COUNT = "DEAD_UFO_COUNT";
 
-    public GameStage(Viewport viewport, Batch batch, MyGame game) {
-        super(viewport, batch, game);
+    public GameStage(Viewport viewport, MyGame game) {
+        super(viewport,  game);
     }
 
 
@@ -66,7 +66,7 @@ public class GameStage extends MyStage {
         ((WheelActorKinematic)getLastAdded()).addToWorld();
 
 
-        addBackEventStackListener();
+        addBackButtonScreenBackByStackPopListener();
 
         world.setContactListener(new ContactListener() {
             @Override

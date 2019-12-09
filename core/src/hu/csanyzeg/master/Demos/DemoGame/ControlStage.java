@@ -23,8 +23,8 @@ public class ControlStage extends MyStage {
     private Preferences preferences = Gdx.app.getPreferences(GameScreen.PREFS);
     private MyLabel deadufocountLabel;
 
-    public ControlStage(Viewport viewport, Batch batch, MyGame game) {
-        super(viewport, batch, game);
+    public ControlStage(Viewport viewport, MyGame game) {
+        super(viewport, game);
     }
 
     @Override

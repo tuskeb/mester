@@ -16,8 +16,8 @@ public class DemoLionScreen extends MyScreen {
 
     public DemoLionScreen(MyGame game) {
         super(game);
-        demoLionStage = new DemoLionStage(new ExtendViewport(1024,1024, new OrthographicCamera(1024,1024)), spriteBatch, game);
-        demoLionStage.addBackEventStackListener();
+        demoLionStage = new DemoLionStage(new ExtendViewport(1024,1024, new OrthographicCamera(1024,1024)), game);
+        demoLionStage.addBackButtonScreenBackByStackPopListener();
         Gdx.input.setInputProcessor(demoLionStage);
     }
 

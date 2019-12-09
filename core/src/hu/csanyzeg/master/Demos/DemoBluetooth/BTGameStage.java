@@ -30,7 +30,7 @@ abstract public class BTGameStage extends BluetoothConnectedStage {
     @Override
     public void init() {
         Gdx.input.setInputProcessor(this);
-        addBackEventStackListener();
+        addBackButtonScreenBackByStackPopListener();
         addActor(new MyButton("Clear", Styles.getTextButtonStyle()){
             @Override
             public void init() {

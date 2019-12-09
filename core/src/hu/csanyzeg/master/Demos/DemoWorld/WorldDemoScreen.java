@@ -31,7 +31,7 @@ public class WorldDemoScreen extends MyScreen {
 
     @Override
     public void init() {
-        controlStage = new MyStage(new ExtendViewport(1280,720, new OrthographicCamera(1280,720)),spriteBatch,game) {
+        controlStage = new MyStage(new ExtendViewport(1280,720, new OrthographicCamera(1280,720)), game) {
             @Override
             public void init() {
                 addActor(new MyLabel("Kattints a testekre!", Styles.getLabelStyle())
@@ -63,7 +63,7 @@ public class WorldDemoScreen extends MyScreen {
         };
 
 
-        box2dStage = new WorldDemoStage(new ExtendViewport(64,48,new OrthographicCamera(64,48)), spriteBatch, game);
+        box2dStage = new WorldDemoStage(new ExtendViewport(64,48,new OrthographicCamera(64,48)), game);
 
         inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(box2dStage);
@@ -75,12 +75,11 @@ public class WorldDemoScreen extends MyScreen {
     public void render(float delta) {
         super.render(delta);
 
-        spriteBatch.setProjectionMatrix(box2dStage.getCamera().combined);
+        //game.getSpriteBatch().setProjectionMatrix(box2dStage.getCamera().combined);
         box2dStage.act();
         box2dStage.draw();
         box2DDebugRenderer.render(box2dStage.world,box2dStage.getCamera().combined);
 
-        spriteBatch.setProjectionMatrix(controlStage.getCamera().combined);
         controlStage.act();
         controlStage.draw();
 

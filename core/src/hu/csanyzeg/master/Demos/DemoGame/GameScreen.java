@@ -31,8 +31,8 @@ public class GameScreen extends MyScreen {
     @Override
     public void init() {
 
-        box2dStage = new GameStage(new ExtendViewport(16,9,new OrthographicCamera(16,9)),spriteBatch,game);
-        controlStage = new ControlStage(new ExtendViewport(720,720,new OrthographicCamera(720,720)),spriteBatch,game);
+        box2dStage = new GameStage(new ExtendViewport(16,9,new OrthographicCamera(16,9)), game);
+        controlStage = new ControlStage(new ExtendViewport(720,720,new OrthographicCamera(720,720)) ,game);
 
         setBackGroundColor(0.2f,0.4f,0.8f);
 
@@ -46,12 +46,9 @@ public class GameScreen extends MyScreen {
     public void render(float delta) {
         super.render(delta);
 
-        spriteBatch.setProjectionMatrix(box2dStage.getCamera().combined);
         box2dStage.act(delta);
         box2dStage.draw();
         box2DDebugRenderer.render(box2dStage.getWorld(),box2dStage.getCamera().combined);
-
-        spriteBatch.setProjectionMatrix(controlStage.getCamera().combined);
         controlStage.act(delta);
         controlStage.draw();
     }

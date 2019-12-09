@@ -29,7 +29,7 @@ public class OtherScreen extends MyScreen {
         r = 1;
         g = 0.5f;
         b = 0.3f;
-        otherStage = new OtherStage(new ExtendViewport(1280,720,new OrthographicCamera(1280,720)), spriteBatch, game);
+        otherStage = new OtherStage(new ExtendViewport(1280,720,new OrthographicCamera(1280,720)), game);
         SinActor sinActor = new SinActor(5, 5);
         sinActor.setY(100);
         sinActor.setHeight(400);

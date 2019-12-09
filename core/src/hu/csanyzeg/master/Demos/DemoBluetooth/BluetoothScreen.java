@@ -38,7 +38,7 @@ public class BluetoothScreen extends MyScreen {
             @Override
             public void init() {
                 super.init();
-                addBackEventStackListener();
+                addBackButtonScreenBackByStackPopListener();
             }
 
 
@@ -49,7 +49,7 @@ public class BluetoothScreen extends MyScreen {
                     @Override
                     public void init() {
                         super.init();
-                        addBackEventStackListener();
+                        addBackButtonScreenBackByStackPopListener();
                     }
                     @Override
                     public void acceptConnection() {
@@ -81,7 +81,7 @@ public class BluetoothScreen extends MyScreen {
                     @Override
                     public void init() {
                         super.init();
-                        addBackEventStackListener();
+                        addBackButtonScreenBackByStackPopListener();
                     }
                     @Override
                     public void startConnection() {

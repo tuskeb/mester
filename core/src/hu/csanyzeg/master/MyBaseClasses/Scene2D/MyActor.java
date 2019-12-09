@@ -21,22 +21,25 @@ import java.util.Map;
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
-abstract public class MyActor extends Actor implements InitableInterface {
+abstract public class MyActor extends Actor implements InitableInterface, IZindex {
 
     protected int zIndex = 0;
 
     @Override
-    public void setZIndex(int index) {
+    public boolean setZIndex(int index) {
         this.zIndex = index;
         Group parent = this.getParent();
-        if (parent == null) return;
+        if (parent == null) return false;
         Array<Actor> children = parent.getChildren();
-        if (children.size == 1) return;
+        if (children.size == 1) return false;
         if (getStage() != null){
             if (getStage() instanceof MyStage){
                 ((MyStage)getStage()).sortActorsByZindex();
+                return true;
             }
         }
+
+        return false;
     }
 
     @Override
@@ -151,7 +154,7 @@ abstract public class MyActor extends Actor implements InitableInterface {
 
     public MyActor() {
         super();
-        debug();
+        //debug();
     }
 
     @Override

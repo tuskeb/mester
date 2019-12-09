@@ -3,7 +3,6 @@ package hu.csanyzeg.master.MyBaseClasses.Scene2D;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -25,25 +24,39 @@ abstract public class MyStage extends Stage implements InitableInterface {
     protected float elapsedTime = 0;
     protected static int ZIndexAutoInc = 1;
 
-    public MyStage(Viewport viewport, Batch batch, MyGame game) {
-        super(viewport, batch);
+    public MyStage(Viewport viewport, MyGame game) {
+        super(viewport);
         this.game = game;
         setCameraResetToCenterOfScreen();
         init();
     }
 
-    public void addBackEventStackListener()    {
+    public interface BackButtonListener {
+        public void backKeyDown();
+    }
+
+    public void addBackButtonListener(final BackButtonListener backButton)    {
         addListener(new InputListener() {
 
             @Override
             public boolean keyDown(InputEvent event, int keycode) {
                 if(keycode== Input.Keys.ESCAPE) {
-                    game.setScreenBackByStackPop();
+                    backButton.backKeyDown();
                 }
                 if(keycode== Input.Keys.BACK) {
-                    game.setScreenBackByStackPop();
+                    backButton.backKeyDown();
                 }
                 return true;
+            }
+        });
+    }
+
+
+    public void addBackButtonScreenBackByStackPopListener()    {
+        addBackButtonListener(new BackButtonListener() {
+            @Override
+            public void backKeyDown() {
+                game.setScreenBackByStackPop();
             }
         });
     }
@@ -329,11 +342,47 @@ abstract public class MyStage extends Stage implements InitableInterface {
      */
     public void addActor(Actor actor, int ZIndex) {
         super.addActor(actor);
-        actor.setZIndex(ZIndex);
+        if (actor instanceof IZindex){
+            actor.setZIndex(ZIndex);
+        }else{
+            sortActorsByZindex();
+        }
+       // System.out.println(ZIndex);
     }
 
 
     public void sortActorsByZindex(){
+/*
+        for (Actor a : getActors()) {
+            if (a instanceof IZindex){
+                System.out.println("U Z: " + ((IZindex) a).getZIndex());
+            }else{
+                System.out.println("E not instance");
+            }
+        }
+*/
+
+        boolean change = true;
+
+        while (change) {
+            change = false;
+            int z = Integer.MAX_VALUE;
+            for (int i = getActors().items.length - 1; i > 0; i--) {
+                if (getActors().items[i] instanceof IZindex) {
+                    z = getActors().items[i].getZIndex();
+                }
+                if (getActors().items[i - 1] instanceof IZindex) {
+                    if (getActors().items[i - 1].getZIndex() > z) {
+                        Actor a = getActors().items[i - 1];
+                        getActors().items[i - 1] = getActors().items[i];
+                        getActors().items[i] = a;
+                        change = true;
+                    }
+                }
+            }
+        }
+
+        /*
         getActors().sort(new Comparator<Actor>() {
             @Override
             public int compare(Actor actor, Actor t1) {
@@ -344,5 +393,20 @@ abstract public class MyStage extends Stage implements InitableInterface {
                 }
             }
         });
+
+         */
+
+/*
+        for (Actor a : getActors()) {
+            if (a instanceof IZindex){
+                System.out.println("U Z: " + ((IZindex) a).getZIndex());
+            }else{
+                System.out.println("U not instance");
+            }
+        }
+
+
+        System.out.println("--------------");
+*/
     }
 }

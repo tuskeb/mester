@@ -24,14 +24,14 @@ import hu.csanyzeg.master.MyBaseClasses.Box2dWorld.WorldBodyEditorLoader;
 public class WorldDemoStage extends MyStage {
     World world;
 
-    public WorldDemoStage(Viewport viewport, Batch batch, MyGame game) {
-        super(viewport, batch, game);
+    public WorldDemoStage(Viewport viewport, MyGame game) {
+        super(viewport, game);
     }
 
     @Override
     public void init() {
         setDebugAll(true);
-        addBackEventStackListener();
+        addBackButtonScreenBackByStackPopListener();
         world = new World(new Vector2(0,0),false);
         WorldDemoRectangleActor worldDemoRectangleActor = new WorldDemoRectangleActor(world);
         worldDemoRectangleActor.addToWorld();

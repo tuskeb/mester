@@ -17,13 +17,13 @@ public class OtherStage extends MyStage {
     private TextButton textButton;
 
 
-    public OtherStage(Viewport viewport, Batch batch, MyGame game) {
-        super(viewport, batch, game);
+    public OtherStage(Viewport viewport, MyGame game) {
+        super(viewport, game);
     }
 
 
     public void init() {
-        addBackEventStackListener();
+        addBackButtonScreenBackByStackPopListener();
         textButton = new MyButton("Vissza", Styles.getTextButtonStyle());
         textButton.addListener(new ClickListener(){
             @Override

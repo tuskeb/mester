@@ -5,7 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import hu.csanyzeg.master.MyBaseClasses.Game.InitableInterface;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 
@@ -14,15 +14,11 @@ import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
  */
 abstract public class MyScreen implements Screen, InitableInterface {
 
-    protected static SpriteBatch spriteBatch = new SpriteBatch();
+
 
     public float r=0,g=0,b=0;
 
     public final MyGame game;
-
-    public static SpriteBatch getSpriteBatch() {
-        return spriteBatch;
-    }
 
     public MyScreen(MyGame game) {
         this.game = game;

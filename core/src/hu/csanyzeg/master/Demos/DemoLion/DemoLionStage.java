@@ -20,8 +20,8 @@ public class DemoLionStage extends MyStage
     private float prevElapsedTime = 0;
 
 
-    public DemoLionStage(Viewport viewport, Batch batch, MyGame game) {
-        super(viewport, batch, game);
+    public DemoLionStage(Viewport viewport, MyGame game) {
+        super(viewport, game);
         addActor( demoLionActor = new DemoLionActor());
         getLastAdded().setY(512);
     }

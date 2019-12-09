@@ -42,7 +42,7 @@ public class InputScreen extends MyScreen {
     public void init() {
 
         //Ha nem akarunk annyi fájlt, akkor lehet egy anonim osztály is.
-        myStage = new MyStage(new ExtendViewport(1280,720,new OrthographicCamera(1280,720)), spriteBatch, game)
+        myStage = new MyStage(new ExtendViewport(1280,720,new OrthographicCamera(1280,720)),  game)
         {
             private String random()
             {
@@ -54,7 +54,7 @@ public class InputScreen extends MyScreen {
 
 
             public void init() {
-                addBackEventStackListener();
+                addBackButtonScreenBackByStackPopListener();
                 setBackGroundColor(0f,0.2f,0.4f);
 
                 table = new Table();

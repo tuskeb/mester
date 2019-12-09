@@ -1,15 +1,16 @@
-package hu.csanyzeg.master;
+package hu.csanyzeg.master.Demos;
 
 import hu.csanyzeg.master.Demos.GlobalClasses.Assets;
 import hu.csanyzeg.master.Demos.DemoLoading.LoadingScreen;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 
-public class MasterDemo extends MyGame {
+public class DemoMyGame extends MyGame {
 
 
 
 	@Override
 	public void create () {
+		super.create();
 		Assets.prepare();
 		setScreen(new LoadingScreen(this));
 	}

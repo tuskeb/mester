@@ -6,7 +6,7 @@ import android.os.Handler;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import hu.csanyzeg.master.MyBaseClasses.Bluetooth.BluetoothSingleton;
-import hu.csanyzeg.master.MasterDemo;
+import hu.csanyzeg.master.Demos.DemoMyGame;
 
 public class AndroidLauncher extends AndroidApplication {
 
@@ -30,7 +30,7 @@ public class AndroidLauncher extends AndroidApplication {
 
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		config.useWakelock = true;
-		initialize(new MasterDemo(), config);
+		initialize(new DemoMyGame(), config);
 	}
 
 }

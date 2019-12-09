@@ -3,6 +3,8 @@ package hu.csanyzeg.master.MyBaseClasses.Game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyScreen;
 
 import java.lang.reflect.InvocationTargetException;
@@ -13,18 +15,6 @@ import java.util.Stack;
  */
 
 abstract public class MyGame extends Game {
-
-    /*
-	public iBluetooth getBluetooth() {
-		return bluetooth;
-	}
-
-	private iBluetooth bluetooth = null;
-
-	public MasterDemo() {
-		bluetooth = BluetoothSingleton.getInstance().bluetoothManager;
-	}
-*/
 
     @Override
     public void create() {
@@ -40,9 +30,21 @@ abstract public class MyGame extends Game {
     }
 
     public void setScreenBackByStackPop(){
+        setScreenBackByStackPop(null);
+    }
+
+    public interface ScreenInit{
+        public void init(MyScreen scr);
+    }
+
+    public void setScreenBackByStackPop(ScreenInit init){
         if (backButtonStack.size()>1){
             try {
-                setScreen((MyScreen) backButtonStack.pop().getConstructor(MyGame.class).newInstance(this),false);
+                MyScreen scr = (MyScreen) backButtonStack.pop().getConstructor(MyGame.class).newInstance(this);
+                if (init != null) {
+                    init.init(scr);
+                }
+                setScreen(scr,false);
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {

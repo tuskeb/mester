@@ -1,6 +1,5 @@
 package hu.csanyzeg.master.Demos.DemoMenu;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -42,14 +41,14 @@ public class MenuStage extends MyStage {
 
     private boolean clck = false;
 
-    public MenuStage(Viewport viewport, Batch batch, MyGame game) {
-        super(viewport, batch, game);
+    public MenuStage(Viewport viewport, MyGame game) {
+        super(viewport, game);
     }
 
 
     public void init()
     {
-        addBackEventStackListener();
+        addBackButtonScreenBackByStackPopListener();
         badlActor = new BadlActor();
         crossActor = new CrossActor();
 

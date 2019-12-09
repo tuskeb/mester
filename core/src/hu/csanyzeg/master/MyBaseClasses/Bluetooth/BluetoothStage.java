@@ -27,7 +27,7 @@ abstract public class BluetoothStage extends MyStage {
     }
 
     public BluetoothStage(Viewport viewport, Batch batch, MyGame game) {
-        super(viewport, batch, game);
+        super(viewport, game);
     }
 
     public void startBluetoothListening(){

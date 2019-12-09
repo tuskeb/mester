@@ -8,7 +8,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyScreen;
 
 import hu.csanyzeg.master.Demos.GlobalClasses.Assets;
 
-
+@Deprecated
 public class LoadingScreen extends MyScreen {
 
 
@@ -27,9 +27,9 @@ public class LoadingScreen extends MyScreen {
 	public void render(float delta) {
 		super.render(delta);
 
-		spriteBatch.begin();
-		bitmapFont.draw(spriteBatch,"Betöltés: " + Assets.manager.getLoadedAssets() + "/" + (Assets.manager.getQueuedAssets()+ Assets.manager.getLoadedAssets()) + " (" + ((int)(Assets.manager.getProgress()*100f)) + "%)", Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
-		spriteBatch.end();
+		//game.getSpriteBatch().begin();
+		//bitmapFont.draw(game.getSpriteBatch(),"Betöltés: " + Assets.manager.getLoadedAssets() + "/" + (Assets.manager.getQueuedAssets()+ Assets.manager.getLoadedAssets()) + " (" + ((int)(Assets.manager.getProgress()*100f)) + "%)", Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+		//game.getSpriteBatch().end();
 		if (Assets.manager.update()) {
 			Assets.afterLoaded();
 			game.setScreen(new MenuScreen(game));

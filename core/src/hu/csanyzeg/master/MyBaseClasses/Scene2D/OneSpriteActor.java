@@ -8,7 +8,7 @@ import hu.csanyzeg.master.MyBaseClasses.Game.InitableInterface;
  * Created by tuskeb on 2016. 09. 30..
  */
 abstract public class OneSpriteActor extends MyActor implements InitableInterface {
-    protected Sprite sprite;
+    public Sprite sprite;
 
     public OneSpriteActor(Sprite sprite) {
         if (sprite!=null) {
@@ -63,5 +63,15 @@ abstract public class OneSpriteActor extends MyActor implements InitableInterfac
     protected void originChanged() {
         super.originChanged();
         sprite.setOrigin(getOriginX(), getOriginY());
+    }
+
+    @Override
+    public void setColor(float r, float g, float b, float a) {
+        super.setColor(r, g, b, a);
+        sprite.setColor(r,g,b,a);
+    }
+
+    public void setAlpha(float a){
+        sprite.setAlpha(a);
     }
 }

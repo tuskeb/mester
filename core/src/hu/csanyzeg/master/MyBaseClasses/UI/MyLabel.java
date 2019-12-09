@@ -1,5 +1,6 @@
 package hu.csanyzeg.master.MyBaseClasses.UI;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import hu.csanyzeg.master.MyBaseClasses.Game.InitableInterface;
 
@@ -18,6 +19,13 @@ public class MyLabel extends Label implements InitableInterface {
     @Override
     public void init() {
 
+    }
+
+    @Override
+    public void setColor(Color color) {
+        LabelStyle style = getStyle();
+        style.fontColor = color;
+        setStyle(style);
     }
 
     protected float elapsedtime =0;

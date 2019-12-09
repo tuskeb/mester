@@ -13,9 +13,10 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
+
 import hu.csanyzeg.master.Demos.DemoGame.AssetsGroupDemoGame;
 
-
+@Deprecated
 public class Assets {
 	// https://github.com/libgdx/libgdx/wiki/Managing-your-assets
 	// http://www.jacobplaster.net/using-libgdx-asset-manager

@@ -18,7 +18,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 abstract public class BluetoothChooseServerClientStage extends MyStage {
 
     public BluetoothChooseServerClientStage(MyGame game) {
-        super(new ExtendViewport(1280, 720, new OrthographicCamera(1280, 720)), new SpriteBatch(), game);
+        super(new ExtendViewport(1280, 720, new OrthographicCamera(1280, 720)), game);
     }
 
     abstract public void startServer();
@@ -27,7 +27,7 @@ abstract public class BluetoothChooseServerClientStage extends MyStage {
     @Override
     public void init() {
         Gdx.app.error("BTM", "Choose client/server");
-        addBackEventStackListener();
+        addBackButtonScreenBackByStackPopListener();
         addActor(new MyButton("Start server", Styles.getTextButtonStyle()) {
             @Override
             public void init() {
